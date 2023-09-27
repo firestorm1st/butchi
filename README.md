@@ -18,10 +18,19 @@ php artisan key:generate
 php artisan migrate
 ```
 
-- Step 6: Run project
+- Step 6: Clear cache server
+```bash
+php artisan config:cache
+```
+
+- Step 7: Run project
 ```bash
 php artisan serve
 ```
 
+- Step 8: Go link
+```bash
+http://localhost:8000/admin/category/index
+```
 
 
