@@ -4,25 +4,24 @@
 @section('action', 'Edit')
 
 @section('content')
-<!-- Default box -->
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">User edit</h3>
+<form method="post" action="{{ route('admin.user.update', ['id' => $id]) }}">
+    @csrf
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">User create</h3>
 
-        <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-        </button>
+            <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                <i class="fas fa-times"></i>
+            </button>
+            </div>
         </div>
-    </div>
 
-    <div class="card-body">
-        <form method="post" action="{{ route('admin.user.store') }}">
-            @csrf
-
+        <div class="card-body">
             <div class="form-group">
                 <label>Email</label>
                 <input type="text" class="form-control" placeholder="Enter email" name="email">
@@ -69,15 +68,12 @@
                 <label>Phone</label>
                 <input type="text" class="form-control" placeholder="Enter phone" name="phone">
             </div>
+        </div>
 
-        </form>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
     </div>
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Update</button>
-    </div>
-</div>
-<!-- /.card -->
-
-
+    <!-- /.card -->
+</form>
 @endsection
