@@ -1,11 +1,11 @@
 Cách bước thực hiện CRUD
 
 Chức năng Thêm
-1. Thêm Router vào Action <form action='{{ route('........') }}'>
+1. Thêm Router vào Action <form action='{{ route('........') }}'> - Csrf ?
 
 2. Kiểm tra form (StoreRequest)
 	- Rỗng
-	- Có phải là Email ? 
+	- Có phải là Email ?
 	- Có phải là số không ?
 	- ....
 
@@ -15,14 +15,14 @@ Chức năng Thêm
 4. Kiểm tra dữ liệu tồn tại chưa ? (StoreRequest)
 	- Unique
 
-5. Nếu có hình thì upload hình 
+5. Nếu có hình thì upload hình
 	- View => Form phải có enctype="multipart/form-data" =>
 	- StoreRequest => Check xem có phải là hình không, kích thước hình, v...v... ?
 	- Rename tên hình để tránh bị trùng những hình đã upload trước đó
 	- Upload file
-	
+
 6. Viết câu truy vấn thêm dữ liệu
-	
+
 7. Chuyển trang kèm thông báo.
 
 ------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Chức năng sửa
 
 2. Kiểm tra form (UpdateRequest)
 	- Rỗng
-	- Có phải là Email ? 
+	- Có phải là Email ?
 	- Có phải là số không ?
 	- ....
 
@@ -52,7 +52,7 @@ Chức năng sửa
 4. Hiện dữ liệu cần sửa ( old('element-form-name', $dataOld['column-name-from-db']) )
 
 5. Kiểm tra dữ liệu tồn tại chưa nhưng phải trừ chính nó ? (UpdateRequest)
-	- VD : 
+	- VD :
 	ID	Name
 	1	AAA
 	2	BBB
@@ -61,14 +61,14 @@ Chức năng sửa
 6. Nếu có hình thì upload hình nhưng phải xét trường hợp
 	TH1:
 		- Không upload hình => Giữ nguyên hình cũ
-	TH2: 
+	TH2:
 		- Upload hình:
 			+ Kiểm tra hình cũ tồn tại không ?
 			+ Xóa hình cũ
 			+ Validtion hình
 			+ Rename hình
 			+ Upload hình mới
-7. Viết câu truy vấn update dữ liệu		
+7. Viết câu truy vấn update dữ liệu
 
 8. Chuyển trang kèm thông báo.
 
@@ -79,7 +79,7 @@ Chức năng xóa
 
 2. Nếu có hình thì phải xóa hình
 
-3. Viết câu truy vấn xóa dữ liệu	
+3. Viết câu truy vấn xóa dữ liệu
 
 4. Chuyển trang kèm thông báo.
 
