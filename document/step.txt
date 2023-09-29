@@ -54,7 +54,7 @@ Chức năng sửa
 5. Kiểm tra dữ liệu tồn tại chưa nhưng phải trừ chính nó ? (UpdateRequest)
 	- VD :
 	ID	Name
-	1	AAA
+	1	AAA     => AAA
 	2	BBB
 	3 	CCC
 
@@ -65,6 +65,7 @@ Chức năng sửa
 		- Upload hình:
 			+ Kiểm tra hình cũ tồn tại không ?
 			+ Xóa hình cũ
+            
 			+ Validtion hình
 			+ Rename hình
 			+ Upload hình mới

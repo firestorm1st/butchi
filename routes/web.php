@@ -27,10 +27,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
 
-        Route::get('edit/:id', 'edit')->name('edit');
-        Route::post('update/:id', 'update')->name('update');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
 
-        Route::get('destroy/:id', 'destroy')->name('destroy');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
 
     Route::prefix('product')->name('product.')->controller(ProductController::class)->group(function () {
@@ -39,10 +39,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
 
-        Route::get('edit/:id', 'edit')->name('edit');
-        Route::post('update/:id', 'update')->name('update');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
 
-        Route::get('destroy/:id', 'destroy')->name('destroy');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
 
     Route::prefix('user')->name('user.')->controller(UserController::class)->group(function () {
@@ -51,9 +51,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
 
-        Route::get('edit/:id', 'edit')->name('edit');
-        Route::post('update/:id', 'update')->name('update');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
 
-        Route::get('destroy/:id', 'destroy')->name('destroy');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
 });
