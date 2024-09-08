@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('user_mission', function (Blueprint $table) {
             $table->id();
-            $table->integer('cart_total')->default(1000000);
-            $table->datetime('cart_date');
-            $table->tinyInteger('status');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('mission_id');
+            $table->foreign('mission_id')->references('id')->on('missions');
+            $table->tinyInteger('status')->default(1)->comment('1: Done - 2: Undone');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('user_mission');
     }
 };
