@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('module', 'Category')
+@section('module', 'Mission')
 @section('action', 'List')
 
 @push('css')
@@ -38,7 +38,7 @@
 <!-- Default box -->
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Category list</h3>
+        <h3 class="card-title">Danh sách nhiệm vụ</h3>
 
         <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -55,31 +55,42 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Tên nhiệm vụ</th>
+                    <th>Ngày áp dụng</th>
+                    <th>Ngày tạo</th>
+                    <th>Chỉnh sửa</th>
+                    <th>Xóa</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                {{-- <tr>
                     <td>1</td>
+                    <td>Product 01</td>
+                    <td>10.000.000 VND</td>
                     <td>Category 01</td>
                     <td><span class="right badge badge-success">Show</span></td>
+                    <td><span class="right badge badge-danger">Featured</span></td>
                     <td>26/09/2023 - 15:10</td>
                     <td><a href="">Edit</a></td>
                     <td><a href="">Delete</a></td>
+                </tr> --}}
+                <tr>
+                    <th>ID</th>
+                    <th>Tên nhiệm vụ</th>
+                    <th>Ngày áp dụng</th>
+                    <th>Ngày tạo</th>
+                    <th>Chỉnh sửa</th>
+                    <th>Xóa</th>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Tên nhiệm vụ</th>
+                    <th>Ngày áp dụng</th>
+                    <th>Ngày tạo</th>
+                    <th>Chỉnh sửa</th>
+                    <th>Xóa</th>
                 </tr>
             </tfoot>
         </table>

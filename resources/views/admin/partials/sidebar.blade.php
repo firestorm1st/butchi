@@ -38,19 +38,14 @@
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
-                Category
+                Contact
                 <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
             <ul class="nav nav-treeview">
+                
                 <li class="nav-item">
-                    <a href="{{ route('admin.category.create') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Create</p>
-                    </a>
-                    </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.category.index') }}" class="nav-link">
+                    <a href="{{ route('admin.contact.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>List</p>
                     </a>
@@ -62,19 +57,19 @@
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
-                Product
+                Mission
                 <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('admin.product.create') }}" class="nav-link">
+                    <a href="{{ route('admin.mission.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Create</p>
                     </a>
                     </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.product.index') }}" class="nav-link">
+                    <a href="{{ route('admin.mission.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>List</p>
                     </a>

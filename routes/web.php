@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\MissionController;
+
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +20,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('client.')->group(function(){
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
+    Route::get('/pencil', [HomeController::class, 'showPencil'])->name('showPencil');
+    Route::post('/pencil', [HomeController::class, 'pencil'])->name('pencil');
+
+    Route::get('/checkin', [HomeController::class, 'showCheckin'])->name('showCheckin');
+    Route::post('/checkin', [HomeController::class, 'checkin'])->name('checkin');
+
+    Route::get('/room', [HomeController::class, 'room'])->name('room');
+
 });
 
+Route::get('auth/login', [LoginController::class, 'showLogin'])->name('showLogin');
+Route::post('auth/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('auth/register', [RegisterController::class, 'showRegister'])->name('showRegister');
+Route::post('auth/register', [RegisterController::class, 'register'])->name('register');
+
+
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
+    Route::prefix('contact')->name('contact.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'index')->name('index');
 
         Route::get('create', 'create')->name('create');
@@ -33,7 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
 
-    Route::prefix('product')->name('product.')->controller(ProductController::class)->group(function () {
+    Route::prefix('mission')->name('mission.')->controller(MissionController::class)->group(function () {
         Route::get('index', 'index')->name('index');
 
         Route::get('create', 'create')->name('create');

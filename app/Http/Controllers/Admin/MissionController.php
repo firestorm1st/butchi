@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\StoreRequest;
-use App\Http\Requests\Admin\Category\UpdateRequest;
+use App\Http\Requests\Admin\Mission\UpdateRequest;
+use App\Http\Requests\Admin\Mission\StoreRequest;
 
-class CategoryController extends Controller
+class MissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.modules.category.index');
+        return view('admin.modules.mission.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.modules.category.create');
+        return view('admin.modules.mission.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.modules.category.edit');
+        return view('admin.modules.mission.edit');
     }
 
     /**

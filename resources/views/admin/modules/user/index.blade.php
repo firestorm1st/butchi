@@ -38,7 +38,7 @@
 <!-- Default box -->
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">User list</h3>
+        <h3 class="card-title">Danh sách người dùng</h3>
 
         <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -56,39 +56,36 @@
                 <tr>
                     <th>ID</th>
                     <th>Email</th>
-                    <th>Level</th>
-                    <th>Status</th>
-                    <th>Fullname</th>
-                    <th>Phone</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Tên người dùng</th>
+                    <th>Hình đại diện</th>
+                    <th>Tài khoản</th>
+                    <th>Ngày tạo</th>
+                    <th>Chỉnh sửa</th>
+                    <th>Xóa</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>admin@gmail.com</td>
-                    <td><span class="right badge badge-success">Admin</span></td>
-                    <td><span class="right badge badge-danger">Show</span></td>
-                    <td>Vũ Quốc Tuấn</td>
-                    <td>090 123 4567</td>
-                    <td>26/09/2023 - 15:10</td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Avatar</th>
+                    <th>Role</th>
+                    <th>Create At</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>ID</th>
                     <th>Email</th>
-                    <th>Level</th>
-                    <th>Status</th>
-                    <th>Fullname</th>
-                    <th>Phone</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Tên người dùng</th>
+                    <th>Hình đại diện</th>
+                    <th>Tài khoản</th>
+                    <th>Ngày tạo</th>
+                    <th>Chỉnh sửa</th>
+                    <th>Xóa</th>
                 </tr>
             </tfoot>
         </table>

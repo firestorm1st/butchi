@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('module', 'Category')
+@section('module', 'Contact')
 @section('action', 'List')
 
 @push('css')
@@ -38,7 +38,7 @@
 <!-- Default box -->
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Product list</h3>
+        <h3 class="card-title">Danh sách góp ý</h3>
 
         <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -55,40 +55,28 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Featured</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Ngày gửi</th>
+                    <th>Tên người gửi</th>
+                    <th>Email</th>
+                    <th>Lời nhắn</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>Product 01</td>
-                    <td>10.000.000 VND</td>
-                    <td>Category 01</td>
-                    <td><span class="right badge badge-success">Show</span></td>
-                    <td><span class="right badge badge-danger">Featured</span></td>
-                    <td>26/09/2023 - 15:10</td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
+                    <th>ID</th>
+                    <th>Send_at</th>
+                    <th>Fullname</th>
+                    <th>Mail</th>
+                    <th>Message</th>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Featured</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Ngày gửi</th>
+                    <th>Tên người gửi</th>
+                    <th>Email</th>
+                    <th>Lời nhắn</th>
                 </tr>
             </tfoot>
         </table>

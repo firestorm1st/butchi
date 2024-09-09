@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('avatar');
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->tinyInteger('status')->default(1)->comment('1: Student - 2: Parents - 3: Admin');
+            $table->tinyInteger('status')->default(1)->comment('1: Active - 2: Unactive');
             $table->rememberToken();
             $table->timestamps();
         });

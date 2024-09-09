@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -29,7 +30,11 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+        $user = new User();
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->avatar = $request->avatar;
+        $user->save();
     }
 
     /**
