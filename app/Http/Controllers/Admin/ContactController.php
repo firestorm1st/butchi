@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Contact\StoreRequest;
 use App\Http\Requests\Admin\Contact\UpdateRequest;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -13,7 +14,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('admin.modules.contact.index');
+        $contacts = Contact::orderBy('created_at', 'DESC')->get();
+        return view('admin.modules.contact.index', ['contacts' => $contacts]);
     }
 
     /**

@@ -27,12 +27,18 @@
 @push('hanldejs')
 <script>
     $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
-  </script>
+
+    function confirmDelete() {
+        return confirm('Do you want to delete it?');
+    }
+</script>
 @endpush
 @section('content')
 <!-- Default box -->
@@ -65,16 +71,29 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($users as $user)
                 <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Avatar</th>
-                    <th>Role</th>
-                    <th>Create At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <td>{{$loop->iteration}}</td>
+                    
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->username}}</td>
+                    
+                    <td>
+                        <img src="{{ asset('uploads/' . $user->image) }}" alt="{{ $user->name }}" style="width: 200px; height: 200px;">
+                    </td>
+
+                    <td>
+                        <span class="right badge badge-{{$user->role == 1 ? 'success' : ($user->role == 2 ? 'info' : 'primary')}}">
+                            {{$user->role == 1 ? 'Student' : ($user->role == 2 ? 'Parents' : 'Admin')}}
+                        </span>
+                    </td>
+
+                    
+                    <td>{{$user->created_at}}</td>
+                    <td><a href="{{route('admin.user.edit',['id'=>$user->id])}}">Edit</a></td>
+                    <td><a onclick="return confirmDelete ()" href="{{route('admin.user.destroy',['id'=>$user->id])}}">Delete</a></td>
                 </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>

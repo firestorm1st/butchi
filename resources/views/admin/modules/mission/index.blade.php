@@ -63,25 +63,16 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- <tr>
-                    <td>1</td>
-                    <td>Product 01</td>
-                    <td>10.000.000 VND</td>
-                    <td>Category 01</td>
-                    <td><span class="right badge badge-success">Show</span></td>
-                    <td><span class="right badge badge-danger">Featured</span></td>
-                    <td>26/09/2023 - 15:10</td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
-                </tr> --}}
+                @foreach ($missions as $mission)
                 <tr>
-                    <th>ID</th>
-                    <th>Tên nhiệm vụ</th>
-                    <th>Ngày áp dụng</th>
-                    <th>Ngày tạo</th>
-                    <th>Chỉnh sửa</th>
-                    <th>Xóa</th>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$mission->name}}</td>
+                    <td>{{$mission->day}}</td>
+                    <td>{{$mission->created_at}}</td>
+                    <td><a href="{{route('admin.mission.edit',['id'=>$mission->id])}}">Edit</a></td>
+                    <td><a onclick="return confirmDelete ()" href="{{route('admin.mission.destroy',['id'=>$mission->id])}}">Delete</a></td>
                 </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>

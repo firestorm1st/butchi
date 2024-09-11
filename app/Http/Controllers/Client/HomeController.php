@@ -9,17 +9,17 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('client.modules.index');
+        //return view('client.modules.index');
     }
 
     public function blog()
     {
-        return view('client.modules.blog');
+        //return view('client.modules.blog');
     }
 
     public function showPencil()
     {
-        return view('client.modules.pencil');
+        //return view('client.modules.pencil');
     }
 
     public function pencil(Request $request)
@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function showCheckin()
     {
-        return view('client.modules.checkin');
+        //return view('client.modules.checkin');
     }
 
     public function checkin(Request $request)
@@ -39,6 +39,6 @@ class HomeController extends Controller
 
     public function room()
     {
-        return view('client.modules.room');
+        //return view('client.modules.room');
     }
 }
