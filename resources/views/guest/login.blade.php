@@ -6,9 +6,9 @@
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="active" data-bs-toggle="tab">
-                                <h4>login</h4>
-                            </a>
+                            
+                                <h4>Đăng nhập</h4>
+                            
                         </div>
 
                         <div class="tab-content">
@@ -19,7 +19,7 @@
                                             @if ($errors->any())
                                             <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
                                             @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                             @endforeach
@@ -28,32 +28,32 @@
                                             @if ($message = Session::has('error'))
                                             <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Cảnh báo!</h5>
                                             {{Session::get('error')}}
                                             </div>
                                             @endif
                                             @if ($message = Session::has('success'))
                                             <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Chúc mừng!</h5>
                                             {{Session::get('success')}}
                                             </div>
                                             @endif
                                             @csrf
-                                            <label style="color: red">Email<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" type="email" name="email" placeholder="email" value="{{old('email')}}">
-                                            <label style="color: red">Password<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" type="password" name="password" placeholder="Password">
+                                            <label>Email<span class="required">*</span></label>
+                                            <input type="email" name="email" placeholder="email" value="{{old('email')}}">
+                                            <label>Mật khẩu<span class="required">*</span></label>
+                                            <input type="password" name="password" placeholder="Password">
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <a href="{{route('showRegister')}}">Register Now!</a><br>
-                                                    <a href="{{route('forget.password')}}">Forgot Password?</a>
+                                                    <a href="{{route('showRegister')}}">Đăng ký ngay!</a><br>
+                                                    <a href="{{route('forget.password')}}">Quên mật khẩu?</a>
 
                                                     <input id="remember" type="checkbox">
-                                                    <label for="remember">Remember me</label>
+                                                    <label for="remember">Ghi nhớ đăng nhập</label>
                                                 </div>
                                                 <button type="submit" class="btn btn-dark">
-                                                        <span>Login</span>
+                                                        <span>Đăng nhập</span>
                                                 </button>
                                             </div>
                                         </form>

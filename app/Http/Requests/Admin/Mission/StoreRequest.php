@@ -22,7 +22,18 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:missions,name',
+            'day' => 'required'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Email phải có đuôi @gmail.com',
+            'fullname.required' => 'Vui lòng nhập tên',
+            'message.required' => 'Vui lòng để lại lời nhắn'
         ];
     }
 }

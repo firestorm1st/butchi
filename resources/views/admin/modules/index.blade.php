@@ -16,10 +16,10 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.order.index')}}"><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Order</div></a>
+                <a href=""><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Order</div></a>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countActiveOrder()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countActiveOrder()}}</div> --}}
                   </div>
                   
                 </div>
@@ -38,8 +38,8 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.product.index')}}"><div class="text-xs font-weight-bold text-success text-uppercase mb-1">Products</div></a>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Product::countActiveProduct()}}</div>
+                <a href=""><div class="text-xs font-weight-bold text-success text-uppercase mb-1">Products</div></a>
+                {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Product::countActiveProduct()}}</div> --}}
               </div>
               <div class="col-auto">
                 <i class="fas fa-cubes fa-2x text-gray-300"></i>
@@ -55,8 +55,8 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.category.index')}}"><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Category</div></a>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Category::countActiveCategory()}}</div>
+                <a href=""><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Category</div></a>
+                {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Category::countActiveCategory()}}</div> --}}
               </div>
               <div class="col-auto">
                 <i class="fas fa-sitemap fa-2x text-gray-300"></i>
@@ -71,7 +71,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">product Quantity</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Product::countProductQuantity()}}</div>
+                {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Product::countProductQuantity()}}</div> --}}
               </div>
               <div class="col-auto">
                 <i class="fas fa-newspaper fa-2x text-gray-300"></i>
@@ -86,10 +86,10 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.order.index')}}"><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Brand</div></a>
+                <a href=""><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Brand</div></a>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Brand::countBrand()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Brand::countBrand()}}</div> --}}
                   </div>
                   
                 </div>
@@ -107,10 +107,10 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.order.index')}}"><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total User</div></a>
+                <a href=""><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total User</div></a>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\User::countUser()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\User::countUser()}}</div> --}}
                   </div>
                   
                 </div>
@@ -128,10 +128,10 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.order.index')}}"><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Atrribute</div></a>
+                <a href=""><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Atrribute</div></a>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Attribute::countAttribute()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Attribute::countAttribute()}}</div> --}}
                   </div>
                 </div>
               </div>
@@ -148,10 +148,10 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <a href="{{route('admin.order.index')}}"><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Value of Attribute</div></a>
+                <a href=""><div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Value of Attribute</div></a>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\AttributeValue::countAttributeValue()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\AttributeValue::countAttributeValue()}}</div> --}}
                   </div>
                 </div>
               </div>
@@ -171,7 +171,7 @@
                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">New Order</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countNewReceivedOrder()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countNewReceivedOrder()}}</div> --}}
                   </div>
                   
                 </div>
@@ -192,7 +192,7 @@
                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Processing Order</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countProcessingOrder()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countProcessingOrder()}}</div> --}}
                   </div>
                   
                 </div>
@@ -213,7 +213,7 @@
                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Delivered Order</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countDeliveredOrder()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countDeliveredOrder()}}</div> --}}
                   </div>
                   
                 </div>
@@ -234,7 +234,7 @@
                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Cancelled Order</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countCancelledOrder()}}</div>
+                    {{-- <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countCancelledOrder()}}</div> --}}
                   </div>
                   
                 </div>

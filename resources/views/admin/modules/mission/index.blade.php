@@ -32,6 +32,10 @@
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
+
+    function confirmDelete() {
+        return confirm('Bạn có chắc muốn xóa mục này không?');
+    }
   </script>
 @endpush
 @section('content')
@@ -69,8 +73,8 @@
                     <td>{{$mission->name}}</td>
                     <td>{{$mission->day}}</td>
                     <td>{{$mission->created_at}}</td>
-                    <td><a href="{{route('admin.mission.edit',['id'=>$mission->id])}}">Edit</a></td>
-                    <td><a onclick="return confirmDelete ()" href="{{route('admin.mission.destroy',['id'=>$mission->id])}}">Delete</a></td>
+                    <td><a href="{{route('admin.mission.edit',['id'=>$mission->id])}}">Chỉnh sửa</a></td>
+                    <td><a onclick="return confirmDelete ()" href="{{route('admin.mission.destroy',['id'=>$mission->id])}}">Xóa</a></td>
                 </tr>
                 @endforeach
             </tbody>
