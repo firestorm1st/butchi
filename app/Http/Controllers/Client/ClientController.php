@@ -9,7 +9,7 @@ class ClientController extends Controller
 {
     public function showPencil()
     {
-        return view('client.modules.pencil');
+        //return view('client.modules.pencil');
     }
 
     public function pencil(Request $request)
@@ -19,7 +19,7 @@ class ClientController extends Controller
 
     public function showCheckin()
     {
-        return view('client.modules.checkin');
+        //return view('client.modules.checkin');
     }
 
     public function checkin(Request $request)
@@ -29,6 +29,6 @@ class ClientController extends Controller
 
     public function room()
     {
-        return view('client.modules.room');
+        //return view('client.modules.room');
     }
 }

@@ -31,7 +31,8 @@
 
                     <div class="form-group">
                         <label>Ngày áp dụng</label>
-                        <input type="text" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{ old('day') }}">
+                        {{-- <input type="text" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{ old('day') }}"> --}}
+                        <input type="date" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{ old('day') }}">
                     </div>
 
                 

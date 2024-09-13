@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Mission\UpdateRequest;
 use App\Http\Requests\Admin\Mission\StoreRequest;
+use App\Models\Mission;
 
 class MissionController extends Controller
 {
@@ -13,7 +14,8 @@ class MissionController extends Controller
      */
     public function index()
     {
-        return view('admin.modules.mission.index');
+        $missions = Mission::orderBy('created_at', 'DESC')->get();
+        return view('admin.modules.mission.index', ['missions' => $missions]);
     }
 
     /**
@@ -29,7 +31,12 @@ class MissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+        $mission = new Mission();
+        $mission->name = $request->name;
+        $mission->day = $request->day;
+        $mission->save();
+
+        return redirect()->route('admin.mission.index')->with('success', 'Create mission carefully');
     }
 
     /**
@@ -45,7 +52,11 @@ class MissionController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.modules.mission.edit');
+        $mission = Mission::find($id);
+        if ($mission == null) {
+            abort(404);
+        }
+        return view('admin.modules.mission.edit', ['mission' => $mission, 'id' => $id]);
     }
 
     /**
@@ -53,14 +64,30 @@ class MissionController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-        //
+        $mission = Mission::find($id);
+        if ($mission == null) {
+            abort(404);
+        }
+        
+        $mission->name = $request->name;
+        $mission->day = $request->day;
+        $mission->save();
+
+        return redirect()->route('admin.mission.index')->with('success', 'Create mission carefully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $mission = Mission::find($id);
+        if ($mission == null) {
+            abort(404);
+        }
+
+        $mission->delete();
+        return redirect()->route('admin.mission.index')->with('success', 'Delete mission success');
     }
 }
