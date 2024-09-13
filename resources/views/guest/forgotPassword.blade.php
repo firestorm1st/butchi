@@ -1,19 +1,5 @@
 @extends('master')
 @section('content')
-{{-- <nav class="breadcrumb-section breadcrumb-bg1">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="bread-crumb-title">Quên mật khẩu</h2>
-                <ol class="breadcrumb bg-transparent m-0 p-0 justify-content-center align-items-center">
-                    <li class="breadcrumb-item"><a href="{{route('guest.index')}}">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quên mật khẩu</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</nav> --}}
-    <!-- main content start -->
     <div class="login-register-area section-padding-bottom">
         <div class="container">
             <div class="row">
@@ -78,9 +64,6 @@
             background-size: cover; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
-        }
-        h4{
-            margin-top: 50px;
         }
     </style>
     <!-- main content end -->

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->tinyInteger('role')->default(1)->comment('1:Student - 2:Parent - 3:Admin');
             $table->string('username');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->tinyInteger('status')->default(1)->comment('1: Active - 2: Unactive');
             $table->rememberToken();

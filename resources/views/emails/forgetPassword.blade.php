@@ -1,13 +1,13 @@
 @component('mail::message')
     
-Xin chào,{{$user->name}}. Bạn quên mật khẩu?
+Xin chào,{{$user->name}}. Bạn quên mật khẩu sao?
 
-<p>Vui lòng làm theo hướng dẫn</p>
+<p>Nếu chuyện đó xảy ra.</p>
 
 @component('mail::button',['url'=>url('resetPassword/'.$user->remember_token)])
-Kích hoạt lại mật khẩu của bằng link sau:
+Đặt lại mật khẩu
 @endcomponent
 
-Cảm ơn, <br>
+Chúng tôi xin cảm ơn, <br>
 {{config('app.name')}}
 @endcomponent

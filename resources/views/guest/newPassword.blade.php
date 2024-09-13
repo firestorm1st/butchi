@@ -1,28 +1,14 @@
 @extends('master')
 @section('content')
-<nav class="breadcrumb-section breadcrumb-bg1">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="bread-crumb-title">Quên mật khẩu</h2>
-                <ol class="breadcrumb bg-transparent m-0 p-0 justify-content-center align-items-center">
-                    <li class="breadcrumb-item"><a href="{{route('index')}}">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quên mật khẩu</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</nav>
-    <!-- main content start -->
     <div class="login-register-area section-padding-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            {{-- <a class="active" data-bs-toggle="tab"> --}}
-                                <h4>Thiết lập lại mật khẩu</h4>
-                            {{-- </a> --}}
+                            <a class="active" data-bs-toggle="tab">
+                                <h4>Lấy lại mật khẩu</h4>
+                            </a>
                         </div>
 
                         <div class="tab-content">
@@ -33,14 +19,14 @@
                                             @if ($errors->any())
                                             <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
                                             @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                             @endforeach
                                             @if ($message = Session::has('error'))
                                             <div class="alert alert-error alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Cảnh báo!</h5>
                                             {{Session::get('error')}}
                                             </div>
                                             @endif
@@ -49,7 +35,7 @@
                                             @if ($message = Session::has('success'))
                                             <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Chúc mừng!</h5>
                                             {{Session::get('success')}}
                                             </div>
                                             @endif
@@ -58,11 +44,11 @@
                                             <input type="text" disabled value="{{$email}}" name="email">
                                             <label>Mật khẩu mới<span class="required">*</span></label>
                                             <input type="password" name="password" placeholder="Enter New Password">
-                                            <label>Xác nhận mật khẩu<span class="required">*</span></label>
+                                            <label>Xác nhận<span class="required">*</span></label>
                                             <input type="password" class="form-control" placeholder="Confirm New password" name="password_confirmation">
                                             <div class="button-box">
                                             <button type="submit" class="btn btn-dark">
-                                                    <span>Cập nhật</span>
+                                                    <span>Tạo lại</span>
                                             </button>
                                             </div>
                                         </form>
@@ -75,6 +61,13 @@
             </div>
         </div>
     </div>
-
+    <style>
+        body{
+            background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position:center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+        }
+    </style>
     <!-- main content end -->
 @endsection

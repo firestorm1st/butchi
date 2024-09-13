@@ -6,9 +6,9 @@
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            {{-- <a class="active" data-bs-toggle="tab"> --}}
+                            
                                 <h4>Đăng nhập</h4>
-                            {{-- </a> --}}
+                            
                         </div>
 
                         <div class="tab-content">
@@ -19,7 +19,7 @@
                                             @if ($errors->any())
                                             <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
                                             @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                             @endforeach
@@ -28,14 +28,14 @@
                                             @if ($message = Session::has('error'))
                                             <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Cảnh báo!</h5>
                                             {{Session::get('error')}}
                                             </div>
                                             @endif
                                             @if ($message = Session::has('success'))
                                             <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                                            <h5><i class="icon fas fa-check"></i> Chúc mừng!</h5>
                                             {{Session::get('success')}}
                                             </div>
                                             @endif
@@ -73,9 +73,6 @@
             background-size: cover; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
-        }
-        h4{
-            margin-top: 50px;
         }
     </style>
     <!-- main content end -->
