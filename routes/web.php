@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MissionController;
 use App\Http\Controllers\Logout;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+
 use App\Http\Controllers\Client\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\GuestController;

@@ -7,18 +7,24 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\registerRequest;
 use App\Models\User;
-use Auth;
-use Str;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
+// use Str;
+use Illuminate\Support\Str;
 use DB;
-use Mail;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+// use Mail;
+
+use Illuminate\Support\Facades\Mail;
+ 
+// use Hash;
 use App\Mail\ForgotPasswordMail;
 
 class LoginController extends Controller
 {
     public function showLogin(){
         if(Auth::check()){
-            return redirect()->route('index');
+            return redirect()->route('guest.index');
         }else{
         return view('guest.login');
         }

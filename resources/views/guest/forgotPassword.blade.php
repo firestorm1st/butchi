@@ -6,7 +6,7 @@
             <div class="col-12">
                 <h2 class="bread-crumb-title">Forgot Password</h2>
                 <ol class="breadcrumb bg-transparent m-0 p-0 justify-content-center align-items-center">
-                    <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('guest.index')}}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Forgot Password</li>
                 </ol>
             </div>

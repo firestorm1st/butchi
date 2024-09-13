@@ -5,9 +5,9 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#">Trang chủ</a></li>
+            <li><a href="{{route('guest.index')}}">Trang chủ</a></li>
             <li><a href="#">Hoạt động</a></li>
-            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="{{route('guest.introduce')}}">Giới thiệu</a></li>
             <li><a href="#">Liên hệ</a></li>
             <li>
             <a>
@@ -25,7 +25,7 @@
             @if (Auth::user()->role==3)
                 <li><a href="{{route('admin.modules.contact.index')}}">Admin</a></li>
             @endif
-                <li><a href="{{route('client.account',['id'=>Auth::user()->id])}}">My account</a></li>
+                {{-- <li><a href="{{route('client.account',['id'=>Auth::user()->id])}}">My account</a></li> --}}
                 <li><a href="{{route('logout')}}">Log out</a></li>
             @else
                 <li><a href="{{route('showLogin')}}">Log in</a></li>
