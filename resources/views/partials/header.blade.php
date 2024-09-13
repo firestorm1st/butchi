@@ -1,11 +1,11 @@
 <header>
     <div class="logo">
         <img src="{{asset('client/image/logo.png')}}" style="width:60px;height:60px;margin-left: 30px;">
-        <div class="h3"><p><b>Bút chì thấu cảm</b></p></div>
+        <div class="h6"><p><b>Bút chì thấu cảm</b></p></div>
     </div>
     <nav>
         <ul>
-            <li><a href="#">Trang chủ</a></li>
+            <li><a href="{{route('guest.index')}}">Trang chủ</a></li>
             <li><a href="#">Hoạt động</a></li>
             <li><a href="#">Giới thiệu</a></li>
             <li><a href="#">Liên hệ</a></li>
@@ -45,14 +45,13 @@
         font-family: 'true typewriter';
     }
 
-    .logo h3{
-        margin-left: 10px;
-        font-size: 20px;
-        margin-right: 0px;
+    .logo h6{
+        margin-left: 35px;
+        font-size: 18px;
     }
 
     nav {
-        margin-left: 725px;
+        margin-left: 700px;
     }
 
     nav ul {
