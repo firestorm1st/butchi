@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Mission\UpdateRequest;
 use App\Http\Requests\Admin\Mission\StoreRequest;
@@ -31,12 +31,20 @@ class MissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $mission = new Mission();
-        $mission->name = $request->name;
-        $mission->day = $request->day;
-        $mission->save();
+        $ngayNhapVao = Carbon::parse($request->day);
+        $ngayHienTai = Carbon::now();
 
-        return redirect()->route('admin.mission.index')->with('success', 'Create mission carefully');
+        if ($ngayNhapVao->gt($ngayHienTai)) {
+            $mission = new Mission();
+            $mission->name = $request->name;
+            $mission->day = $request->day;
+            $mission->save();
+    
+            return redirect()->route('admin.mission.index')->with('success', 'Tạo mới nhiệm vụ thành công.');
+        } else {
+        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày nhập vào phải lớn hơn ngày hiện tại']);
+        }
+        
     }
 
     /**
@@ -73,7 +81,7 @@ class MissionController extends Controller
         $mission->day = $request->day;
         $mission->save();
 
-        return redirect()->route('admin.mission.index')->with('success', 'Create mission carefully');
+        return redirect()->route('admin.mission.index')->with('success', 'Cập nhật nhiệm vụ thành công.');
     }
     
 
@@ -88,6 +96,6 @@ class MissionController extends Controller
         }
 
         $mission->delete();
-        return redirect()->route('admin.mission.index')->with('success', 'Delete mission success');
+        return redirect()->route('admin.mission.index')->with('success', 'Xóa nhiệm vụ thành công.');
     }
 }

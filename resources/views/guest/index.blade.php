@@ -6,7 +6,7 @@
                 <h2>Chào mừng bạn đến với<br> "Bút Chì Thấu Cảm"</h2>
                 <p>Chỉ vẽ hạnh phúc - Dẫn lối yêu thương</p>
                 <button class="start-btn">Bắt đầu ></button>
-                <a class="link" href="{{ route('guest.introduce') }}">hướng dẫn</a>
+                <a class="link" href="{{ route('guest.introduce') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
                 <img src="{{asset('client/image/trang.jpg')}}" alt="Bút Chì Thấu Cảm Image">

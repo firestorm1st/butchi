@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\MissionController;
 use App\Http\Controllers\Logout;
@@ -61,6 +62,7 @@ Route::name('client.')->group(function(){
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('index', [AdminController::class, 'index'])->name('index');
     Route::prefix('contact')->name('contact.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'index')->name('index');
 

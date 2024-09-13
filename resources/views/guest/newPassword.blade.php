@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="bread-crumb-title">Forgot Password'</h2>
+                <h2 class="bread-crumb-title">Quên mật khẩu</h2>
                 <ol class="breadcrumb bg-transparent m-0 p-0 justify-content-center align-items-center">
-                    <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Forgot Password'</li>
+                    <li class="breadcrumb-item"><a href="{{route('index')}}">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Quên mật khẩu</li>
                 </ol>
             </div>
         </div>
@@ -20,9 +20,9 @@
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="active" data-bs-toggle="tab">
-                                <h4>Retake Password</h4>
-                            </a>
+                            {{-- <a class="active" data-bs-toggle="tab"> --}}
+                                <h4>Thiết lập lại mật khẩu</h4>
+                            {{-- </a> --}}
                         </div>
 
                         <div class="tab-content">
@@ -56,13 +56,13 @@
                                             @csrf
                                             <input type="text" hidden value="{{$token}}" name="token">
                                             <input type="text" disabled value="{{$email}}" name="email">
-                                            <label>New Password<span class="required">*</span></label>
+                                            <label>Mật khẩu mới<span class="required">*</span></label>
                                             <input type="password" name="password" placeholder="Enter New Password">
-                                            <label>Confirm New Passord<span class="required">*</span></label>
+                                            <label>Xác nhận mật khẩu<span class="required">*</span></label>
                                             <input type="password" class="form-control" placeholder="Confirm New password" name="password_confirmation">
                                             <div class="button-box">
                                             <button type="submit" class="btn btn-dark">
-                                                    <span>Reset</span>
+                                                    <span>Cập nhật</span>
                                             </button>
                                             </div>
                                         </form>

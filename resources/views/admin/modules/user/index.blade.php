@@ -36,7 +36,7 @@
     });
 
     function confirmDelete() {
-        return confirm('Do you want to delete it?');
+        return confirm('Bạn có chắc muốn xóa mục này không?');
     }
 </script>
 @endpush
@@ -90,8 +90,8 @@
 
                     
                     <td>{{$user->created_at}}</td>
-                    <td><a href="{{route('admin.user.edit',['id'=>$user->id])}}">Edit</a></td>
-                    <td><a onclick="return confirmDelete ()" href="{{route('admin.user.destroy',['id'=>$user->id])}}">Delete</a></td>
+                    <td><a href="{{route('admin.user.edit',['id'=>$user->id])}}">Chỉnh sửa</a></td>
+                    <td><a onclick="return confirmDelete ()" href="{{route('admin.user.destroy',['id'=>$user->id])}}">Xóa</a></td>
                 </tr>
                 @endforeach
             </tbody>

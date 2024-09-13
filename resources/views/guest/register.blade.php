@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-<nav class="breadcrumb-section breadcrumb-bg1">
+{{-- <nav class="breadcrumb-section breadcrumb-bg1">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-</nav>
+</nav> --}}
     <!-- main content start -->
     <div class="login-register-area section-padding-bottom">
         <div class="container">
@@ -20,9 +20,9 @@
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            <a data-bs-toggle="tab" href="#lg1">
-                                <h4>register</h4>
-                            </a>
+                            {{-- <a data-bs-toggle="tab" href="#lg1"> --}}
+                                <h2>Đăng ký</h2>
+                            {{-- </a> --}}
                         </div>
                         <div class="tab-content">
                             <div id="lg1" class="tab-pane show active">
@@ -48,18 +48,18 @@
                                             @csrf
                                             <label>Email<span class="required">*</span></label>
                                             <input type="email" name="email" placeholder="email" value="{{old('email')}}">
-                                            <label>Password<span class="required">*</span></label>
+                                            <label>Mật khẩu<span class="required">*</span></label>
                                             <input type="password" name="password" placeholder="Password">
-                                            <label>Confirm Passord<span class="required">*</span></label>
+                                            <label>Xác nhận mật khẩu<span class="required">*</span></label>
                                             <input type="password" class="form-control" placeholder="Enter password" name="password_confirmation">
                                             <label>Username<span class="required">*</span></label>
                                             <input name="username" placeholder="user_name" value="{{old('username')}}">
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <a href="{{route('showLogin')}}" class="text-center">I already have a membership</a>
+                                                    <a href="{{route('showLogin')}}" class="text-center">Tôi đã là thành viên</a>
                                                 </div>
                                                 <button type="submit" class="btn btn-dark">
-                                                        <span>Register</span>
+                                                        <span>Đăng ký</span>
                                                 </button>
                                             </div>
                                         </form>
@@ -73,5 +73,16 @@
         </div>
     </div>
 
+    <style>
+        body{
+            background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position:center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+        }
+        h4{
+            margin-top: 50px;
+        }
+    </style>
     <!-- main content end -->
 @endsection
