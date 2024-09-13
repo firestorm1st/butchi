@@ -1,16 +1,16 @@
 <header>
-    <div class="logo">
-        <img src="{{asset('client/image/logo.png')}}" style="width:60px;height:60px;margin-left: 30px;">
-        <div class="h6"><p><b>Bút chì thấu cảm</b></p></div>
-    </div>
     <nav>
-        <ul>
+        <div class="logo">
+            <img src="{{asset('client/image/logo.png')}}" style="width:60px;height:60px;margin-left: 30px;">
+            <div class="h6"><p><b>Bút chì thấu cảm</b></p></div>
+        </div>
+        <ul class="navbar">
             <li><a href="{{route('guest.index')}}">Trang chủ</a></li>
             <li><a href="#">Hoạt động</a></li>
-            <li><a href="{{route('guest.introduce')}}">Giới thiệu</a></li>
+            <li><a href="{{route('guest.aboutUs')}}">Giới thiệu</a></li>
             <li><a href="#">Liên hệ</a></li>
             <li>
-            <a>
+            <p class="p_navbar">
             @php
                 if(Auth::check()==true)
                 {
@@ -19,7 +19,7 @@
                     echo 'Guest';
                 }
             @endphp 
-            </a>
+            </p>
             </li>
             @if(Auth::check())
             @if (Auth::user()->role==3)
@@ -32,36 +32,46 @@
                 <li><a href="{{route('showRegister')}}">Register</a></li>
             @endif
         </ul>
+        <button class="start-btn">Bắt đầu</button>
     </nav>
-    <button class="start-btn">Bắt đầu</button>
 </header>
 
 <style>
     header {
         background: transparent; /* Ensures header is transparent so background is visible */
-        display: flex;
-        align-items: center;
-        padding: 0px 10px;
         font-family: 'true typewriter';
     }
 
     .logo h6{
-        margin-left: 35px;
+        margin-right: auto;
         font-size: 18px;
     }
 
     nav {
-        margin-left: 700px;
+        display: flex;
+        align-items: center; /* Ensure both logo and navbar items are vertically centered */
+        justify-content: space-between; /* Space between the logo and the navbar */
+        padding: 10px 20px;
     }
 
-    nav ul {
+    .navbar {
         list-style: none;
         display: flex;
-        gap: 20px;
+        gap: 20px; /* Space between links */
+        margin-left: auto; /* Pushes the nav links to the far right */
     }
 
-    nav a {
+    .navbar li {
+        margin: 0;
+    }
+
+    .navbar a {
         text-decoration: none;
+        color: #000;
+        font-size: 18px;
+    }
+
+    .p_navbar{
         color: #000;
         font-size: 18px;
     }
