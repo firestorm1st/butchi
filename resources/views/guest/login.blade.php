@@ -40,10 +40,10 @@
                                             </div>
                                             @endif
                                             @csrf
-                                            <label>Email<span class="required">*</span></label>
-                                            <input type="email" name="email" placeholder="email" value="{{old('email')}}">
-                                            <label>Password<span class="required">*</span></label>
-                                            <input type="password" name="password" placeholder="Password">
+                                            <label style="color: red">Email<span class="required">*</span></label>
+                                            <input style="border: 1px solid #000;" type="email" name="email" placeholder="email" value="{{old('email')}}">
+                                            <label style="color: red">Password<span class="required">*</span></label>
+                                            <input style="border: 1px solid #000;" type="password" name="password" placeholder="Password">
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
                                                     <a href="{{route('showRegister')}}">Register Now!</a><br>
@@ -73,9 +73,6 @@
             background-size: cover; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
-        }
-        h4{
-            margin-top: 50px;
         }
     </style>
     <!-- main content end -->
