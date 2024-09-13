@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\MissionController;
-
+use App\Http\Controllers\Logout;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ClientController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Guest\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,27 +19,45 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('login', [LoginController::class, 'showLogin'])
+->name('showLogin');
+Route::post('login',[LoginController::class, 'login']);
 
-Route::name('client.')->group(function(){
-    Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('register',[LoginController::class, 'showRegister'])
+->name('showRegister');
+Route::post('register',[LoginController::class, 'register'])->name('registerPost');
 
-    Route::get('/pencil', [HomeController::class, 'showPencil'])->name('showPencil');
-    Route::post('/pencil', [HomeController::class, 'pencil'])->name('pencil');
+Route::get('forgetPassword',[LoginController::class,'showForgotPassword'])
+->name('forget.password');
+Route::post('forgetPassword',[LoginController::class,'forgotPassword'])
+->name('forget.password.post');
 
-    Route::get('/checkin', [HomeController::class, 'showCheckin'])->name('showCheckin');
-    Route::post('/checkin', [HomeController::class, 'checkin'])->name('checkin');
+route::get('resetPassword/{token}',[LoginController::class,'resetPassword'])
+->name('reset.password');
+route::post('resetPassword',[LoginController::class,'resetPasswordPost'])
+->name('reset.password.post');
 
-    Route::get('/room', [HomeController::class, 'room'])->name('room');
+Route::get('Logout',action: Logout::class)->name('logout');
+
+Route::name('guest.')->group(function(){
+    Route::get('/', [GuestController::class, 'index'])->name('index');
+    Route::get('/contactUs', [GuestController::class, 'contactUs'])->name('contactUs');
+    Route::get('/introduce', [GuestController::class, 'introduce'])->name('introduce');
+    Route::get('/aboutUs', [GuestController::class, 'aboutUs'])->name('aboutUs');
 
 });
 
-Route::get('auth/login', [LoginController::class, 'showLogin'])->name('showLogin');
-Route::post('auth/login', [LoginController::class, 'login'])->name('login');
 
-Route::get('auth/register', [RegisterController::class, 'showRegister'])->name('showRegister');
-Route::post('auth/register', [RegisterController::class, 'register'])->name('register');
+Route::name('client.')->group(function(){
+    Route::get('/pencil', [ClientController::class, 'showPencil'])->name('showPencil');
+    Route::post('/pencil', [ClientController::class, 'pencil'])->name('pencil');
 
+    Route::get('/checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
+    Route::post('/checkin', [ClientController::class, 'checkin'])->name('checkin');
+
+    Route::get('/room', [ClientController::class, 'room'])->name('room');
+
+});
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('contact')->name('contact.')->controller(ContactController::class)->group(function () {
