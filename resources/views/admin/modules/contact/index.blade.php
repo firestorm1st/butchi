@@ -62,13 +62,15 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($contacts as $contact)
                 <tr>
-                    <th>ID</th>
-                    <th>Send_at</th>
-                    <th>Fullname</th>
-                    <th>Mail</th>
-                    <th>Message</th>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$contact->fullname}}</td>
+                    <td>{{$contact->email}}</td>
+                    <td>{{$contact->message}}</td>
+                    <td>{{$contact->created_at}}</td>
                 </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>

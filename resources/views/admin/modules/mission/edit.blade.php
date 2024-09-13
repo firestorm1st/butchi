@@ -4,7 +4,7 @@
 @section('action', 'Edit')
 
 @section('content')
-<form method="post" action="{{ route('admin.mission.update') }}">
+<form method="post" action="{{ route('admin.mission.update', ['id' => $id]) }}">
     @csrf
     <!-- Default box -->
     <div class="card">
@@ -26,12 +26,13 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Tên nhiệm vụ</label>
-                        <textarea class="form-control" placeholder="Nhập mô tả nhiệm vụ" name="name" value="{{ old('name') }}"></textarea>
+                        <textarea class="form-control" placeholder="Nhập mô tả nhiệm vụ" name="name">{{ old('name', $mission->name) }}</textarea>
                     </div>
+                    
 
                     <div class="form-group">
                         <label>Ngày áp dụng</label>
-                        <input type="text" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{ old('day') }}">
+                        <input type="text" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{old('day', $mission->day)}}">
                     </div>
 
                 

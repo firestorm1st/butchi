@@ -7,28 +7,14 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function showPencil()
+
+    public function index()
     {
-        return view('client.modules.pencil');
+        //return view('client.modules.index');
     }
 
-    public function pencil(Request $request)
+    public function blog()
     {
-        // return view('client.modules.pencil');
-    }
-
-    public function showCheckin()
-    {
-        return view('client.modules.checkin');
-    }
-
-    public function checkin(Request $request)
-    {
-        // return view('client.modules.checkin');
-    }
-
-    public function room()
-    {
-        return view('client.modules.room');
+        //return view('client.modules.blog');
     }
 }

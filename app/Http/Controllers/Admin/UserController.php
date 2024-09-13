@@ -12,11 +12,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     return view('admin.modules.user.index');
+    // }
+
     public function index()
     {
-        return view('admin.modules.user.index');
+        $users = User::orderBy('created_at', 'DESC')->get();
+        return view('admin.modules.user.index', ['users' => $users]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -31,10 +36,26 @@ class UserController extends Controller
     public function store(StoreRequest $request)
     {
         $user = new User();
+        // $request->validate([
+        //     'avatar' => 'required|mimes:jpg,png,bmp,jpeg',
+        // ]);
+
+        // $avatar = $request->avatar;
+        // $avatarName = time() . '-' . $avatar->getClientOriginalName();
+        // $avatar->move(public_path('uploads/'), $avatarName);
+        // $user->avatar = $avatarName;
+
+
         $user->username = $request->username;
-        $user->password = $request->password;
-        $user->avatar = $request->avatar;
+        $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        // $user->status = $request->status;
+        $user->role = $request->role;
+
+
         $user->save();
+
+        return redirect()->route('admin.user.index')->with('success', 'Create user successfully');
     }
 
     /**
@@ -50,7 +71,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.modules.user.edit');
+        $user = User::find($id);
+        if ($user == null) {
+            abort(404);
+        }
+        return view('admin.modules.user.edit', ['user' => $user, 'id' => $id]);
     }
 
     /**
@@ -58,7 +83,37 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-        //
+        $user = User::find($id)->first();
+
+        // $request->validate([
+        //     'file' => 'required|mimes:pdf',
+        //     'image' => 'required|mimes:jpg,png,bmp,jpeg',
+        // ]);
+
+        if ($user->email !== null) {
+            return redirect()->route('admin.user.index')->with('error', 'Email cannot be edited.');
+        }
+
+        // $avatar = $request->avatar;
+        // if (!empty($avatar)) {
+        //     $old_image_path = public_path('uploads/' . $user->avatar);
+        //     if (file_exists($old_image_path)) {
+        //         unlink($old_image_path);
+        //     }
+        //     $avatarName = time() . '-' . $avatar->getClientOriginalName();
+        //     $avatar->move(public_path('uploads/'), $avatarName);
+        //     $user->image = $avatarName;
+        // }
+
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        // $user->status = $request->status;
+        $user->role = $request->role;
+        
+        $user->save();
+
+        return redirect()->route('admin.user.index')->with('success', 'Update user successfully');
     }
 
     /**
@@ -66,6 +121,18 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        if ($user == null) {
+            abort(404);
+        }
+
+        $old_image_path = public_path('uploads/' . $user->avatar);
+        if (file_exists($old_image_path)) {
+            unlink($old_image_path);
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.user.index')->with('success', 'Delete user successfully');
     }
 }
