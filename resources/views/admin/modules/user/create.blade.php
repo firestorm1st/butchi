@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'User')
-@section('action', 'Create')
+@section('module', 'Người dùng')
+@section('action', 'Tạo mới')
 
 @section('content')
 <form method="post" action="{{ route('admin.user.store') }}" enctype="multipart/form-data">

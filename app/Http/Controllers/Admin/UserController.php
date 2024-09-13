@@ -55,7 +55,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.user.index')->with('success', 'Create user successfully');
+        return redirect()->route('admin.user.index')->with('success', 'Tạo mới người dùng thành công.');
     }
 
     /**
@@ -90,8 +90,8 @@ class UserController extends Controller
         //     'image' => 'required|mimes:jpg,png,bmp,jpeg',
         // ]);
 
-        if ($user->email !== null) {
-            return redirect()->route('admin.user.index')->with('error', 'Email cannot be edited.');
+        if ($user->email == null) {
+            return redirect()->route('admin.user.index')->with('error', 'Email chưa đăng ký tài khoản.');
         }
 
         // $avatar = $request->avatar;
@@ -107,13 +107,13 @@ class UserController extends Controller
 
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
-        $user->email = $request->email;
+        
         // $user->status = $request->status;
         $user->role = $request->role;
         
         $user->save();
 
-        return redirect()->route('admin.user.index')->with('success', 'Update user successfully');
+        return redirect()->route('admin.user.index')->with('success', 'Cập nhật thông tin người dùng thành công.');
     }
 
     /**
@@ -133,6 +133,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('admin.user.index')->with('success', 'Delete user successfully');
+        return redirect()->route('admin.user.index')->with('success', 'Xóa người dùng thành công.');
     }
 }

@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'Contact')
-@section('action', 'List')
+@section('module', 'Liên hệ')
+@section('action', 'Danh sách')
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('administrator/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">

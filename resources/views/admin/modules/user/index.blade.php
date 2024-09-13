@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'User')
-@section('action', 'List')
+@section('module', 'Người dùng')
+@section('action', 'Danh sách')
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('administrator/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -63,7 +63,7 @@
                     <th>ID</th>
                     <th>Email</th>
                     <th>Tên người dùng</th>
-                    <th>Hình đại diện</th>
+                    {{-- <th>Hình đại diện</th> --}}
                     <th>Tài khoản</th>
                     <th>Ngày tạo</th>
                     <th>Chỉnh sửa</th>
@@ -78,9 +78,9 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->username}}</td>
                     
-                    <td>
+                    {{-- <td>
                         <img src="{{ asset('uploads/' . $user->image) }}" alt="{{ $user->name }}" style="width: 200px; height: 200px;">
-                    </td>
+                    </td> --}}
 
                     <td>
                         <span class="right badge badge-{{$user->role == 1 ? 'success' : ($user->role == 2 ? 'info' : 'primary')}}">
@@ -100,7 +100,7 @@
                     <th>ID</th>
                     <th>Email</th>
                     <th>Tên người dùng</th>
-                    <th>Hình đại diện</th>
+                    {{-- <th>Hình đại diện</th> --}}
                     <th>Tài khoản</th>
                     <th>Ngày tạo</th>
                     <th>Chỉnh sửa</th>

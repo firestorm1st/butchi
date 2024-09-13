@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'User')
-@section('action', 'Edit')
+@section('module', 'Người dùng')
+@section('action', 'Chỉnh sửa')
 
 @section('content')
 <form method="post" action="{{ route('admin.user.update', ['id' => $id]) }}" enctype="multipart/form-data">
@@ -37,18 +37,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Tên người dùng</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên người dùng" name="username" value="{{ old('username', $user->username) }}">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Xác nhận mật khẩu</label>
-                        <input type="text" class="form-control" placeholder="Nhập mật khẩu" name="password_confirmation">
-                    </div>
-
-                    <div class="form-group">
                         <label>Tài khoản này là: </label>
                         <select class="form-control" name="role">
                             <option value="1" {{ old('role', $user->role) == 1 ? 'selected' : '' }}>Học sinh</option>
@@ -56,6 +44,21 @@
                             <option value="3" {{ old('role', $user->role) == 3 ? 'selected' : '' }}>Admin</option>
                         </select>
                     </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tên người dùng</label>
+                        <input type="text" class="form-control" placeholder="Nhập tên người dùng" name="username" value="{{ old('username', $user->username) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu</label>
+                        <input type="text" class="form-control" placeholder="Nhập mật khẩu" name="password_confirmation">
+                    </div>
+
+                   
 
                     {{-- <div class="form-group">
                         <label>Avatar</label>
@@ -69,11 +72,10 @@
                     </div> --}}
                     
                 </div>
+
+                
             </div>
 
-            
-
-            
         </div>
 
         <div class="card-footer">

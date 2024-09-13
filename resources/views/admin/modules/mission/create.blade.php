@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'Mission')
-@section('action', 'Create')
+@section('module', 'Nhiệm vụ')
+@section('action', 'Tạo mới')
 
 @section('content')
 <form method="post" action="{{ route('admin.mission.store') }}">

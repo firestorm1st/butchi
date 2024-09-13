@@ -22,7 +22,17 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'day' => 'required|unique:missions,day'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Vui lòng nhập nội dung nhiệm vụ',
+            'day.required' => 'Vui lòng nhập ngày áp dụng',
+            'day.unique' => 'Đã có nhiệm vụ trong ngày vừa nhập, vui lòng chọn ngày khác'
         ];
     }
 }

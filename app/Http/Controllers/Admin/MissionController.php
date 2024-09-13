@@ -42,7 +42,7 @@ class MissionController extends Controller
     
             return redirect()->route('admin.mission.index')->with('success', 'Tạo mới nhiệm vụ thành công.');
         } else {
-        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày nhập vào phải lớn hơn ngày hiện tại']);
+        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
         }
         
     }
@@ -77,11 +77,22 @@ class MissionController extends Controller
             abort(404);
         }
         
-        $mission->name = $request->name;
-        $mission->day = $request->day;
-        $mission->save();
+        $ngayNhapVao = Carbon::parse($request->day);
+        $ngayHienTai = Carbon::now();
 
-        return redirect()->route('admin.mission.index')->with('success', 'Cập nhật nhiệm vụ thành công.');
+        if ($ngayNhapVao->gt($ngayHienTai)) {
+            $mission->name = $request->name;
+            $mission->day = $request->day;
+            $mission->save();
+    
+            return redirect()->route('admin.mission.index')->with('success', 'Cập nhật nhiệm vụ thành công.');
+        } else {
+        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
+        }
+
+        
+
+        
     }
     
 

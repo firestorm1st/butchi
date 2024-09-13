@@ -1,7 +1,7 @@
 @extends('admin.master')
 
-@section('module', 'Mission')
-@section('action', 'Edit')
+@section('module', 'Nhiệm vụ')
+@section('action', 'Chỉnh sửa')
 
 @section('content')
 <form method="post" action="{{ route('admin.mission.update', ['id' => $id]) }}">
@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label>Ngày áp dụng</label>
-                        <input type="text" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{old('day', $mission->day)}}">
+                        <input type="date" class="form-control" placeholder="Nhập ngày áp dụng" name="day" value="{{old('day', $mission->day)}}">
                     </div>
 
                 
