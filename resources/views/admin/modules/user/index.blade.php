@@ -81,11 +81,9 @@
 
                             <td>
                                 @if ($user->avatar)
-                                    <img src="{{ asset('uploads/' . $user->avatar) }}"
-                                        style="width: 50px; height: 50px;">
+                                    <img src="{{ asset('uploads/' . $user->avatar) }}" style="width: 50px; height: 50px;">
                                 @else
-                                    <img src="{{ asset('client/image/logo.png') }}"
-                                        style="width: 50px; height: 50px;">
+                                    <img src="{{ asset('client/image/logo.png') }}" style="width: 50px; height: 50px;">
                                 @endif
                             </td>
 

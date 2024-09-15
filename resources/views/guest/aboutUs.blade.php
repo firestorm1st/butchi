@@ -1,5 +1,5 @@
 @extends('master')
-@section('content')    
+@section('content')
     <style>
         * {
             margin: 0;
@@ -8,11 +8,16 @@
         }
 
         body {
-            background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover;  /* Makes sure the background image covers the whole page */
-    background-position: center center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            background-image: url("{{ asset('client/image/bg.png') }}");
+            /* Path to your image */
+            background-size: cover;
+            /* Makes sure the background image covers the whole page */
+            background-position: center center;
+            /* Centers the background image */
+            background-repeat: no-repeat;
+            /* Prevents the image from repeating */
+            background-attachment: fixed;
+            /* Keeps the background fixed when scrolling */
         }
 
         .container {
@@ -33,7 +38,7 @@
         }
 
         .text-section h1 {
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
             font-size: 36px;
             font-weight: bold;
         }
@@ -89,7 +94,7 @@
         }
 
         .column h3 {
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
             font-size: 24px;
             margin-bottom: 20px;
         }
@@ -107,7 +112,7 @@
     <div class="container">
         <!-- Left Section: Image -->
         <div class="image-section">
-            <img src="{{asset('client/image/yeuthuong.png')}}" alt="Bút Chì Thấu Cảm Image" style="width: 300px;height:auto">
+            <img src="{{ asset('client/image/yeuthuong.png') }}" alt="Bút Chì Thấu Cảm Image" style="width: 300px;height:auto">
         </div>
 
         <!-- Right Section: Text and Button -->

@@ -25,7 +25,8 @@
                 }
             @endphp  --}}
                     @if (Auth::check())
-                        <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a>
+                        <a
+                            href="{{ route('client.showAccount', ['id' => Auth::user()->id]) }}">{{ Auth::user()->username }}</a>
                     @else
                         Guest
                     @endif

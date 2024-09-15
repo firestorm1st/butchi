@@ -9,7 +9,7 @@
                 <a class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
-                <img src="{{asset('client/image/trang.jpg')}}" alt="Bút Chì Thấu Cảm Image">
+                <img src="{{ asset('client/image/trang.jpg') }}" alt="Bút Chì Thấu Cảm Image">
             </div>
         </section>
     </main>
@@ -22,14 +22,19 @@
         }
 
         body {
-            background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover;  /* Makes sure the background image covers the whole page */
-            background-position: center center; /* Centers the background image */
-            background-repeat: no-repeat; /* Prevents the image from repeating */   
-            background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            background-image: url("{{ asset('client/image/bg.png') }}");
+            /* Path to your image */
+            background-size: cover;
+            /* Makes sure the background image covers the whole page */
+            background-position: center center;
+            /* Centers the background image */
+            background-repeat: no-repeat;
+            /* Prevents the image from repeating */
+            background-attachment: fixed;
+            /* Keeps the background fixed when scrolling */
         }
 
-        .logo h3{
+        .logo h3 {
             margin-left: 10px;
             font-size: 20px;
         }
@@ -45,7 +50,7 @@
             font-size: 16px;
         }
 
-        .link{
+        .link {
             font-family: 'true typewriter';
             margin-left: 40px;
             font-weight: bold;
@@ -60,7 +65,7 @@
 
         .content {
             margin: 30px auto;
-            display:flex;
+            display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
@@ -70,7 +75,7 @@
             font-size: 40px;
             font-weight: bold;
             line-height: 1.2;
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
         }
 
         .welcome-text p {

@@ -1,25 +1,26 @@
 @extends('master')
 @section('content')
     <div class="container_account">
-        
-            <div class="left-column">
-                <div class="center">
-                    <h2 style="font-family:'Dancing Script'; font-size: 36px;">{{ $user->username }}</h2>
-                    @if ($user->avatar)
-                        <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện người dùng" width='200px'
-                            height='200px'>
-                    @else
-                        <img src="{{ asset('client/image/avatar.png') }}" alt="Avatar">
-                    @endif
-                    {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
-                </div>
-                <p>Giao diện: Học sinh</p>
-                <p>Mật khẩu: matkhauabcd</p>
-                
-                <a href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary" style="font-family: 'true typewriter';">Cập nhật thông tin</a>
-                {{-- <a  href="#">Đổi mật khẩu</a> --}}
+
+        <div class="left-column">
+            <div class="center">
+                <h2 style="font-family:'Dancing Script'; font-size: 36px;">{{ $user->username }}</h2>
+                @if ($user->avatar)
+                    <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện người dùng" width='200px'
+                        height='200px'>
+                @else
+                    <img src="{{ asset('client/image/avatar.png') }}" alt="Avatar">
+                @endif
+                {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
             </div>
-        
+            <p>Giao diện: Học sinh</p>
+            <p>Mật khẩu: matkhauabcd</p>
+
+            <a href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary"
+                style="font-family: 'true typewriter';">Cập nhật thông tin</a>
+            {{-- <a  href="#">Đổi mật khẩu</a> --}}
+        </div>
+
         <div class="right-column">
             <div class="icon-container">
                 <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
@@ -36,10 +37,14 @@
     <style>
         body {
             background-image: url("{{ asset('client/image/bg.png') }}");
-            background-size: cover;  /* Makes sure the background image covers the whole page */
-    background-position: center center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            background-size: cover;
+            /* Makes sure the background image covers the whole page */
+            background-position: center center;
+            /* Centers the background image */
+            background-repeat: no-repeat;
+            /* Prevents the image from repeating */
+            background-attachment: fixed;
+            /* Keeps the background fixed when scrolling */
         }
 
         .left-column img {

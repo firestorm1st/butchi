@@ -34,7 +34,8 @@ class ClientController extends Controller
         return view('client.room');
     }
 
-    public function showAccount($id){
+    public function showAccount($id)
+    {
         $user = User::find($id);
         if ($user == null) {
             abort(404);
@@ -42,8 +43,9 @@ class ClientController extends Controller
         return view('client.accountPage', ['user' => $user, 'id' => $id]);
     }
 
-    public function account(Request $request, string $id){
-        
+    public function account(Request $request, string $id)
+    {
+
         $user = User::where('id', $id)->first();
 
         $request->validate([
@@ -68,14 +70,14 @@ class ClientController extends Controller
         $user->password = bcrypt($request->password);
 
         $user->role = $request->role;
-        
+
         $user->update();
         // dd($user);
         return redirect()->route('client.showAccount', ['user' => $user, 'id' => $id])->with('success', 'Cập nhật thông tin người dùng thành công.');
-        
     }
 
-    public function changeAccount(string $id){
+    public function changeAccount(string $id)
+    {
         $user = User::find($id);
         if ($user == null) {
             abort(404);

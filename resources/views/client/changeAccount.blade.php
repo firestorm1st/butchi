@@ -81,7 +81,7 @@
 
         }
 
-        .container{
+        .container {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -91,7 +91,7 @@
 
         }
 
-        .button{
+        .button {
             width: 30%;
             margin: auto;
         }
@@ -129,7 +129,7 @@
             /* Đảm bảo padding không thay đổi kích thước tổng thể */
         }
 
-       
+
 
         .custom-input {
             width: 100%;

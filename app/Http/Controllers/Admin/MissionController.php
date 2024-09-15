@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Mission\UpdateRequest;
@@ -39,12 +40,11 @@ class MissionController extends Controller
             $mission->name = $request->name;
             $mission->day = $request->day;
             $mission->save();
-    
+
             return redirect()->route('admin.mission.index')->with('success', 'Tạo mới nhiệm vụ thành công.');
         } else {
-        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
         }
-        
     }
 
     /**
@@ -76,7 +76,7 @@ class MissionController extends Controller
         if ($mission == null) {
             abort(404);
         }
-        
+
         $ngayNhapVao = Carbon::parse($request->day);
         $ngayHienTai = Carbon::now();
 
@@ -84,17 +84,13 @@ class MissionController extends Controller
             $mission->name = $request->name;
             $mission->day = $request->day;
             $mission->save();
-    
+
             return redirect()->route('admin.mission.index')->with('success', 'Cập nhật nhiệm vụ thành công.');
         } else {
-        return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
         }
-
-        
-
-        
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
