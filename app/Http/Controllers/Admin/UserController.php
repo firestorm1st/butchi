@@ -36,14 +36,15 @@ class UserController extends Controller
     public function store(StoreRequest $request)
     {
         $user = new User();
-        // $request->validate([
-        //     'avatar' => 'required|mimes:jpg,png,bmp,jpeg',
-        // ]);
+        $request->validate([
+            'avatar' => 'required|mimes:jpg,png,bmp,jpeg',
+        ]);
 
-        // $avatar = $request->avatar;
-        // $avatarName = time() . '-' . $avatar->getClientOriginalName();
-        // $avatar->move(public_path('uploads/'), $avatarName);
-        // $user->avatar = $avatarName;
+
+        $avatar = $request->avatar;
+        $avatarName = time() . '-' . $avatar->getClientOriginalName();
+        $avatar->move(public_path('uploads/'), $avatarName);
+        $user->avatar = $avatarName;
 
 
         $user->username = $request->username;
@@ -83,35 +84,37 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-        $user = User::find($id)->first();
+        $user = User::where('id', $id)->first();
 
-        // $request->validate([
-        //     'file' => 'required|mimes:pdf',
-        //     'image' => 'required|mimes:jpg,png,bmp,jpeg',
-        // ]);
+        $request->validate([
+            'image' => 'mimes:jpg,png,bmp,jpeg',
+        ]);
 
         if ($user->email == null) {
             return redirect()->route('admin.user.index')->with('error', 'Email chưa đăng ký tài khoản.');
         }
 
-        // $avatar = $request->avatar;
-        // if (!empty($avatar)) {
-        //     $old_image_path = public_path('uploads/' . $user->avatar);
-        //     if (file_exists($old_image_path)) {
-        //         unlink($old_image_path);
-        //     }
-        //     $avatarName = time() . '-' . $avatar->getClientOriginalName();
-        //     $avatar->move(public_path('uploads/'), $avatarName);
-        //     $user->image = $avatarName;
-        // }
+        $avatar = $request->avatar;
+        if (!empty($avatar)) {
+            if ($user->avatar) {
+                $old_image_path = public_path('uploads/' . $user->avatar);
+                if (file_exists($old_image_path)) {
+                    unlink($old_image_path);
+                }
+            }
+
+            $avatarName = time() . '-' . $avatar->getClientOriginalName();
+            $avatar->move(public_path('uploads/'), $avatarName);
+            $user->avatar = $avatarName;
+        }
 
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
-        
+
         // $user->status = $request->status;
         $user->role = $request->role;
-        
-        $user->save();
+        // dd($user);
+        $user->update();
 
         return redirect()->route('admin.user.index')->with('success', 'Cập nhật thông tin người dùng thành công.');
     }
@@ -121,7 +124,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
+        $user = User::where('id', $id)->first();
         if ($user == null) {
             abort(404);
         }

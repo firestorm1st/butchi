@@ -54,10 +54,14 @@ Route::name('client.')->group(function(){
     Route::get('room', [ClientController::class, 'room'])->name('room');
     Route::post('room', [ClientController::class, 'room'])->name('room');
 
+    Route::get('account/{id}', [ClientController::class, 'showAccount'])->name('showAccount');
+    Route::get('change-account/{id}', [ClientController::class, 'changeAccount'])->name('changeAccount');
+    Route::post('account/{id}', [ClientController::class, 'account'])->name('account');
+
     Route::get('checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
     Route::post('checkin', [ClientController::class, 'checkin'])->name('checkin');
 
-    //Route::get('accountPage', [ClientController::class, 'accountPage'])->name('accountPage');
+    
 
 });
 

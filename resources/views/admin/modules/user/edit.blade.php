@@ -4,7 +4,7 @@
 @section('action', 'Chỉnh sửa')
 
 @section('content')
-<form method="post" action="{{ route('admin.user.update', ['id' => $id]) }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('admin.user.update', ['id' => $user->id]) }}" enctype="multipart/form-data">
     @csrf
     <!-- Default box -->
     <div class="card">
@@ -28,12 +28,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" placeholder="Nhập email" name="email" value="{{ old('email', $user->email) }}" readonly>
+                        <input type="text" class="form-control" name="email" value="{{ old('email', $user->email) }}" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input type="text" class="form-control" placeholder="Nhập mật khẩu" name="password">
+                        <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password">
                     </div>
 
                     <div class="form-group">
@@ -55,22 +55,20 @@
 
                     <div class="form-group">
                         <label>Xác nhận mật khẩu</label>
-                        <input type="text" class="form-control" placeholder="Nhập mật khẩu" name="password_confirmation">
+                        <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password_confirmation">
                     </div>
 
-                   
-
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label>Avatar</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customImage" value="{{ old('avatar', $user->avatar) }}" name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg"/>
+                            <input type="file" class="custom-file-input" id="customImage" value="{{ old('avatar') }}" name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg"/>
                             <label class="custom-file-label" for="customImage">Choose file</label>
                         </div>
                         @if($user->avatar)
-                        <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Avatar" width='200px' height='200px'>
+                        <img src="{{ asset('uploads/'.$user->avatar) }}" alt="Hình đại diện" width='200px' height='200px'>
                         @endif
-                    </div> --}}
-                    
+                    </div>
+
                 </div>
 
                 

@@ -40,6 +40,13 @@
                             <label class="custom-file-label" for="customImage">Choose file</label>
                         </div>
                     </div> --}}
+                    <div class="form-group">
+                        <label>Avatar</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customImage" value="{{ old('image') }}" name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg"/>
+                            <label class="custom-file-label" for="customImage">Choose file</label>
+                        </div>
+                    </div>
                     
                 </div>
 
