@@ -50,7 +50,7 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
-        // $user->status = $request->status;
+        $user->is_offline = $request->is_offline;
         $user->role = $request->role;
 
 
@@ -111,7 +111,7 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
 
-        // $user->status = $request->status;
+        $user->is_offline = $request->is_offline;
         $user->role = $request->role;
         // dd($user);
         $user->update();

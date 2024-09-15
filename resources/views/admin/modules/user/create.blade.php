@@ -42,14 +42,20 @@
                         </div>
                     </div> --}}
                         <div class="form-group">
-                            <label>Avatar</label>
+                            <label>Hình đại diện</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customImage" value="{{ old('image') }}"
                                     name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg" />
                                 <label class="custom-file-label" for="customImage">Choose file</label>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label>Làm nhiệm vụ:</label>
+                            <select class="form-control" name="is_offline">
+                                <option value="1" {{ old('is_offline') == 1 ? 'selected' : '' }} selected>Trực tiếp</option>
+                                <option value="2" {{ old('is_offline') == 2 ? 'selected' : '' }}>Trực tuyến</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -68,7 +74,7 @@
                         <div class="form-group">
                             <label>Tài khoản này là: </label>
                             <select class="form-control" name="role">
-                                <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Học sinh</option>
+                                <option value="1" {{ old('role') == 1 ? 'selected' : '' }} selected>Học sinh</option>
                                 <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Phụ huynh</option>
                                 <option value="3" {{ old('role') == 3 ? 'selected' : '' }}>Admin</option>
                             </select>
@@ -88,7 +94,7 @@
         function confirmEmail() {
             if (confirm(
                     "Please check your email carefully before registering, because your email is the only thing that cannot be edited."
-                    )) {
+                )) {
                 return true;
             } else {
                 return false;

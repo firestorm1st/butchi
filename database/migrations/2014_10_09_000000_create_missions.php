@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('day');
-            // $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_offline')->default(1)->comment('1: offline - 2: online');
             $table->timestamps();
         });
     }

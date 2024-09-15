@@ -47,7 +47,13 @@
                                 <option value="3" {{ old('role', $user->role) == 3 ? 'selected' : '' }}>Admin</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label>Làm nhiệm vụ:</label>
+                            <select class="form-control" name="is_offline">
+                                <option value="1" {{ old('is_offline', $user->is_offline) == 1 ? 'selected' : '' }}>Trực tiếp</option>
+                                <option value="2" {{ old('is_offline', $user->is_offline) == 2 ? 'selected' : '' }}>Trực tuyến</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-6">

@@ -13,10 +13,33 @@
                 @endif
                 {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
             </div>
-            <p>Giao diện: Học sinh</p>
-            <p>Mật khẩu: matkhauabcd</p>
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Giao diện: </b>
 
-            <a href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary"
+                @if ($user->role == 1)
+                    <p style="display: inline-block;">Học sinh</p>
+                @elseif ($user->role == 2)
+                    <p style="display: inline-block;">Phụ huynh</p>
+                @elseif ($user->role == 3)
+                    <p style="display: inline-block;">Admin</p>
+                @endif
+            </div>
+
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Email: </b>
+                <p style="display: inline-block;">{{ $user->email }}</p>
+            </div>
+
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Nhiệm vụ: </b>
+                @if ($user->is_offline == 1)
+                    <p style="display: inline-block;">Trực tiếp</p>
+                @elseif ($user->is_offline == 2)
+                    <p style="display: inline-block;">Trực tuyến</p>
+                @endif
+            </div>
+
+            <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary"
                 style="font-family: 'true typewriter';">Cập nhật thông tin</a>
             {{-- <a  href="#">Đổi mật khẩu</a> --}}
         </div>
