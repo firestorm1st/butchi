@@ -6,8 +6,8 @@
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">@yield('module')</a></li>
-        <li class="breadcrumb-item active">@yield('action')</li>
+        {{-- <li class="breadcrumb-item">@yield('module')</a></li>
+        <li class="breadcrumb-item active">@yield('action')</li> --}}
         </ol>
     </div>
     </div>
