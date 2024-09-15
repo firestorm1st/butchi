@@ -6,7 +6,6 @@
                 <div class="col-lg-7 col-md-12 mx-auto">
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav nav-tabs" id="nav-tab" role="tablist">
-                            
                                 <h4>Đăng nhập</h4>
                             
                         </div>
@@ -70,9 +69,9 @@
     <style>
         body{
             background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover; /* Ensures the image covers the entire section */
+            background-size:1600px; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            background-repeat: no-repeat;
         }
     </style>
     <!-- main content end -->

@@ -29,6 +29,10 @@ class ClientController extends Controller
 
     public function room()
     {
-        //return view('client.modules.room');
+        return view('client.room');
+    }
+
+    public function accountPage(){
+        return view('client.accountPage');
     }
 }

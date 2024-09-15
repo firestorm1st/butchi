@@ -1,14 +1,14 @@
 <header>
     <nav>
         <div class="logo">
-            <img src="{{asset('client/image/logo.png')}}" style="width:60px;height:60px;margin-left: 30px;">
+            <img src="{{asset('client/image/logo.png')}}" style="width:80px;height:80px;margin-left:10px;">
             <div class="h6"><p><b>Bút chì thấu cảm</b></p></div>
         </div>
         <ul class="navbar">
             <li><a href="{{route('guest.index')}}">Trang chủ</a></li>
             <li><a href="#">Hoạt động</a></li>
             <li><a href="{{route('guest.aboutUs')}}">Giới thiệu</a></li>
-            <li><a href="#">Liên hệ</a></li>
+            <li><a href="{{route('guest.contactUs')}}">Liên hệ</a></li>
             <li>
             <p class="p_navbar">
             @php
@@ -44,14 +44,14 @@
 
     .logo h6{
         margin-right: auto;
-        font-size: 18px;
+        font-size: 20px;
     }
 
     nav {
         display: flex;
         align-items: center; /* Ensure both logo and navbar items are vertically centered */
         justify-content: space-between; /* Space between the logo and the navbar */
-        padding: 10px 20px;
+        padding: 0px 20px;
     }
 
     .navbar {

@@ -11,11 +11,6 @@ class GuestController extends Controller
     {
         return view('guest.index');
     }
-
-    public function introduce(){
-        return view('guest.introduce');
-    }
-
     public function aboutUs()
     {
         return view('guest.aboutUs');

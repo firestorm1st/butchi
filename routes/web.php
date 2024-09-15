@@ -44,20 +44,20 @@ Route::get('Logout',action: Logout::class)->name('logout');
 Route::name('guest.')->group(function(){
     Route::get('/', [GuestController::class, 'index'])->name('index');
     Route::get('/contactUs', [GuestController::class, 'contactUs'])->name('contactUs');
-    Route::get('/introduce', [GuestController::class, 'introduce'])->name('introduce');
     Route::get('/aboutUs', [GuestController::class, 'aboutUs'])->name('aboutUs');
 
 });
-
-
+Route::get('room', [ClientController::class, 'room'])->name('room');
 Route::name('client.')->group(function(){
-    Route::get('/pencil', [ClientController::class, 'showPencil'])->name('showPencil');
-    Route::post('/pencil', [ClientController::class, 'pencil'])->name('pencil');
+    Route::get('index', [ClientController::class, 'index'])->name('index');
 
-    Route::get('/checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
-    Route::post('/checkin', [ClientController::class, 'checkin'])->name('checkin');
+    Route::get('room', [ClientController::class, 'room'])->name('room');
+    Route::post('room', [ClientController::class, 'room'])->name('room');
 
-    Route::get('/room', [ClientController::class, 'room'])->name('room');
+    Route::get('checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
+    Route::post('checkin', [ClientController::class, 'checkin'])->name('checkin');
+
+    //Route::get('accountPage', [ClientController::class, 'accountPage'])->name('accountPage');
 
 });
 

@@ -4680,6 +4680,8 @@ svg {
 }
 
 .login-register-wrapper .login-register-tab-list {
+  font-family: 'true typewriter';
+  color: red;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

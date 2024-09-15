@@ -6,7 +6,7 @@
                 <h2>Chào mừng bạn đến với<br> "Bút Chì Thấu Cảm"</h2>
                 <p>Chỉ vẽ hạnh phúc - Dẫn lối yêu thương</p>
                 <button class="start-btn">Bắt đầu ></button>
-                <a class="link" href="{{ route('guest.introduce') }}">Hướng dẫn</a>
+                <a class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
                 <img src="{{asset('client/image/trang.jpg')}}" alt="Bút Chì Thấu Cảm Image">
@@ -22,11 +22,10 @@
         }
 
         body {
-            color: #000;
             background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover; /* Ensures the image covers the entire section */
+            background-size:1560px; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            background-repeat: no-repeat;
         }
 
         .logo h3{
@@ -55,14 +54,11 @@
 
         main {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 50px;
         }
 
         .content {
-            margin-top: 30px;
-            margin-left: 250px;
+            margin: 30px auto;
             display:flex;
             align-items: center;
             justify-content: space-between;

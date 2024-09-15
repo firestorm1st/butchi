@@ -9,11 +9,9 @@
 
         body {
             background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover; /* Ensures the image covers the entire section */
+            background-size:1560px; /* Ensures the image covers the entire section */
             background-position:center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-color: #f9f9f9;
-            padding: 20px;
+            background-repeat: no-repeat;
         }
 
         .container {
