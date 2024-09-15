@@ -9,9 +9,10 @@
 
         body {
             background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size:1560px; /* Ensures the image covers the entire section */
-            background-position:center; /* Center the image */
-            background-repeat: no-repeat;
+            background-size: cover;  /* Makes sure the background image covers the whole page */
+    background-position: center center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed when scrolling */
         }
 
         .container {
