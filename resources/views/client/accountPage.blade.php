@@ -46,14 +46,14 @@
 
         <div class="right-column">
             <div class="icon-container " style="margin-right: -7px">
-                <img src="{{ asset('client/image/1.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/2.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/3.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/4.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/5.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/6.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/7.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/8.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/batngo.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/buonba.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/mongdoi.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/sohai.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/tintuong.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/vuive.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/changhet.png') }}" alt="Avatar">
                
                     
                 
@@ -118,28 +118,28 @@
                                 let text;
                                 switch (context.raw) {
                                     case 1:
-                                        text = "Hơi giận dữ";
+                                        text = "Bất ngờ";
                                         break;
                                     case 2:
-                                        text = "Hơi thất vọng";
+                                        text = "Buồn bã";
                                         break;
                                     case 3:
-                                        text = "Tạm ổn";
+                                        text = "Giận dữ";
                                         break;
                                     case 4:
-                                        text = "Khá tốt";
+                                        text = "Mong đợi";
                                         break;
                                     case 5:
-                                        text = "Rất tốt";
+                                        text = "Sợ hãi";
                                         break;
                                     case 6:
-                                        text = "Tuyệt vời";
+                                        text = "Tin tưởng";
                                         break;
                                     case 7:
-                                        text = "Xuất sắc";
+                                        text = "Vui vẻ";
                                         break;
                                     case 8:
-                                        text = "Hoàn hảo";
+                                        text = "Chán ghét";
                                         break;
                                     default:
                                         text = "Không xác định";
