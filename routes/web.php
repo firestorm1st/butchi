@@ -45,6 +45,8 @@ Route::name('guest.')->group(function(){
     Route::get('/', [GuestController::class, 'index'])->name('index');
     Route::get('/contactUs', [GuestController::class, 'contactUs'])->name('contactUs');
     Route::get('/aboutUs', [GuestController::class, 'aboutUs'])->name('aboutUs');
+    
+    
 
 });
 Route::get('room', [ClientController::class, 'room'])->name('room');
@@ -58,9 +60,13 @@ Route::name('client.')->group(function(){
     Route::get('change-account/{id}', [ClientController::class, 'changeAccount'])->name('changeAccount');
     Route::post('account/{id}', [ClientController::class, 'account'])->name('account');
 
+    Route::get('chart', [ClientController::class, 'chart'])->name('chart');
+    // Route::get('data', [ClientController::class, 'getIconData']);
+
     Route::get('checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
     Route::post('checkin', [ClientController::class, 'checkin'])->name('checkin');
 
+    
     
 
 });

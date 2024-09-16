@@ -39,24 +39,125 @@
                 @endif
             </div>
 
-            <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary"
-                style="font-family: 'true typewriter';">Cập nhật thông tin</a>
+            <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}"
+                class="btn btn-primary" style="font-family: 'true typewriter';">Cập nhật thông tin</a>
             {{-- <a  href="#">Đổi mật khẩu</a> --}}
         </div>
 
         <div class="right-column">
-            <div class="icon-container">
-                <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/mongdoi.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/vuive.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/tintuong.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/sohai.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/batngo.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/buonba.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/changhet.png') }}" alt="Avatar">
+            <div class="icon-container " style="margin-right: -7px">
+                <img src="{{ asset('client/image/1.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/2.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/3.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/4.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/5.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/6.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/7.png') }}" alt="Avatar">
+                <img src="{{ asset('client/image/8.png') }}" alt="Avatar">
+               
+                    
+                
             </div>
+            <canvas id="myLineChart"></canvas>
+            
         </div>
+
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var dataFromLaravel = @json($data);
+        
+        // Tạo mảng label từ các giá trị ngày
+        const labels = dataFromLaravel.map(item => {
+            const date = new Date(item.date);
+            return `${date.getDate()}/${date.getMonth() + 1}`; // Định dạng ngày thành dd/mm
+        });
+
+        // Tạo mảng data từ các giá trị emo_id (hoặc giá trị khác bạn muốn hiển thị)
+        const emoData = dataFromLaravel.map(item => item.emo_id);
+
+
+
+        // Khởi tạo biểu đồ
+        var ctx = document.getElementById('myLineChart').getContext('2d');
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels, // Gán các nhãn ngày
+                datasets: [{
+                    label: 'Cảm xúc 7 ngày',
+                    data: emoData, // Các giá trị (1 đến 8) cho trục Y
+                    backgroundColor: 'rgb(33, 33, 33)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Màu nền của các điểm
+                    pointBorderColor: '#fff', // Màu viền của các điểm
+                    pointRadius: 5, // Kích thước của các điểm
+                    pointHoverRadius: 7, // Kích thước của các điểm khi hover
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 1, // Giá trị tối thiểu trên trục Y
+                        max: 8, // Giá trị tối đa trên trục Y
+                        ticks: {
+                            stepSize: 1, // Các giá trị cách nhau 1 đơn vị
+                            callback: function(value) {
+                                return ""; // Hiển thị số trên trục Y
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                // Tùy chỉnh văn bản trong tooltip dựa trên giá trị
+                                let text;
+                                switch (context.raw) {
+                                    case 1:
+                                        text = "Hơi giận dữ";
+                                        break;
+                                    case 2:
+                                        text = "Hơi thất vọng";
+                                        break;
+                                    case 3:
+                                        text = "Tạm ổn";
+                                        break;
+                                    case 4:
+                                        text = "Khá tốt";
+                                        break;
+                                    case 5:
+                                        text = "Rất tốt";
+                                        break;
+                                    case 6:
+                                        text = "Tuyệt vời";
+                                        break;
+                                    case 7:
+                                        text = "Xuất sắc";
+                                        break;
+                                    case 8:
+                                        text = "Hoàn hảo";
+                                        break;
+                                    default:
+                                        text = "Không xác định";
+                                }
+                                return 'Cảm xúc: ' + text;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+
+        // .catch(error => console.error('Error fetching data:', error));
+    });
+    </script>
     <style>
         body {
             background-color: #fffaed;
@@ -98,7 +199,7 @@
 
         .right-column {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
         }
 
@@ -106,10 +207,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            
+        }
+
+        .icon-container img{
+            margin: 6px auto;
         }
 
         .icon-container img {
-            width: auto;
+            width: 30px;
             height: 30px;
             margin-bottom: 15px;
         }
@@ -117,5 +223,13 @@
         .left-column p {
             style="font-family: 'true typewriter';"
         }
+
+        #myLineChart {
+        /* position: relative; */
+        height: 400px;
+        width: 200%;
+        /* width: 80%;
+            margin: auto; */
+    }
     </style>
 @endsection

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Emotion;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -20,4 +23,11 @@ class GuestController extends Controller
     {
         return view('guest.contactUs');
     }
+
+    public function chart()
+    {
+        return view('guest.chart');
+    }
+
+    
 }
