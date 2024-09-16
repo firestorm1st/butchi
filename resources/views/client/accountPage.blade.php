@@ -35,11 +35,7 @@
     </div>
     <style>
         body {
-            background-image: url("{{ asset('client/image/bg.png') }}");
-            background-size: cover;  /* Makes sure the background image covers the whole page */
-    background-position: center center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            background-color: #fffaed;
         }
 
         .left-column img {

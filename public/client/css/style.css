@@ -3454,6 +3454,7 @@ svg {
 /*------------------*
 # Shop Pages
 *------------------*/
+
 .tab-content .tab-pane.active .grid-view .product-card {
   -webkit-animation: zoomIn 0.5s ease;
           animation: zoomIn 0.5s ease;
@@ -4124,7 +4125,7 @@ svg {
 }
 
 .single-form label {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 /*--------------------------------------
@@ -4737,17 +4738,18 @@ svg {
   }
 }
 
-.login-register-wrapper .login-form-container .login-register-form form input {
+.login-register-wrapper .login-form-container .login-register-form form .input{
   background-color: transparent;
   border: 1px solid #ebebeb;
   color: #666;
   font-size: 14px;
   height: 45px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 0 15px;
   width: 100%;
   outline: none;
 }
+
 
 .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn {
   padding: 10px 0 19px;
@@ -4778,6 +4780,16 @@ svg {
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
+
+.login-form-container{
+  border: 1px solid black;
+}
+
+.login-form-container label{
+  color: red;
+  font-family:'Dancing Script';
+}
+
 @media screen and (max-width: 480px) {
   .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn a {
     float: none;

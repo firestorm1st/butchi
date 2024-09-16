@@ -57,13 +57,7 @@
 
     <style>
         body {
-            background-image: url("{{ asset('client/image/bg.png') }}");
-            /* Path to your image */
-            background-size: 1765px;
-            /* Ensures the image covers the entire section */
-            background-position: center;
-            /* Center the image */
-            background-repeat: no-repeat;
+            background-color: #fffaed;
         }
 
         .left-column img {

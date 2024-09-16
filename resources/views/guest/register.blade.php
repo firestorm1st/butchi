@@ -34,19 +34,33 @@
                                             @endif
                                             @csrf
                                             <label style="color: red">Email<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" type="email" name="email" placeholder="email" value="{{old('email')}}">
+                                            <input class="input" type="email" name="email" placeholder="email" value="{{old('email')}}">
                                             <label style="color: red">Mật khẩu<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" type="password" name="password" placeholder="Password">
+                                            <input class="input" type="password" name="password" placeholder="Password">
                                             <label style="color: red">Xác nhận mật khẩu<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" type="password" class="form-control" placeholder="Enter password" name="password_confirmation">
+                                            <input class="input" type="password" class="form-control" placeholder="Enter password" name="password_confirmation">
                                             <label style="color: red">Username<span class="required">*</span></label>
-                                            <input style="border: 1px solid #000;" name="username" placeholder="user_name" value="{{old('username')}}">
+                                            <input class="input" name="username" placeholder="user_name" value="{{old('username')}}">
+                                            <div class="checkbox-class">
+                                                <input type="checkbox" id="is_online" name="is_online" value="1" {{ old('is_online') == '1' ? 'checked' : '' }}>
+                                                <label for="is_online">Trực tiếp</label>
+                                            </div>
+                        
+                                            <!-- Thêm radio button cho role -->
+                                            <label style="color: red">Vai trò<span class="required">*</span></label>
+                                            <div class="role-selection">
+                                                <label for="student">Học sinh</label>
+                                                <input class="radio" type="radio" id="student" name="role" value="1" {{ old('role') == '1' ? 'checked' : '' }}>
+                                                <label for="parent">Phụ huynh</label>
+                                                <input class="radio" type="radio" id="parent" name="role" value="2" {{ old('role') == '2' ? 'checked' : '' }}>
+                                            </div>
+                        
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
                                                     <a href="{{route('showLogin')}}" class="text-center">Tôi đã là thành viên</a>
                                                 </div>
                                                 <button type="submit" class="btn btn-dark">
-                                                        <span>Đăng ký</span>
+                                                    <span>Đăng ký</span>
                                                 </button>
                                             </div>
                                         </form>
@@ -60,13 +74,35 @@
         </div>
     </div>
     <style>
-        body{
-            background-image: url("{{ asset('client/image/bg.png') }}"); /* Path to your image */
-            background-size: cover;  /* Makes sure the background image covers the whole page */
-    background-position: center center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
-        }
+        
+    .radio {
+        transform: scale(1.5);
+        margin-right: 5px;
+    }
+
+    /* Đặt Học sinh và Phụ huynh ngang hàng */
+    .role-selection {
+        display: flex;
+        align-items: center;
+        gap: 20px; /* Khoảng cách giữa các radio button và label */
+    }
+
+    /* Căn chỉnh label ngang với radio */
+    .role-selection div {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Tinh chỉnh thêm khoảng cách và căn giữa text với radio button */
+    .role-selection label {
+        margin: 0;
+        display: flex;
+        font-size: 20px;
+    }
+
+    body{
+        background-color: #fffaed;
+    }
     </style>
     <!-- main content end -->
 @endsection
