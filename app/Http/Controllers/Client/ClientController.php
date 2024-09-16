@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Emotion;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -40,7 +44,28 @@ class ClientController extends Controller
         if ($user == null) {
             abort(404);
         }
-        return view('client.accountPage', ['user' => $user, 'id' => $id]);
+
+
+        // Lấy dữ liệu cho 7 ngày gần nhất
+        $data = Emotion::where('user_id', $id)->where('date', '>=', Carbon::now()->subDays(7)->format('Y-m-d'))
+            ->orderBy('date')
+            ->get(['date', 'emo_id']); // Thay đổi theo cấu trúc bảng của bạn
+
+        // return response()->json($data);
+
+        // return view('client.accountPage', ['user' => $user, 'id' => $id]);
+
+        // if (request()->wantsJson()) {
+        //     return response()->json($data);
+
+        // }
+        // dd($data);
+        // Trả về trang view nếu là yêu cầu thông thường (non-AJAX)
+        return view('client.accountPage', [
+            'user' => $user,
+            'id' => $id,  // Thông tin người dùng
+            'data' => $data    // Dữ liệu Emotion để hiển thị
+        ]);
     }
 
     public function account(Request $request, string $id)
@@ -83,5 +108,15 @@ class ClientController extends Controller
             abort(404);
         }
         return view('client.changeAccount', ['user' => $user, 'id' => $id]);
+    }
+
+    public function chart() {
+        $data = Emotion::where('date', '>=', Carbon::now()->subDays(7)->format('Y-m-d'))
+            ->orderBy('date')
+            ->get(['date', 'emo_id']); 
+           
+        return view('client.chart', [
+            'data' => $data
+        ]);
     }
 }

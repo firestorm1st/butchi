@@ -11,3 +11,6 @@
 <link rel="stylesheet" href="{{ asset('client/css/plugins/swiper-bundle.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('client/css/plugins/jquery-ui.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('client/css/style.css') }}" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
