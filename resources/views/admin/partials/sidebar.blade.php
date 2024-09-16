@@ -12,11 +12,17 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             @if (Auth::check())
                 <div class="image">
-                    <img src="{{ asset('uploads/' . Auth::user()->avatar) }}" class="img-circle elevation-2"
-                        alt="User Image">
+                    @if (Auth::user()->avatar)
+                        <img src="{{ asset('uploads/' . Auth::user()->avatar) }}" class="img-circle elevation-2"
+                            alt="User Image">
+                    @else
+                        <img src="{{ asset('client/image/avatar.png') }}" class="img-circle elevation-2"
+                            alt="User Image">
+                    @endif
                 </div>
                 <div class="info">
-                    <a href="{{ route('admin.user.edit', ['id' => Auth::user()->id]) }}" class="d-block">{{ Auth::user()->username }}</a>
+                    <a href="{{ route('admin.user.edit', ['id' => Auth::user()->id]) }}"
+                        class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             @endif
         </div>

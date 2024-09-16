@@ -1,25 +1,49 @@
 @extends('master')
 @section('content')
     <div class="container_account">
-        
-            <div class="left-column">
-                <div class="center">
-                    <h2 style="font-family:'Dancing Script'; font-size: 36px;">{{ $user->username }}</h2>
-                    @if ($user->avatar)
-                        <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện người dùng" width='200px'
-                            height='200px'>
-                    @else
-                        <img src="{{ asset('client/image/avatar.png') }}" alt="Avatar">
-                    @endif
-                    {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
-                </div>
-                <p>Giao diện: Học sinh</p>
-                <p>Mật khẩu: matkhauabcd</p>
-                
-                <a href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary" style="font-family: 'true typewriter';">Cập nhật thông tin</a>
-                {{-- <a  href="#">Đổi mật khẩu</a> --}}
+
+        <div class="left-column">
+            <div class="center">
+                <h2 style="font-family:'Dancing Script'; font-size: 36px;">{{ $user->username }}</h2>
+                @if ($user->avatar)
+                    <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện người dùng" width='200px'
+                        height='200px'>
+                @else
+                    <img src="{{ asset('client/image/avatar.png') }}" alt="Avatar">
+                @endif
+                {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
             </div>
-        
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Giao diện: </b>
+
+                @if ($user->role == 1)
+                    <p style="display: inline-block;">Học sinh</p>
+                @elseif ($user->role == 2)
+                    <p style="display: inline-block;">Phụ huynh</p>
+                @elseif ($user->role == 3)
+                    <p style="display: inline-block;">Admin</p>
+                @endif
+            </div>
+
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Email: </b>
+                <p style="display: inline-block;">{{ $user->email }}</p>
+            </div>
+
+            <div style="font-size: 18px">
+                <b style="display: inline-block; ">Nhiệm vụ: </b>
+                @if ($user->is_offline == 1)
+                    <p style="display: inline-block;">Trực tiếp</p>
+                @elseif ($user->is_offline == 2)
+                    <p style="display: inline-block;">Trực tuyến</p>
+                @endif
+            </div>
+
+            <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}" class="btn btn-primary"
+                style="font-family: 'true typewriter';">Cập nhật thông tin</a>
+            {{-- <a  href="#">Đổi mật khẩu</a> --}}
+        </div>
+
         <div class="right-column">
             <div class="icon-container">
                 <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
@@ -36,6 +60,7 @@
     <style>
         body {
             background-color: #fffaed;
+
         }
 
         .left-column img {

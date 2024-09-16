@@ -1,5 +1,5 @@
 @extends('master')
-@section('content')    
+@section('content')
     <style>
         * {
             margin: 0;
@@ -9,6 +9,7 @@
 
         body {
             background-color: #fffaed;
+
         }
 
         .container {
@@ -29,7 +30,7 @@
         }
 
         .text-section h1 {
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
             font-size: 36px;
             font-weight: bold;
         }
@@ -85,7 +86,7 @@
         }
 
         .column h3 {
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
             font-size: 24px;
             margin-bottom: 20px;
         }
@@ -103,7 +104,7 @@
     <div class="container">
         <!-- Left Section: Image -->
         <div class="image-section">
-            <img src="{{asset('client/image/yeuthuong.png')}}" alt="Bút Chì Thấu Cảm Image" style="width: 300px;height:auto">
+            <img src="{{ asset('client/image/yeuthuong.png') }}" alt="Bút Chì Thấu Cảm Image" style="width: 300px;height:auto">
         </div>
 
         <!-- Right Section: Text and Button -->

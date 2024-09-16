@@ -66,6 +66,7 @@
                         <th>Tên người dùng</th>
                         <th style="width: 50px; height: 50px;">Hình đại diện</th>
                         <th>Tài khoản</th>
+                        <th>Nhiệm vụ</th>
                         <th>Ngày tạo</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>
@@ -81,21 +82,25 @@
 
                             <td>
                                 @if ($user->avatar)
-                                    <img src="{{ asset('uploads/' . $user->avatar) }}"
-                                        style="width: 50px; height: 50px;">
+                                    <img src="{{ asset('uploads/' . $user->avatar) }}" style="width: 50px; height: 50px;">
                                 @else
-                                    <img src="{{ asset('client/image/logo.png') }}"
-                                        style="width: 50px; height: 50px;">
+                                    <img src="{{ asset('client/image/logo.png') }}" style="width: 50px; height: 50px;">
                                 @endif
                             </td>
 
                             <td>
                                 <span
                                     class="right badge badge-{{ $user->role == 1 ? 'success' : ($user->role == 2 ? 'info' : 'primary') }}">
-                                    {{ $user->role == 1 ? 'Student' : ($user->role == 2 ? 'Parents' : 'Admin') }}
+                                    {{ $user->role == 1 ? 'Học sinh' : ($user->role == 2 ? 'Phụ huynh' : 'Admin') }}
                                 </span>
                             </td>
 
+                            <td>
+                                <span
+                                    class="right badge badge-{{ $user->is_offline == 1 ? 'success' : 'info'}}">
+                                    {{ $user->is_offline == 1 ? 'Trực tiếp' : 'Trực tuyến'}}
+                                </span>
+                            </td>
 
                             <td>{{ $user->created_at }}</td>
                             <td><a href="{{ route('admin.user.edit', ['id' => $user->id]) }}">Chỉnh sửa</a></td>
@@ -111,6 +116,7 @@
                         <th>Tên người dùng</th>
                         <th style="width: 50px; height: 50px;">Hình đại diện</th>
                         <th>Tài khoản</th>
+                        <th>Nhiệm vụ</th>
                         <th>Ngày tạo</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>

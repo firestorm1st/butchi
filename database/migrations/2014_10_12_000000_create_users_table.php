@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('avatar')->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->tinyInteger('status')->default(1)->comment('1: Active - 2: Unactive');
+            $table->tinyInteger('is_offline')->default(1)->comment('1: offline - 2: online');
             $table->rememberToken();
             $table->timestamps();
         });

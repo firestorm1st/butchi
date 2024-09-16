@@ -7,15 +7,15 @@
     <div class="rooms-container">
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 1">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 1">
                 <div class="room-info">Phòng ph</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
         </div>
-        
+
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 2</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
@@ -23,7 +23,7 @@
 
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 2</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
@@ -31,21 +31,21 @@
 
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 2</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
         </div>
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 2</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
         </div>
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 2</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
@@ -53,7 +53,7 @@
 
         <div class="room">
             <div class="room-image">
-                <img src="{{asset('client/image/phong.png')}}" alt="Room 2">
+                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
                 <div class="room-info">Phòng 3</div>
             </div>
             <button class="enter-btn" onclick="openModal()">Vào</button>
@@ -89,6 +89,7 @@
             padding: 0;
             text-align: center;
             background-color: #fffaed;
+
         }
 
         .room-selection-container {
@@ -96,7 +97,7 @@
         }
 
         h1 {
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
             font-size: 2rem;
             margin-bottom: 10px;
         }
@@ -112,7 +113,8 @@
 
         .room {
             position: relative;
-            width: calc(20% - 30px); /* Four rooms per row */
+            width: calc(20% - 30px);
+            /* Four rooms per row */
             margin-bottom: 40px;
             text-align: center;
         }
@@ -128,7 +130,8 @@
 
         .room-info {
             position: absolute;
-            top: 37%; /* Adjust to fit the board on the door */
+            top: 37%;
+            /* Adjust to fit the board on the door */
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 16px;
@@ -172,14 +175,15 @@
         }
 
         .modal {
-            display: none; 
+            display: none;
             position: fixed;
             z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black with opacity */
             justify-content: center;
             align-items: center;
         }

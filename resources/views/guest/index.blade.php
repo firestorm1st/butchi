@@ -9,7 +9,7 @@
                 <a class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
-                <img src="{{asset('client/image/trang.jpg')}}" alt="Bút Chì Thấu Cảm Image">
+                <img src="{{ asset('client/image/trang.jpg') }}" alt="Bút Chì Thấu Cảm Image">
             </div>
         </section>
     </main>
@@ -25,7 +25,7 @@
             background-color: #fffaed;
         }
 
-        .logo h3{
+        .logo h3 {
             margin-left: 10px;
             font-size: 20px;
         }
@@ -41,7 +41,7 @@
             font-size: 16px;
         }
 
-        .link{
+        .link {
             font-family: 'true typewriter';
             margin-left: 40px;
             font-weight: bold;
@@ -56,7 +56,7 @@
 
         .content {
             margin: 30px auto;
-            display:flex;
+            display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
@@ -66,7 +66,7 @@
             font-size: 40px;
             font-weight: bold;
             line-height: 1.2;
-            font-family:'Dancing Script';
+            font-family: 'Dancing Script';
         }
 
         .welcome-text p {
