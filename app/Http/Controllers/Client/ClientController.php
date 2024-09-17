@@ -94,10 +94,9 @@ class ClientController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
 
-        $user->role = $request->role;
-
         $user->update();
         // dd($user);
+        
         return redirect()->route('client.showAccount', ['user' => $user, 'id' => $id])->with('success', 'Cập nhật thông tin người dùng thành công.');
     }
 

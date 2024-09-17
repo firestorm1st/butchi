@@ -1,6 +1,5 @@
 @extends('master')
 @section('content')
-
     <form method="post" action="{{ route('client.account', ['id' => $id]) }}" enctype="multipart/form-data">
         @csrf
         <div class="container">
@@ -26,17 +25,14 @@
                     <input style="font-family: 'true typewriter'" type="password" class="custom-input"
                         placeholder="Nhập lại mật khẩu" name="password_confirmation">
 
-                    @if (Auth::check())
-                        <select style="font-family: 'true typewriter'" class="custom-input" name="role">
-                            <option value="1" {{ old('role', $user->role) == 1 ? 'selected' : '' }}>Học sinh</option>
-                            <option value="2" {{ old('role', $user->role) == 2 ? 'selected' : '' }}>Phụ huynh</option>
-
-                            <!-- Nếu là admin, thêm tùy chọn admin -->
-                            @if (Auth::user()->role == 3)
-                                <option value="3" {{ old('role', $user->role) == 3 ? 'selected' : '' }}>Admin</option>
-                            @endif
-                        </select>
+                    @if ($user->role == 1)
+                        <label>Học sinh</label>
+                    @elseif ($user->role == 2)
+                        <label>Phụ huynh</label>
+                    @else
+                        <label>Admin</label>
                     @endif
+
                     <div class="custom-file">
                         <input type="file" class="custom-file-input custom-input" id="customImage"
                             value="{{ old('avatar') }}" name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg" />
@@ -121,6 +117,7 @@
             /* Khoảng cách bên trong */
             box-sizing: border-box;
             /* Đảm bảo padding không thay đổi kích thước tổng thể */
+
         }
 
 
@@ -161,6 +158,11 @@
             padding: 10px;
             text-align: right;
             margin-right: 15px;
+        }
+
+        .right-column label {
+            text-align: left;
+            color: black;
         }
 
         .icon-container {

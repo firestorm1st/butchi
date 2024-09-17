@@ -43,7 +43,8 @@ Route::get('Logout',action: Logout::class)->name('logout');
 
 Route::name('guest.')->group(function(){
     Route::get('/', [GuestController::class, 'index'])->name('index');
-    Route::get('/contactUs', [GuestController::class, 'contactUs'])->name('contactUs');
+    Route::get('/contactUs', [GuestController::class, 'showContactUs'])->name('showContactUs');
+    Route::post('/contactUs', [GuestController::class, 'contactUs'])->name('contactUs');
     Route::get('/aboutUs', [GuestController::class, 'aboutUs'])->name('aboutUs');
     
     

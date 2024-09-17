@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Emotion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -19,14 +20,21 @@ class GuestController extends Controller
         return view('guest.aboutUs');
     }
 
-    public function contactUs()
+    public function showContactUs()
     {
         return view('guest.contactUs');
     }
 
-    public function chart()
+    public function contactUs(Request $request)
     {
-        return view('guest.chart');
+       
+            $contact = new Contact();
+            $contact->fullname = $request->fullname;
+            $contact->email = $request->email;
+            $contact->message = $request->message;
+            $contact->save();
+
+            return redirect()->route('guest.showContactUs')->with('success', 'Liên hệ của bạn đã được gửi, cảm ơn bạn đã đóng góp cho chúng mình.');
     }
 
     
