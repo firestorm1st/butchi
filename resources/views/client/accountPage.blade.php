@@ -13,7 +13,7 @@
                 @endif
                 {{-- <p style="font-family: 'true typewriter';">Thay đổi hình đại diện</p> --}}
             </div>
-            <div style="font-size: 18px">
+            <div style="font-size: 15px">
                 <b style="display: inline-block; ">Giao diện: </b>
 
                 @if ($user->role == 1)
@@ -25,12 +25,12 @@
                 @endif
             </div>
 
-            <div style="font-size: 18px">
+            <div style="font-size: 15px">
                 <b style="display: inline-block; ">Email: </b>
                 <p style="display: inline-block;">{{ $user->email }}</p>
             </div>
 
-            <div style="font-size: 18px">
+            <div style="font-size: 15px">
                 <b style="display: inline-block; ">Nhiệm vụ: </b>
                 @if ($user->is_offline == 1)
                     <p style="display: inline-block;">Trực tiếp</p>
@@ -54,109 +54,118 @@
                 <img src="{{ asset('client/image/tintuong.png') }}" alt="Avatar">
                 <img src="{{ asset('client/image/vuive.png') }}" alt="Avatar">
                 <img src="{{ asset('client/image/changhet.png') }}" alt="Avatar">
-               
-                    
-                
+
+
+
             </div>
-            <canvas id="myLineChart"></canvas>
-            
+            <canvas id="myLineChart" style="font-size: 40px"></canvas>
+
         </div>
 
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        var dataFromLaravel = @json($data);
-        
-        // Tạo mảng label từ các giá trị ngày
-        const labels = dataFromLaravel.map(item => {
-            const date = new Date(item.date);
-            return `${date.getDate()}/${date.getMonth() + 1}`; // Định dạng ngày thành dd/mm
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var dataFromLaravel = @json($data);
 
-        // Tạo mảng data từ các giá trị emo_id (hoặc giá trị khác bạn muốn hiển thị)
-        const emoData = dataFromLaravel.map(item => item.emo_id);
+            // Tạo mảng label từ các giá trị ngày
+            const labels = dataFromLaravel.map(item => {
+                const date = new Date(item.date);
+                return `${date.getDate()}/${date.getMonth() + 1}`; // Định dạng ngày thành dd/mm
+            });
+
+            // Tạo mảng data từ các giá trị emo_id (hoặc giá trị khác bạn muốn hiển thị)
+            const emoData = dataFromLaravel.map(item => item.emo_id);
 
 
 
-        // Khởi tạo biểu đồ
-        var ctx = document.getElementById('myLineChart').getContext('2d');
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels, // Gán các nhãn ngày
-                datasets: [{
-                    label: 'Cảm xúc 7 ngày',
-                    data: emoData, // Các giá trị (1 đến 8) cho trục Y
-                    backgroundColor: 'rgb(33, 33, 33)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Màu nền của các điểm
-                    pointBorderColor: '#fff', // Màu viền của các điểm
-                    pointRadius: 5, // Kích thước của các điểm
-                    pointHoverRadius: 7, // Kích thước của các điểm khi hover
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        min: 1, // Giá trị tối thiểu trên trục Y
-                        max: 8, // Giá trị tối đa trên trục Y
-                        ticks: {
-                            stepSize: 1, // Các giá trị cách nhau 1 đơn vị
-                            callback: function(value) {
-                                return ""; // Hiển thị số trên trục Y
-                            }
-                        }
-                    }
+            // Khởi tạo biểu đồ
+            var ctx = document.getElementById('myLineChart').getContext('2d');
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels, // Gán các nhãn ngày
+                    datasets: [{
+                        label: 'Cảm xúc 7 ngày',
+                        data: emoData, // Các giá trị (1 đến 8) cho trục Y
+                        backgroundColor: [
+                            'rgba(105, 0, 132, .2)',
+                        ],
+                        fill: true,
+                        borderColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                        ],
+                        borderWidth: 2,
+                        // tension: 0.4
+                        // backgroundColor: 'rgb(33, 33, 33)',
+                        // borderColor: 'rgba(75, 192, 192, 1)',
+                        // borderWidth: 1,
+                        pointBackgroundColor: 'rgba(255, 99, 132, 0.8)', // Màu nền của các điểm
+                        pointBorderColor: '#fff', // Màu viền của các điểm
+                        pointRadius: 5, // Kích thước của các điểm
+                        pointHoverRadius: 7, // Kích thước của các điểm khi hover
+                    }]
                 },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                // Tùy chỉnh văn bản trong tooltip dựa trên giá trị
-                                let text;
-                                switch (context.raw) {
-                                    case 1:
-                                        text = "Bất ngờ";
-                                        break;
-                                    case 2:
-                                        text = "Buồn bã";
-                                        break;
-                                    case 3:
-                                        text = "Giận dữ";
-                                        break;
-                                    case 4:
-                                        text = "Mong đợi";
-                                        break;
-                                    case 5:
-                                        text = "Sợ hãi";
-                                        break;
-                                    case 6:
-                                        text = "Tin tưởng";
-                                        break;
-                                    case 7:
-                                        text = "Vui vẻ";
-                                        break;
-                                    case 8:
-                                        text = "Chán ghét";
-                                        break;
-                                    default:
-                                        text = "Không xác định";
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            min: 1, // Giá trị tối thiểu trên trục Y
+                            max: 8, // Giá trị tối đa trên trục Y
+                            ticks: {
+                                stepSize: 1, // Các giá trị cách nhau 1 đơn vị
+                                callback: function(value) {
+                                    return ""; // Hiển thị số trên trục Y
                                 }
-                                return 'Cảm xúc: ' + text;
                             }
                         }
                     },
-                    legend: {
-                        display: true
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    // Tùy chỉnh văn bản trong tooltip dựa trên giá trị
+                                    let text;
+                                    switch (context.raw) {
+                                        case 1:
+                                            text = "Bất ngờ";
+                                            break;
+                                        case 2:
+                                            text = "Buồn bã";
+                                            break;
+                                        case 3:
+                                            text = "Giận dữ";
+                                            break;
+                                        case 4:
+                                            text = "Mong đợi";
+                                            break;
+                                        case 5:
+                                            text = "Sợ hãi";
+                                            break;
+                                        case 6:
+                                            text = "Tin tưởng";
+                                            break;
+                                        case 7:
+                                            text = "Vui vẻ";
+                                            break;
+                                        case 8:
+                                            text = "Chán ghét";
+                                            break;
+                                        default:
+                                            text = "Không xác định";
+                                    }
+                                    return 'Cảm xúc: ' + text;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        // .catch(error => console.error('Error fetching data:', error));
-    });
+            // .catch(error => console.error('Error fetching data:', error));
+        });
     </script>
     <style>
         body {
@@ -207,10 +216,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+
         }
 
-        .icon-container img{
+        .icon-container img {
             margin: 6px auto;
         }
 
@@ -225,11 +234,10 @@
         }
 
         #myLineChart {
-        /* position: relative; */
-        height: 400px;
-        width: 200%;
-        /* width: 80%;
-            margin: auto; */
-    }
+            /* position: relative; */
+            height: 400px;
+            width: 200%;
+            
+        }
     </style>
 @endsection
