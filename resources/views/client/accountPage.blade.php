@@ -39,9 +39,12 @@
                 @endif
             </div>
 
-            <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}"
-                class="btn btn-primary" style="font-family: 'true typewriter';">Cập nhật thông tin</a>
-            {{-- <a  href="#">Đổi mật khẩu</a> --}}
+            @if (Auth::check())
+                @if (Auth::user()->id == $user->id)
+                    <a style="margin-top: 10px" href="{{ route('client.changeAccount', ['id' => $user->id]) }}"
+                        class="btn btn-primary" style="font-family: 'true typewriter';">Cập nhật thông tin</a>
+                @endif
+            @endif
         </div>
 
         <div class="right-column">
@@ -181,8 +184,9 @@
         .container_account {
             display: flex;
             align-items: center;
-            margin-top: 50px;
-            margin-left: 270px;
+            width: 90%;
+            margin: 50px auto;
+            
         }
 
         .left-column {
@@ -219,14 +223,14 @@
 
         }
 
-        .icon-container img {
-            margin: 6px auto;
-        }
+        /* .icon-container img {
+            margin: 7px auto;
+        } */
 
         .icon-container img {
             width: 30px;
             height: 30px;
-            margin-bottom: 15px;
+            margin: 16px;
         }
 
         .left-column p {
@@ -237,7 +241,11 @@
             /* position: relative; */
             height: 400px;
             width: 200%;
-            
+
+        }
+
+        .left-column img{
+            border-radius: 100%
         }
     </style>
 @endsection

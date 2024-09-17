@@ -68,6 +68,7 @@
                         <th>Tài khoản</th>
                         <th>Nhiệm vụ</th>
                         <th>Ngày tạo</th>
+                        <th>Trang cá nhân</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>
                     </tr>
@@ -103,6 +104,7 @@
                             </td>
 
                             <td>{{ $user->created_at }}</td>
+                            <td><a href="{{ route('client.showAccount', ['id' => $user->id]) }}">Chỉnh sửa</a></td>
                             <td><a href="{{ route('admin.user.edit', ['id' => $user->id]) }}">Chỉnh sửa</a></td>
                             <td><a onclick="return confirmDelete ()"
                                     href="{{ route('admin.user.destroy', ['id' => $user->id]) }}">Xóa</a></td>
@@ -118,6 +120,7 @@
                         <th>Tài khoản</th>
                         <th>Nhiệm vụ</th>
                         <th>Ngày tạo</th>
+                        <th>Trang cá nhân</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>
                     </tr>

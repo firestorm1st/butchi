@@ -7,18 +7,19 @@
                 <p>&nbsp;&nbsp;&nbsp;Nếu có bất kỳ thắc mắc hay nguyện vọng nào, bạn có thể gửi đến “Bút Chì Thầu Cảm” ngay
                     tại đây.</br>&nbsp;&nbsp;&nbsp;Chúng mình vô cùng cảm kích và biết ơn với sự đóng góp của bạn.</p>
             </div>
-            <form action="/submit" method="POST" class="contact-form">
+            <form action="{{ route('guest.contactUs')}}" method="POST" class="contact-form">
+                @csrf
                 <div class="form-group">
-                    <label style="color: red" for="name">Họ và tên</label>
-                    <input type="text" id="name" name="name" placeholder="Xin nhập tên..." required>
+                    <label style="color: red" for="fullname">Họ và tên</label>
+                    <input type="text" id="name" name="fullname" placeholder="Xin nhập tên..." value="{{ old('fullname') }}" required>
                 </div>
                 <div class="form-group">
                     <label style="color: red" for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="hello@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="hello@example.com" value="{{ old('email') }}" required>
                 </div>
                 <div class="form-group">
                     <label style="color: red" for="message">Nhắn gửi:</label>
-                    <textarea id="message" name="message" placeholder="Nhập vào đây..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Nhập vào đây..." value="{{ old('message') }}" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Gửi</button>
             </form>
