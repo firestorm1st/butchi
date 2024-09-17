@@ -5,81 +5,48 @@
         <button class="create-room-btn" onclick="openModalcreate()">TẠO PHÒNG +</button>
     </div>
     <div class="rooms-container">
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 1">
-                <div class="room-info">Phòng ph</div>
+        @foreach($rooms as $room)
+            <div class="room">
+                <div class="room-image">
+                    <img src="{{ asset('client/image/phong.png') }}" alt="Room {{ $room->name }}">
+                    <div class="room-info">{{ $room->name }}</div>
+                </div>
+                <button class="enter-btn" onclick="openModal({{ $room->id }})">Vào</button>
             </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 2</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 2</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 2</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 2</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 2</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
-
-        <div class="room">
-            <div class="room-image">
-                <img src="{{ asset('client/image/phong.png') }}" alt="Room 2">
-                <div class="room-info">Phòng 3</div>
-            </div>
-            <button class="enter-btn" onclick="openModal()">Vào</button>
-        </div>
+        @endforeach
     </div>
+
+    {{-- Modal nhập mật khẩu --}}
     <div id="passwordModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Nhập mật khẩu</h2>
-            <input type="password" id="roomPassword" placeholder="Nhập mật khẩu...">
-            <div>
-                <button class="submit-btn">Xác nhận</button>
-            </div>
+            <form action="{{ route('client.rooms.enter', ['id' => 0]) }}" method="POST" id="enterRoomForm">
+                @csrf
+                <input type="hidden" id="roomId" name="room_id">
+                <input type="password" name="password" placeholder="Nhập mật khẩu...">
+                <div>
+                    <button class="submit-btn" type="submit">Xác nhận</button>
+                </div>
+            </form>
         </div>
     </div>
 
+    {{-- Modal tạo phòng --}}
     <div id="passwordModalcreate" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModalcreate()">&times;</span>
             <h2>Nhập tên phòng</h2>
-            <input type="text" id="roomName" placeholder="Nhập tên phòng...">
-            <h2>Nhập mật khẩu</h2>
-            <input type="password" id="roomPassword" placeholder="Nhập mật khẩu...">
-            <div>
-                <button class="submit-btn">Xác nhận</button>
-            </div>
+            <form id="createRoomForm" action="{{ route('client.rooms.store') }}" method="POST">
+                @csrf
+                <input type="text" id="roomName" name="name" placeholder="Nhập tên phòng..." required>
+                <h2>Nhập mật khẩu</h2>
+                <input type="password" id="roomPassword" name="password" placeholder="Nhập mật khẩu..." required>
+                <input type="password" id="roomPasswordConfirm" name="password_confirmation" placeholder="Xác nhận mật khẩu..." required>
+                <div>
+                    <button type="submit" class="submit-btn">Xác nhận</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -89,7 +56,6 @@
             padding: 0;
             text-align: center;
             background-color: #fffaed;
-
         }
 
         .room-selection-container {
@@ -114,7 +80,6 @@
         .room {
             position: relative;
             width: calc(20% - 30px);
-            /* Four rooms per row */
             margin-bottom: 40px;
             text-align: center;
         }
@@ -131,7 +96,6 @@
         .room-info {
             position: absolute;
             top: 37%;
-            /* Adjust to fit the board on the door */
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 16px;
@@ -183,7 +147,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            /* Black with opacity */
             justify-content: center;
             align-items: center;
         }
@@ -231,18 +194,18 @@
             margin-bottom: 10px;
         }
     </style>
+
     <script>
-        // Function to open the modal
-        function openModal() {
+        function openModal(roomId) {
             document.getElementById("passwordModal").style.display = "flex";
+            document.getElementById("roomId").value = roomId;
+            document.getElementById("enterRoomForm").action = `/rooms/${roomId}/enter`;
         }
 
-        // Function to close the modal
         function closeModal() {
             document.getElementById("passwordModal").style.display = "none";
         }
 
-        // Close modal when clicking outside of it
         window.onclick = function(event) {
             let modal = document.getElementById("passwordModal");
             if (event.target == modal) {
@@ -250,17 +213,14 @@
             }
         }
 
-        // Function to open the modal
         function openModalcreate() {
             document.getElementById("passwordModalcreate").style.display = "flex";
         }
 
-        // Function to close the modal
         function closeModalcreate() {
             document.getElementById("passwordModalcreate").style.display = "none";
         }
 
-        // Close modal when clicking outside of it
         window.onclick = function(event) {
             let modal = document.getElementById("passwordModalcreate");
             if (event.target == modal) {

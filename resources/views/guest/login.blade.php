@@ -24,21 +24,18 @@
                                                         <li>{{ $error }}</li>
                                                     @endforeach
                                                 </div>
-                                            @endif
-                                            @if ($message = Session::has('error'))
-                                                <div class="alert alert-danger alert-dismissible">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                        aria-hidden="true">×</button>
-                                                    <h5><i class="icon fas fa-check"></i> Cảnh báo!</h5>
-                                                    {{ Session::get('error') }}
+                                                @if (session('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session('success') }}
                                                 </div>
+                                                @endif
                                             @endif
-                                            @if ($message = Session::has('success'))
-                                                <div class="alert alert-success alert-dismissible">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                        aria-hidden="true">×</button>
-                                                    <h5><i class="icon fas fa-check"></i> Chúc mừng!</h5>
-                                                    {{ Session::get('success') }}
+                                            
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    @foreach ($errors->all() as $error)
+                                                        <p>{{ $error }}</p>
+                                                    @endforeach
                                                 </div>
                                             @endif
                                             @csrf

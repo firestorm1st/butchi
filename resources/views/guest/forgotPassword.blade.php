@@ -45,8 +45,8 @@
                                                 </div>
                                             @endif
                                             @csrf
-                                            <label>Nhập Email<span class="required">*</span></label>
-                                            <input type="email" name="email" placeholder="email"
+                                            <label style="font-family: 'Dancing Script'">Nhập Email<span class="required">*</span></label>
+                                            <input class="input" type="email" name="email" placeholder="email"
                                                 value="{{ old('email') }}">
                                             <div class="button-box">
                                                 <button type="submit" class="btn btn-dark">

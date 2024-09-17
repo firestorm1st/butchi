@@ -5,8 +5,19 @@
             <div class="welcome-text">
                 <h2>Chào mừng bạn đến với<br> "Bút Chì Thấu Cảm"</h2>
                 <p>Chỉ vẽ hạnh phúc - Dẫn lối yêu thương</p>
-                <button class="start-btn">Bắt đầu ></button>
-                <a class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
+                @auth
+                    @if(Auth::user()->room_id == null)
+                        <!-- Điều hướng đến danh sách phòng để chọn -->
+                        <button class="start-btn"><a href="{{ route('client.rooms.show') }}">Bắt đầu</a></button>
+                    @else
+                        <!-- Điều hướng đến trang client.index -->
+                        <button class="start-btn"><a href="{{ route('client.index') }}">Bắt đầu</a></button>
+                    @endif
+                @endauth
+                @guest
+                    <button class="start-btn"><a href="{{ route('showLogin') }}">Bắt đầu</a></button>
+                @endguest
+                <a style="color: black" class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
                 <img src="{{ asset('client/image/trang.jpg') }}" alt="Bút Chì Thấu Cảm Image">

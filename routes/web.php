@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Middleware\checkLogin;
+use App\Http\Middleware\CheckRoomPassword;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\GuestController;
 
@@ -50,12 +52,13 @@ Route::name('guest.')->group(function(){
     
 
 });
-Route::get('room', [ClientController::class, 'room'])->name('room');
-Route::name('client.')->group(function(){
-    Route::get('index', [ClientController::class, 'index'])->name('index');
 
-    Route::get('room', [ClientController::class, 'room'])->name('room');
-    Route::post('room', [ClientController::class, 'room'])->name('room');
+Route::name('client.')->middleware([checkLogin::class])->group(function(){
+    Route::get('index', [ClientController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
+
+    Route::get('room', [ClientController::class, 'showRooms'])->name('rooms.show');
+    Route::post('/rooms/create', [ClientController::class, 'storeRoom'])->name('rooms.store');
+    Route::post('/rooms/{id}/enter', [ClientController::class, 'enterRoom'])->name('rooms.enter');
 
     Route::get('account/{id}', [ClientController::class, 'showAccount'])->name('showAccount');
     Route::get('change-account/{id}', [ClientController::class, 'changeAccount'])->name('changeAccount');
