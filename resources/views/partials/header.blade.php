@@ -25,8 +25,7 @@
                 }
             @endphp  --}}
                     @if (Auth::check())
-                        <a
-                            href="{{ route('client.showAccount', ['id' => Auth::user()->id]) }}">{{ Auth::user()->username }}</a>
+                        <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a>
                     @else
                         Guest
                     @endif
@@ -43,7 +42,18 @@
                 <li><a href="{{ route('showRegister') }}">Đăng ký</a></li>
             @endif
         </ul>
-        <button class="start-btn">Bắt đầu</button>
+        @auth
+            @if(Auth::user()->room_id == null)
+                <!-- Điều hướng đến danh sách phòng để chọn -->
+                <button class="start-btn"><a href="{{ route('client.rooms.show') }}">Bắt đầu</a></button>
+            @else
+                <!-- Điều hướng đến trang client.index -->
+                <button class="start-btn"><a href="{{ route('client.index') }}">Bắt đầu</a></button>
+            @endif
+        @endauth
+        @guest
+            <button class="start-btn"><a href="{{ route('showLogin') }}">Bắt đầu</a></button>
+        @endguest
     </nav>
 </header>
 

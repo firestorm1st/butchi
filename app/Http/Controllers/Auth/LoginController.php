@@ -40,13 +40,13 @@ class LoginController extends Controller
         ];
         if (Auth::attempt($credentials)) {
             if (Auth::id()) {
-                $userlevel = Auth()->user()->level;
+                $userlevel = Auth()->user()->role;
                 if ($userlevel == 1) {
-                    return redirect()->route('index');
-                } else if ($userlevel == 2) {
+                    return redirect()->route('guest.index');
+                } else if ($userlevel == 3) {
                     return redirect()->route('admin.index');
-                } else {
-                    return redirect()->back();
+                } else if($userlevel == 2){
+                    return redirect()->route('guest.index');
                 }
             }
         } else {
