@@ -48,7 +48,7 @@
         </div>
 
         <div class="right-column">
-            <div class="icon-container " style="margin-right: -7px">
+            <div class="icon-container ">
                 <img src="{{ asset('client/image/batngo.png') }}" alt="Avatar">
                 <img src="{{ asset('client/image/buonba.png') }}" alt="Avatar">
                 <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
@@ -98,10 +98,7 @@
                             'rgba(255, 99, 132, 0.8)',
                         ],
                         borderWidth: 2,
-                        // tension: 0.4
-                        // backgroundColor: 'rgb(33, 33, 33)',
-                        // borderColor: 'rgba(75, 192, 192, 1)',
-                        // borderWidth: 1,
+        
                         pointBackgroundColor: 'rgba(255, 99, 132, 0.8)', // Màu nền của các điểm
                         pointBorderColor: '#fff', // Màu viền của các điểm
                         pointRadius: 5, // Kích thước của các điểm
@@ -167,7 +164,7 @@
                 }
             });
 
-            // .catch(error => console.error('Error fetching data:', error));
+
         });
     </script>
     <style>
@@ -190,9 +187,9 @@
         }
 
         .left-column {
-            width: 300px;
+            /* width: 40%px; */
             /* Điều chỉnh độ rộng theo ý muốn */
-            height: 350px;
+            height: 100%;
             /* Điều chỉnh độ cao theo ý muốn */
             background-color: #9a901e6c;
             /* Màu nền */
@@ -202,7 +199,8 @@
             /* Thêm bóng */
             padding: 10px;
             text-align: left;
-            margin-right: 15px;
+            margin-right: 30px;
+            margin-left: 80px;
         }
 
         .center {
@@ -211,9 +209,11 @@
         }
 
         .right-column {
+            
             display: flex;
             flex-direction: row;
             align-items: center;
+            
         }
 
         .icon-container {
@@ -223,14 +223,10 @@
 
         }
 
-        /* .icon-container img {
-            margin: 7px auto;
-        } */
-
         .icon-container img {
-            width: 30px;
-            height: 30px;
-            margin: 16px;
+            width: 33px;
+            height: 33px;
+            margin-top: 21px;
         }
 
         .left-column p {
