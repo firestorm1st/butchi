@@ -54,11 +54,12 @@ Route::name('guest.')->group(function(){
 });
 
 Route::name('client.')->middleware([checkLogin::class])->group(function(){
-    Route::get('index', [ClientController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
+    Route::get('index/{id}', [ClientController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
 
     Route::get('room', [ClientController::class, 'showRooms'])->name('rooms.show');
     Route::post('/rooms/create', [ClientController::class, 'storeRoom'])->name('rooms.store');
-    Route::post('/rooms/{id}/enter', [ClientController::class, 'enterRoom'])->name('rooms.enter');
+    Route::post('client/rooms/enter/{id}', [ClientController::class, 'enterRoom'])
+    ->name('rooms.enter');
 
     Route::get('account/{id}', [ClientController::class, 'showAccount'])->name('showAccount');
     Route::get('change-account/{id}', [ClientController::class, 'changeAccount'])->name('changeAccount');

@@ -42,7 +42,7 @@
                                             <label style="color: red">Username<span class="required">*</span></label>
                                             <input class="input" name="username" placeholder="user_name" value="{{old('username')}}">
                                             <div class="checkbox-class">
-                                                <input type="checkbox" id="is_online" name="is_online" value="1" {{ old('is_online') == '1' ? 'checked' : '' }}>
+                                                <input type="checkbox" id="is_offline" name="is_offline" value="1" {{ old('is_offline') == '1' ? 'checked' : '' }}>
                                                 <label for="is_online">Trực tiếp</label>
                                             </div>
                         

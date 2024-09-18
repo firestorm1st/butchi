@@ -1,19 +1,25 @@
 @extends('master')
 @section('content')
     <h1>CHỌN PHÒNG</h1>
+    @if(Auth::User()->role==2)
     <div class="create-room">
         <button class="create-room-btn" onclick="openModalcreate()">TẠO PHÒNG +</button>
     </div>
+    @endif
     <div class="rooms-container">
-        @foreach($rooms as $room)
-            <div class="room">
-                <div class="room-image">
-                    <img src="{{ asset('client/image/phong.png') }}" alt="Room {{ $room->name }}">
-                    <div class="room-info">{{ $room->name }}</div>
-                </div>
-                <button class="enter-btn" onclick="openModal({{ $room->id }})">Vào</button>
-            </div>
-        @endforeach
+        @if ($rooms->isEmpty())
+        <p style="font-size: 45px;font-family: 'Dancing Script';margin-left:475px;margin-top:150px;">Hiện tại chưa có phòng nào cả</p>
+        @else
+            @foreach($rooms as $room)
+                    <div class="room">
+                        <div class="room-image">
+                            <img src="{{ asset('client/image/phong.png') }}" alt="Room {{ $room->name }}">
+                            <div class="room-info">{{ $room->name }}</div>
+                        </div>
+                        <button class="enter-btn" onclick="openModal({{ $room->id }})">Vào</button>
+                    </div>
+                @endforeach
+        @endif
     </div>
 
     {{-- Modal nhập mật khẩu --}}
@@ -24,7 +30,7 @@
             <form action="{{ route('client.rooms.enter', ['id' => 0]) }}" method="POST" id="enterRoomForm">
                 @csrf
                 <input type="hidden" id="roomId" name="room_id">
-                <input type="password" name="password" placeholder="Nhập mật khẩu...">
+                <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
                 <div>
                     <button class="submit-btn" type="submit">Xác nhận</button>
                 </div>
@@ -197,14 +203,17 @@
 
     <script>
         function openModal(roomId) {
-            document.getElementById("passwordModal").style.display = "flex";
-            document.getElementById("roomId").value = roomId;
-            document.getElementById("enterRoomForm").action = `/rooms/${roomId}/enter`;
+            // Đặt room_id vào trường ẩn
+            document.getElementById('roomId').value = roomId;
+            // Cập nhật action của form để gửi đến route chính xác
+            document.getElementById('enterRoomForm').action = `/client/rooms/enter/${roomId}`;
+            // Hiển thị modal
+            document.getElementById('passwordModal').style.display = 'flex';
         }
 
         function closeModal() {
-            document.getElementById("passwordModal").style.display = "none";
-        }
+            document.getElementById('passwordModal').style.display = 'none';
+        }   
 
         window.onclick = function(event) {
             let modal = document.getElementById("passwordModal");

@@ -15,9 +15,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('client.index');
+        $room = Room::findOrFail($id);  // Tìm phòng theo ID
+
+        // Kiểm tra xem user có thuộc phòng này không
+        if (auth()->user()->room_id !== $room->id) {
+            return redirect()->route('client.rooms.enter', ['id' => $room->id])->withErrors(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
+        }
+
+        // Truyền dữ liệu phòng vào view
+        return view('client.index', ['room' => $room]);
     }
 
     public function showPencil()
@@ -60,11 +68,11 @@ class ClientController extends Controller
         $user->room_id = $room->id;
         $user->save();
 
-        return redirect()->route('client.index')->with('success', 'Phòng đã được tạo thành công');
+        return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Phòng đã được tạo thành công');
     }
 
     // Redirect to the client index page with an error message if saving fails
-    return redirect()->route('client.index')->with('error', 'Có lỗi xảy ra');
+    return redirect()->back()->with('error', 'Có lỗi xảy ra');
 }
 
 
@@ -74,17 +82,23 @@ class ClientController extends Controller
         return view('client.room', compact('rooms'));
     }
 
-    public function enterRoom(Request $request)
+    public function enterRoom(Request $request, $id)
     {
-        $room = Room::find($request->room_id);
+        $room = Room::find($id);  // Tìm thông tin phòng theo ID
+        $password = $request->input('password');
 
-        if ($room && Hash::check($request->password, $room->password)) {
-            Auth::user()->update(['room_id' => $room->id]);
-            session(['authenticated_room' => $room->id]);
-            return redirect()->route('client.index');
-        } else {
-            return back()->withErrors(['password' => 'Mật khẩu không đúng!']);
+        if ($room && Hash::check($password, $room->password)) {
+            // Gán room_id cho user hiện tại
+            $user = auth()->user();
+            $user->room_id = $room->id;
+            $user->save();
+
+            // Chuyển hướng đến trang client/index/{id}
+            return redirect()->route('client.index', ['id' => $room->id]);
         }
+
+        // Nếu mật khẩu sai, quay lại modal với thông báo lỗi
+        return redirect()->back()->withErrors(['password' => 'Mật khẩu không chính xác']);
     }
 
     public function showAccount($id)

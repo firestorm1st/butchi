@@ -67,8 +67,8 @@ class LoginController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
-        $is_online = $request->has('is_online') ? 1 : 2;
-        $user->status=$is_online;
+        $is_offline = $request->has('is_offline') ? 1 : 2;
+        $user->is_offline=$is_offline;
         $user->role=$request->role;
         $user->save();
 
