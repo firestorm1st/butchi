@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Carbon\Carbon;
 return new class extends Migration
 {
     /**
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('emo_id')->references('id')->on('emotions');
             $table->unsignedBigInteger('level_id');
             $table->foreign('level_id')->references('id')->on('levels');
+            $table->date('date')->default(Carbon::now()->toDateString());
             // $table->tinyInteger('status')->default(1)->comment('1: Show - 2: Hide');
             $table->timestamps();
         });

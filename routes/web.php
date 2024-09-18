@@ -6,8 +6,9 @@ use App\Http\Controllers\Admin\MissionController;
 use App\Http\Controllers\Logout;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\Client\AccountController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\RoomController;
 use App\Http\Middleware\checkLogin;
 use App\Http\Middleware\CheckRoomPassword;
 use Illuminate\Support\Facades\Route;
@@ -54,18 +55,18 @@ Route::name('guest.')->group(function(){
 });
 
 Route::name('client.')->middleware([checkLogin::class])->group(function(){
-    Route::get('index/{id}', [ClientController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
+    Route::get('index/{id}', [RoomController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
 
-    Route::get('room', [ClientController::class, 'showRooms'])->name('rooms.show');
-    Route::post('/rooms/create', [ClientController::class, 'storeRoom'])->name('rooms.store');
-    Route::post('client/rooms/enter/{id}', [ClientController::class, 'enterRoom'])
+    Route::get('room', [RoomController::class, 'showRooms'])->name('rooms.show');
+    Route::post('/rooms/create', [RoomController::class, 'storeRoom'])->name('rooms.store');
+    Route::post('client/rooms/enter/{id}', [RoomController::class, 'enterRoom'])
     ->name('rooms.enter');
 
-    Route::get('account/{id}', [ClientController::class, 'showAccount'])->name('showAccount');
-    Route::get('change-account/{id}', [ClientController::class, 'changeAccount'])->name('changeAccount');
-    Route::post('account/{id}', [ClientController::class, 'account'])->name('account');
+    Route::get('account/{id}', [AccountController::class, 'showAccount'])->name('showAccount');
+    Route::get('change-account/{id}', [AccountController::class, 'changeAccount'])->name('changeAccount');
+    Route::post('account/{id}', [AccountController::class, 'account'])->name('account');
 
-    Route::get('chart', [ClientController::class, 'chart'])->name('chart');
+    Route::get('chart', [AccountController::class, 'chart'])->name('chart');
     // Route::get('data', [ClientController::class, 'getIconData']);
 
     Route::get('checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
