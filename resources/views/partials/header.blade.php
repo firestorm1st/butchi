@@ -48,7 +48,7 @@
                 <button class="start-btn"><a href="{{ route('client.rooms.show') }}">Bắt đầu</a></button>
             @else
                 <!-- Điều hướng đến trang client.index -->
-                <button class="start-btn"><a href="{{ route('client.index',['id' => Auth::User()->room_id]) }}">Bắt đầu</a></button>
+                <button class="start-btn"><a href="{{ route('client.emotion.form',['id' => Auth::User()->room_id]) }}">Bắt đầu</a></button>
             @endif
         @endauth
         @guest

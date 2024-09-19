@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('emo_id')->references('id')->on('emotions');
             $table->unsignedBigInteger('level_id');
             $table->foreign('level_id')->references('id')->on('levels');
+            $table->text('answer');
             // $table->tinyInteger('status')->default(1)->comment('1: Show - 2: Hide');
             $table->timestamps();
         });
