@@ -13,6 +13,19 @@ use App\Models\Level;
 
 class RoomController extends Controller
 {
+    public function index(string $id)
+    {
+        $room = Room::findOrFail($id);  // Tìm phòng theo ID
+
+        // Kiểm tra xem user có thuộc phòng này không
+        if (auth()->user()->room_id !== $room->id) {
+            return redirect()->route('client.rooms.enter', ['id' => $room->id])->withErrors(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
+        }
+
+        // Truyền dữ liệu phòng vào view
+        return view('client.index', ['id' => $id]);
+    }
+
     public function storeRoom(Request $request)
     {
         $user = Auth::user();
@@ -59,11 +72,11 @@ class RoomController extends Controller
             $user->save();
 
             // Chuyển hướng đến trang client/index/{id}
-            return redirect()->route('client.emotion.form', ['id' => $room->id]);
+            return redirect()->route('client.index', ['id' => $room->id]);
         }
 
         // Nếu mật khẩu sai, quay lại modal với thông báo lỗi
-        return redirect()->back()->withErrors(['password' => 'Mật khẩu không chính xác']);
+        return redirect()->back()->withErrors(['error' => 'Mật khẩu không chính xác']);
     }
 
     public function showEmotionForm($room_id)

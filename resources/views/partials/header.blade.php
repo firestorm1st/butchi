@@ -9,8 +9,20 @@
             </div>
         </a>
         <ul class="navbar">
-            <li><a href="{{ route('guest.index') }}">Trang chủ</a></li>
-            <li><a href="#">Hoạt động</a></li>
+            @if (Auth::check())
+            <li class="main-menu-item">
+                <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}" class="main-menu-link">Tài khoản</a>
+                <!-- sub menu start -->
+                <ul class="sub-menu">
+                    @if (Auth::user()->room_id!=null)
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.index',['id'=>Auth::user()->room_id])}}">Xem thành viên</a></li>
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.form',['id'=>Auth::user()->room_id])}}">chọn cảm xúc</a></li>
+                    {{-- <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.showCompare',['id'=>Auth::user()->id])}}">Compare</a></li> --}}
+                    @endif
+                </ul>
+                <!-- sub menu end -->
+            </li>
+            @endif
             <li><a href="{{ route('guest.aboutUs') }}">Giới thiệu</a></li>
             <li><a href="{{ route('guest.contactUs') }}">Liên hệ</a></li>
             <li>

@@ -25,7 +25,7 @@
                 @foreach($levels as $level)
                     <div class="level" {{ $emotionToday->level_id == $level->id ? 'selected' : '' }} data-level="{{ $level->id }}">
                         {{ $level->name }}
-                        <input type="hidden" name="level_id" value="{{ $level->id }}" required>
+                        <input type="hidden" name="level_id" value="{{ $level->id }}" disabled>
                     </div>
                 @endforeach
             </div>
@@ -190,7 +190,7 @@
         max-width: 60px;
         max-height: 60px;
         position: absolute;
-        transform: translate(0px, -50px);
+        transform: translate(0px, -70px);
         transition: transform 0.3s ease;
     }
 

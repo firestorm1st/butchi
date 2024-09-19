@@ -69,8 +69,8 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
     Route::get('chart', [AccountController::class, 'chart'])->name('chart');
     // Route::get('data', [ClientController::class, 'getIconData']);
 
-    Route::get('/emotion/{id}/tracker', [ClientController::class, 'showEmotionForm'])->name('emotion.form')->middleware([CheckRoomPassword::class]);
-    Route::post('/emotion/{id}/store', [ClientController::class, 'saveEmotionDaily'])->name('emotion.store')->middleware([CheckRoomPassword::class]);
+    Route::get('/emotion/{id}/tracker', [RoomController::class, 'showEmotionForm'])->name('emotion.form')->middleware([CheckRoomPassword::class]);
+    Route::post('/emotion/{id}/store', [RoomController::class, 'saveEmotionDaily'])->name('emotion.store')->middleware([CheckRoomPassword::class]);
 
     Route::get('checkin', [ClientController::class, 'showCheckin'])->name('showCheckin');
     Route::post('checkin', [ClientController::class, 'checkin'])->name('checkin');
