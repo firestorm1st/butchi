@@ -36,8 +36,4 @@ class ClientController extends Controller
     {
         // return view('client.modules.checkin');
     }
-
-
-
-    
 }

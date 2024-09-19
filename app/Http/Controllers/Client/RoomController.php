@@ -7,22 +7,12 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EmotionDaily;
+use App\Models\Emotion;
+use App\Models\Level;
 
 class RoomController extends Controller
 {
-    public function index(string $id)
-    {
-        $room = Room::findOrFail($id);  // Tìm phòng theo ID
-
-        // Kiểm tra xem user có thuộc phòng này không
-        if (auth()->user()->room_id !== $room->id) {
-            return redirect()->route('client.rooms.enter', ['id' => $room->id])->withErrors(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
-        }
-
-        // Truyền dữ liệu phòng vào view
-        return view('client.index', ['id' => $id]);
-    }
-
     public function storeRoom(Request $request)
     {
         $user = Auth::user();
@@ -69,10 +59,55 @@ class RoomController extends Controller
             $user->save();
 
             // Chuyển hướng đến trang client/index/{id}
-            return redirect()->route('client.index', ['id' => $room->id]);
+            return redirect()->route('client.emotion.form', ['id' => $room->id]);
         }
 
         // Nếu mật khẩu sai, quay lại modal với thông báo lỗi
         return redirect()->back()->withErrors(['password' => 'Mật khẩu không chính xác']);
+    }
+
+    public function showEmotionForm($room_id)
+    {
+        $user = auth()->user();
+        $today = now()->startOfDay();
+        $room = Room::find($room_id);
+        // Lấy danh sách cảm xúc và mức độ
+        $emotions = Emotion::all();
+        $levels = Level::all();
+        $answer=EmotionDaily::all();
+    // Kiểm tra xem user đã gửi dữ liệu trong ngày chưa
+    $emotionToday = EmotionDaily::where('user_id', $user->id)
+    ->whereDate('created_at', $today)
+    ->first();
+
+    // Trả về view kèm theo thông tin
+    return view('client.emoChoose', compact('emotions', 'levels', 'emotionToday','room','answer'));    
+    }
+
+    public function saveEmotionDaily(Request $request, $room_id)
+    {
+        // Lấy thông tin từ form gửi lên
+        $emotion_id = $request->input('emotion_id');
+        $level_id = $request->input('level_id');
+        $user_id = auth()->id(); // Lấy id người dùng hiện tại
+        $answer=$request->input('answer');
+        $today = now()->startOfDay();
+        $existingEmotion = EmotionDaily::where('user_id', $user_id)
+                                   ->whereDate('created_at', $today)
+                                   ->first();
+        if ($existingEmotion) {
+            return redirect()->back()->with('error', 'Bạn đã gửi cảm xúc hôm nay rồi.');
+        }elseif(EmotionDaily::create([
+            'user_id' => $user_id,
+            'room_id' => $room_id,
+            'emo_id' => $emotion_id,
+            'level_id' => $level_id,
+            'answer' => $answer
+        ])){
+            return redirect()->back()->with('success', 'Cảm xúc của bạn đã được lưu!');
+        }
+
+        // Chuyển hướng về trang cũ hoặc bất kỳ trang nào khác
+        return redirect()->back()->with('error', 'Có lỗi xảy ra');
     }
 }
