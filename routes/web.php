@@ -56,6 +56,7 @@ Route::name('guest.')->group(function(){
 
 Route::name('client.')->middleware([checkLogin::class])->group(function(){
     Route::get('index/{id}', [RoomController::class, 'index'])->name('index')->middleware([CheckRoomPassword::class]);
+    Route::get('emotion/{id}', [RoomController::class, 'showFullEmo'])->name('emotion.full')->middleware([CheckRoomPassword::class]);
 
     Route::get('room', [RoomController::class, 'showRooms'])->name('rooms.show');
     Route::post('/rooms/create', [RoomController::class, 'storeRoom'])->name('rooms.store');

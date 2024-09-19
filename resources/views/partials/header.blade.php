@@ -16,8 +16,8 @@
                 <ul class="sub-menu">
                     @if (Auth::user()->room_id!=null)
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.index',['id'=>Auth::user()->room_id])}}">Xem thành viên</a></li>
-                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.form',['id'=>Auth::user()->room_id])}}">chọn cảm xúc</a></li>
-                    {{-- <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.showCompare',['id'=>Auth::user()->id])}}">Compare</a></li> --}}
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.form',['id'=>Auth::user()->room_id])}}">Chọn cảm xúc</a></li>
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.full',['id'=>Auth::user()->room_id])}}">Xem cảm xúc</a></li>
                     @endif
                 </ul>
                 <!-- sub menu end -->

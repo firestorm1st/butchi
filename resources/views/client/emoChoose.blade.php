@@ -6,8 +6,8 @@
         <!-- Nếu đã chọn cảm xúc hôm nay, hiển thị icon và level đã chọn -->
         <div class="emotion-icons">
             @foreach($emotions as $emotion)
-                <div class="icon" data-emotion="{{ $emotion->id }}">
-                    <img style="pointer-events: none" src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
+                <div class="icon" data-emotion="{{ $emotion->id }}" style="pointer-events: none;">
+                    <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
                     <div class="label">{{ $emotion->name }}</div>
                 </div>
             @endforeach
@@ -20,18 +20,20 @@
                     <div class="label">{{ $emotionToday->emotion->name }}</div>
                 </div>
             </div>
-            <!-- Hiển thị mức độ đã chọn -->
+    
+            <!-- Disable level selection -->
             <div class="levels">
                 @foreach($levels as $level)
-                    <div class="level" {{ $emotionToday->level_id == $level->id ? 'selected' : '' }} data-level="{{ $level->id }}">
+                    <div class="level {{ $emotionToday->level_id == $level->id ? 'selected' : '' }}" data-level="{{ $level->id }}" style="pointer-events: none;">
                         {{ $level->name }}
-                        <input type="hidden" name="level_id" value="{{ $level->id }}" disabled>
+                        <input type="hidden" name="level_id" value="{{ $level->id }}">
                     </div>
                 @endforeach
             </div>
+    
             <div class="pencil-container">
                 <img src="{{ asset('client/image/caybutdoc.png') }}" alt="Pencil">
-                <div class="star selected"></div> <!-- Ngôi sao hiển thị mức độ -->
+                <div class="star selected"></div>
             </div>
             <div class="text-block">
                 <div class="emotion-text">
@@ -44,15 +46,16 @@
             </div>
         </div>
     @else
-        <!-- Nếu chưa chọn cảm xúc hôm nay, hiển thị form chọn cảm xúc -->
-        <form action="{{ route('client.emotion.store', ['id' => $room]) }}" method="POST">
+        <!-- If no emotion for today, show the form -->
+        <form action="{{ route('client.emotion.store', ['id' => $room->id]) }}" method="POST">
             @csrf
+            <input type="hidden" id="emotion_id" name="emotion_id" value="">
+            <input type="hidden" id="level_id" name="level_id" value="">
             <div class="emotion-icons">
                 @foreach($emotions as $emotion)
                     <div class="icon" data-emotion="{{ $emotion->id }}">
                         <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
                         <div class="label">{{ $emotion->name }}</div>
-                        <input type="hidden" name="emotion_id" value="{{ $emotion->id }}" required>
                     </div>
                 @endforeach
             </div>
@@ -61,12 +64,11 @@
                     <img src="{{ asset('client/image/jar.jpg') }}" alt="Emotion Jar">
                     <div class="icon-in-jar"></div>
                 </div>
-                <!-- Hiển thị các level để chọn -->
+                <!-- Show levels to choose from -->
                 <div class="levels">
                     @foreach($levels as $level)
                         <div class="level" data-level="{{ $level->id }}">
                             {{ $level->name }}
-                            <input type="hidden" name="level_id" value="{{ $level->id }}" required>
                         </div>
                     @endforeach
                 </div>
@@ -175,6 +177,25 @@
         height: auto;
         display: block;
         background-size: contain;
+    }
+
+    .icon.disabled,
+    .level.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    /* Disabled textarea */
+    .text-block textarea[disabled] {
+        background-color: #f0f0f0;
+        color: #999;
+        cursor: not-allowed;
+    }
+
+    /* Disabled button */
+    .custom-button[disabled] {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 
     .icon-in-jar {
@@ -361,14 +382,22 @@ document.addEventListener('DOMContentLoaded', function() {
         5: 173  // Top of the pencil for level 5
     };
 
+    const preSelectedLevel = document.querySelector('.level.selected');
+    if (preSelectedLevel) {
+        const levelValue = preSelectedLevel.getAttribute('data-level');
+        const newPosition = levelPositions[levelValue];
+        star.style.top = `${newPosition}px`;
+    }
+
+    // Handle click events on the levels
     levels.forEach((level) => {
         level.addEventListener('click', function() {
-            // Remove 'selected' class from previously selected level, if any
+            // Remove 'selected' class from the previously selected level, if any
             if (selectedLevel) {
                 selectedLevel.classList.remove('selected');
             }
 
-            // Mark the current level as selected
+            // Mark the clicked level as selected
             selectedLevel = level;
             level.classList.add('selected');
 
@@ -380,6 +409,56 @@ document.addEventListener('DOMContentLoaded', function() {
             star.style.top = `${newPosition}px`;
         });
     });
+});
+document.addEventListener("DOMContentLoaded", function() {
+        const icons = document.querySelectorAll(".icon");
+        const levels = document.querySelectorAll(".level");
+        const jar = document.querySelector(".icon-in-jar");
+        const star = document.querySelector(".star");
+        const emotionInput = document.getElementById("emotion_id");
+        const levelInput = document.getElementById("level_id");
+
+        let selectedEmotionId = null;
+        let selectedLevelId = null;
+
+        icons.forEach(icon => {
+            icon.addEventListener("click", function() {
+                const emotionId = icon.getAttribute("data-emotion");
+                selectedEmotionId = emotionId;
+                
+                emotionInput.value = emotionId;  // Cập nhật giá trị emotion_id
+
+                jar.innerHTML = ""; // Clear previous icon
+
+                const clonedIcon = icon.querySelector("img").cloneNode(true);
+                clonedIcon.classList.add("icon-in-jar-style");
+                jar.appendChild(clonedIcon);
+
+                icons.forEach(i => i.classList.remove("selected"));
+                icon.classList.add("selected");
+            });
+        });
+
+        levels.forEach(level => {
+            level.addEventListener("click", function() {
+                const levelId = level.getAttribute("data-level");
+                selectedLevelId = levelId;
+
+                levelInput.value = levelId;  // Cập nhật giá trị level_id
+
+                levels.forEach(lvl => lvl.classList.remove("selected"));
+                level.classList.add("selected");
+
+                const starPosition = 50 + (20 * (levelId - 1));
+                star.style.top = starPosition + "px";
+            });
+        });
+    });
+    document.querySelector('form').addEventListener('submit', function(event) {
+    if (!selectedEmotionId || !selectedLevelId) {
+        event.preventDefault(); // Ngăn form gửi nếu chưa chọn cảm xúc và mức độ
+        alert('Vui lòng chọn cảm xúc và mức độ trước khi gửi.');
+    }
 });
     // Modal logic
     function closeModalcreate() {

@@ -10,9 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EmotionDaily;
 use App\Models\Emotion;
 use App\Models\Level;
+use App\Models\User;
+use Carbon\Carbon;
 
 class RoomController extends Controller
 {
+    public function showFullEmo($roomId) {
+        $room = Room::findOrFail($roomId); 
+        // Lấy danh sách cảm xúc hàng ngày từ bảng EmotionDaily theo room_id
+        $emotions = EmotionDaily::with(['user', 'emotion', 'level'])
+                    ->whereHas('user', function ($query) use ($roomId) {
+                        $query->where('room_id', $roomId);
+                    })
+                    ->get();
+    
+        return view('client.emoIndex', ['rooms'=>$room,'emotions' => $emotions]);
+    }
+
     public function index(string $id)
     {
         $room = Room::findOrFail($id);  // Tìm phòng theo ID
