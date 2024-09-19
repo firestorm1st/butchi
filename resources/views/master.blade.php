@@ -6,6 +6,7 @@
 
     <!-- Required meta tags -->
     @include('partials.head')
+    <title>@yield('title')</title>
 
 </head>
 <!-- head end -->

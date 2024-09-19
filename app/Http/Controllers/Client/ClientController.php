@@ -8,7 +8,8 @@ use App\Models\Room;
 use Hash;
 use Illuminate\Http\Request;
 use App\Models\Emotion;
-
+use App\Models\EmotionDaily;
+use App\Models\Level;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
