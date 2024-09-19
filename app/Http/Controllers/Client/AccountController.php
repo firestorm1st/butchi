@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Emotion;
 use App\Models\User;
 use App\Models\Room;
 use Illuminate\Http\Request;
-use App\Models\Emotion;
-
+use App\Models\EmotionDaily;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -19,17 +20,18 @@ class AccountController extends Controller
             abort(404);
         }
 
+        $emotions = Emotion::orderBy('id', 'desc')->get();
+        
 
-        // Lấy dữ liệu cho 7 ngày gần nhất
-        $data = Emotion::where('user_id', $id)->where('date', '>=', Carbon::now()->subDays(7)->format('Y-m-d'))
+        $data = EmotionDaily::where('user_id', $id)->where('date', '>=', Carbon::now()->subDays(7)->format('Y-m-d'))
             ->orderBy('date')
             ->get(['date', 'emo_id']); // Thay đổi theo cấu trúc bảng của bạn
 
-       
         return view('client.accountPage', [
             'user' => $user,
             'id' => $id,  // Thông tin người dùng
-            'data' => $data    // Dữ liệu Emotion để hiển thị
+            'data' => $data,    // Dữ liệu Emotion để hiển thị
+            'emotions' => $emotions
         ]);
     }
 

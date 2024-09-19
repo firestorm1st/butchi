@@ -50,7 +50,7 @@ class LoginController extends Controller
                 }
             }
         } else {
-            return redirect()->back()->with('Có lỗi xảy ra', 'Email hoặc Password không đúng, vui lòng nhập lại.');
+            return redirect()->back()->with('error', 'Email hoặc Password không đúng, vui lòng nhập lại.');
         }
     }
     public function showRegister()
@@ -93,9 +93,9 @@ class LoginController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
-            return redirect()->back()->with('Chúc mừng', 'Mail kích hoạt lại mật khẩu đã được gửi, vui lòng kiểm tra email của bạn.');
+            return redirect()->back()->with('success', 'Mail kích hoạt lại mật khẩu đã được gửi, vui lòng kiểm tra email của bạn.');
         } else {
-            return redirect()->back()->with('Có lỗi xảy ra', 'Email chưa đăng ký thành viên, vui lòng đăng ký tài khoản mới.');
+            return redirect()->back()->with('error', 'Email chưa đăng ký thành viên, vui lòng đăng ký tài khoản mới.');
         }
     }
     public function resetPassword($token)
@@ -113,11 +113,11 @@ class LoginController extends Controller
         ]);
         $updatePass = User::where("remember_token", $request->token)->get();
         if (!$updatePass) {
-            return redirect()->to(route('forget.password'))->with('Có lỗi xảy ra', 'Cập nhật mật khẩu thất bại.');
+            return redirect()->to(route('forget.password'))->with('error', 'Cập nhật mật khẩu thất bại.');
         }
 
         User::where("remember_token", $request->token)
             ->update(["password" => Hash::make($request->password)]);
-        return redirect()->to(route('showLogin'))->with("Chúc mừng", "Mật khẩu đã được cập nhật thành công.");
+        return redirect()->to(route('showLogin'))->with("success", "Mật khẩu đã được cập nhật thành công.");
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
+            $table->integer('user_id');
             $table->tinyInteger('status')->default(1)->comment('1: Active - 2: Unactive');
             $table->timestamps();
         });
