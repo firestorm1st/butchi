@@ -49,15 +49,9 @@
 
         <div class="right-column">
             <div class="icon-container ">
-                <img src="{{ asset('client/image/batngo.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/buonba.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/giandu.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/mongdoi.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/sohai.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/tintuong.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/vuive.png') }}" alt="Avatar">
-                <img src="{{ asset('client/image/changhet.png') }}" alt="Avatar">
-
+                @foreach ($emotions as $emo)
+                    <img src="{{ asset('client/image/' . $emo->image) }}" alt="Avatar">
+                @endforeach
 
 
             </div>
@@ -98,7 +92,7 @@
                             'rgba(255, 99, 132, 0.8)',
                         ],
                         borderWidth: 2,
-        
+
                         pointBackgroundColor: 'rgba(255, 99, 132, 0.8)', // Màu nền của các điểm
                         pointBorderColor: '#fff', // Màu viền của các điểm
                         pointRadius: 5, // Kích thước của các điểm
@@ -183,7 +177,7 @@
             align-items: center;
             width: 90%;
             margin: 50px auto;
-            
+
         }
 
         .left-column {
@@ -209,11 +203,11 @@
         }
 
         .right-column {
-            
+
             display: flex;
             flex-direction: row;
             align-items: center;
-            
+
         }
 
         .icon-container {
@@ -240,7 +234,7 @@
 
         }
 
-        .left-column img{
+        .left-column img {
             border-radius: 100%
         }
     </style>

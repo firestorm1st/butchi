@@ -51,7 +51,7 @@
                 @foreach($emotions as $emotion)
                     <div class="icon" data-emotion="{{ $emotion->id }}">
                         <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
-                        <div class="label">{{ $emotion->name }}</div>
+                        <div class="label" style="color: {{$emotion->color}}">{{ $emotion->name }}</div>
                         <input type="hidden" name="emotion_id" value="{{ $emotion->id }}" required>
                     </div>
                 @endforeach

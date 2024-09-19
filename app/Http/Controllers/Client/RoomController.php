@@ -30,6 +30,13 @@ class RoomController extends Controller
     {
         $user = Auth::user();
 
+        // Check if the user has already created a room
+        $roomExists = Room::where('user_id', $user->id)->exists();
+
+        if ($roomExists) {
+            return redirect()->back()->with('error', 'Bạn đã tạo phòng, xin vui lòng đăng nhập vào phòng của mình');
+        }
+
         // Validate the input
         $request->validate([
             'name' => 'required|string|max:10',
@@ -37,7 +44,9 @@ class RoomController extends Controller
         ]);
 
         // Create a new room
+        
         $room = new Room();
+        $room->user_id = $user->id;
         $room->name = $request->name;
         $room->password = bcrypt($request->password);
 
@@ -85,16 +94,16 @@ class RoomController extends Controller
         $today = now()->startOfDay();
         $room = Room::find($room_id);
         // Lấy danh sách cảm xúc và mức độ
-        $emotions = Emotion::all();
+        $emotions = Emotion::orderBy('id', 'desc')->get();
         $levels = Level::all();
-        $answer=EmotionDaily::all();
-    // Kiểm tra xem user đã gửi dữ liệu trong ngày chưa
-    $emotionToday = EmotionDaily::where('user_id', $user->id)
-    ->whereDate('created_at', $today)
-    ->first();
+        $answer = EmotionDaily::all();
+        // Kiểm tra xem user đã gửi dữ liệu trong ngày chưa
+        $emotionToday = EmotionDaily::where('user_id', $user->id)
+            ->whereDate('created_at', $today)
+            ->first();
 
-    // Trả về view kèm theo thông tin
-    return view('client.emoChoose', compact('emotions', 'levels', 'emotionToday','room','answer'));    
+        // Trả về view kèm theo thông tin
+        return view('client.emoChoose', compact('emotions', 'levels', 'emotionToday', 'room', 'answer'));
     }
 
     public function saveEmotionDaily(Request $request, $room_id)
@@ -103,20 +112,20 @@ class RoomController extends Controller
         $emotion_id = $request->input('emotion_id');
         $level_id = $request->input('level_id');
         $user_id = auth()->id(); // Lấy id người dùng hiện tại
-        $answer=$request->input('answer');
+        $answer = $request->input('answer');
         $today = now()->startOfDay();
         $existingEmotion = EmotionDaily::where('user_id', $user_id)
-                                   ->whereDate('created_at', $today)
-                                   ->first();
+            ->whereDate('created_at', $today)
+            ->first();
         if ($existingEmotion) {
             return redirect()->back()->with('error', 'Bạn đã gửi cảm xúc hôm nay rồi.');
-        }elseif(EmotionDaily::create([
+        } elseif (EmotionDaily::create([
             'user_id' => $user_id,
             'room_id' => $room_id,
             'emo_id' => $emotion_id,
             'level_id' => $level_id,
             'answer' => $answer
-        ])){
+        ])) {
             return redirect()->back()->with('success', 'Cảm xúc của bạn đã được lưu!');
         }
 
