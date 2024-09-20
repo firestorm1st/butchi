@@ -22,6 +22,7 @@
     .header {
         text-align: center;
         margin-bottom: 30px;
+        padding: 30px 0;
         background-color: #F2F2F2;
     }
 
