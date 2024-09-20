@@ -100,6 +100,18 @@ class RoomController extends Controller
         return redirect()->back()->withErrors(['error' => 'Mật khẩu không chính xác']);
     }
 
+    public function logoutRoom()
+    {
+        $user = Auth::user();
+
+        // Xóa room_id của user để đăng xuất khỏi phòng
+        $user->room_id = null;
+        $user->save();
+
+        // Chuyển hướng sau khi đăng xuất
+        return redirect()->route('client.rooms.show')->with('success', 'Đã đăng xuất khỏi phòng.');
+    }
+
     public function showEmotionForm($room_id)
     {
         $user = auth()->user();

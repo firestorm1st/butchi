@@ -14,6 +14,10 @@
                 </button>
             </div>
         </div>
+        <form action="{{ route('client.logoutRoom') }}" method="POST" onsubmit="return confirmLogout()">
+            @csrf
+            <button type="submit" class="btn btn-danger">Đăng xuất</button>
+        </form>
 
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -95,4 +99,9 @@
         }
  
     </style>
+    <script>
+        function confirmLogout() {
+            return confirm('Bạn có chắc chắn muốn đăng xuất khỏi phòng này không?');
+        }
+    </script>
 @endsection

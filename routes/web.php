@@ -62,6 +62,7 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
     Route::post('/rooms/create', [RoomController::class, 'storeRoom'])->name('rooms.store');
     Route::post('client/rooms/enter/{id}', [RoomController::class, 'enterRoom'])
     ->name('rooms.enter');
+    Route::post('/logout-room', [RoomController::class, 'logoutRoom'])->name('logoutRoom');
 
     Route::get('account/{id}', [AccountController::class, 'showAccount'])->name('showAccount');
     Route::get('change-account/{id}', [AccountController::class, 'changeAccount'])->name('changeAccount');
