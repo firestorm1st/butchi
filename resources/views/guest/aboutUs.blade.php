@@ -5,7 +5,7 @@
         font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #fdf7e2; /* Màu nền giống trong hình */
+        background-color: #fffaed;; /* Màu nền giống trong hình */
         color: #333;
     }
 
@@ -13,8 +13,8 @@
         width: 80%;
         margin: 30px auto;
         padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fffaed;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
         border-radius: 8px; /* Bo góc cho container */
         position: relative;
     }
@@ -22,6 +22,7 @@
     .header {
         text-align: center;
         margin-bottom: 30px;
+        background-color: #F2F2F2;
     }
 
     .header h1 {
@@ -32,10 +33,11 @@
     }
 
     .header p {
-        color: #8e44ad; /* Màu tím cho tiêu đề phụ */
+        color: black; /* Màu tím cho tiêu đề phụ */
         font-size: 20px;
         font-style: italic;
         margin-bottom: 20px;
+
     }
 
     hr {
@@ -54,7 +56,8 @@
         color: #f39c12;
         font-size: 24px;
         margin-bottom: 20px;
-        text-align: center;
+        text-align: left;
+        font-weight: bold;
     }
 
     .message-content {
@@ -78,37 +81,81 @@
         margin-bottom: 20px;
     }
 
-    /* Styling cho phần hướng dẫn */
-    .steps, .evaluation {
-        margin-bottom: 20px;
-        float: left; /* Căn trái */
-    width: 50%; /* Chiếm 50% chiều rộng */
+
+    .highlight1 {
+        color: #BD37E5; /* Màu đỏ để làm nổi bật các bước */
+        font-weight: bold; 
     }
 
-    .steps p, .evaluation p {
-        font-size: 13px;
-        line-height: 1.6;
-        margin: 10px 0;
-        
-    }
-
-    .highlight {
-        color: #e74c3c; /* Màu đỏ để làm nổi bật các bước */
+    .highlight2 {
+        color: #FC549B; /* Màu đỏ để làm nổi bật các bước */
         font-weight: bold;
     }
 
-    .illustration {
-        display: block;
-        margin: 0 auto; /* Canh giữa hình minh họa */
-        width: 300px; /* Kích thước hình ảnh */
-        height: auto;
-        margin-top: 30px;
+    .highlight3 {
+        color: #4834C3; /* Màu đỏ để làm nổi bật các bước */
+        font-weight: bold; 
     }
+    
+    .content {
+        width: 60%;
+        margin: 30px auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .welcome-text h2 {
+        font-size: 40px;
+        font-weight: bold;
+        line-height: 1.2;
+        font-family: 'Dancing Script';
+    }
+
+    .welcome-text p {
+        margin: 10px 0;
+        font-size: 18px;
+        font-family: 'true typewriter';
+    }
+
+    .welcome-text .start-btn {
+        margin-top: 10px;
+        font-family: 'true typewriter';
+    }
+
+    .welcome-image img {
+        max-width: 400px;
+        border-radius: 20px;
+    }
+
+    .tamtu p{
+        font-size: 18px;
+        align-content: justify;
+        margin-bottom: 0;
+        font-family: true typewriter;
+    }
+    
+    hr{
+        margin: 20px auto;
+        width: 80%;
+        border-top: 2px solid #8B3DFF;
+    }
+
+    
 </style>
+<section class="content">
+    <div class="welcome-text">
+        <h2><b> Giới thiệu về </b><br><b>"Bút Chì Thấu Cảm"</b> </h2>
+        <p>Chỉ vẽ hạnh phúc - Dẫn lối yêu thương</p>
+    </div>
+    <div class="welcome-image">
+        <img src="{{ asset('client/image/yeuthuong.png') }}" alt="Bút Chì Thấu Cảm">
+    </div>
+</section>
 <div class="container">
     <!-- Phần đầu -->
     <div class="header">
-        <h1>Bút Chì Thấu Cảm</h1>
         <p>Bút Chì Thấu Cảm - cầu nối để giúp các gia đình <br> 
         diễn đạt tình yêu thương theo một cách rất riêng <br> 
         - tôn trọng, tin tưởng, hạnh phúc.</p>
@@ -136,27 +183,62 @@
     
     <!-- Dòng kẻ ngang phân cách -->
     <hr>
+<div style="display:flex; flex-direction: row; width: 100%">
+    <div class="left-column" style="display:flex; flex-direction: column; width: 80%; margin: auto">
+        <h1 style="font-weight: bolder; font-family: Dancing Script">Hướng dẫn sử dụng</h1>
+        <h2><i style="font-weight: bolder; color: #4834C3; font-family: Dancing Script">“Vẽ tâm tư”</i></h2>  
+        <div style="width: 80%" class="tamtu">
+            <div>
+                <p><span class="highlight1"><i>Bước 1:</i></span> Chọn một cảm xúc chủ đạo trong ngày.</p>
+                <p><span class="highlight1"><i>Bước 2:</i></span> Đánh giá mức độ của cảm xúc đó bằng cách ấn vào thang đo bên cạnh thân bút chì.</p>
+                <p><span class="highlight1"><i>Bước 3:</i></span> Chia sẻ thêm về cảm xúc ngày hôm nay thông qua phần giấy ghi chú. (Điều gì/việc gì đã mang đến cảm xúc đó? Bạn xử lý cảm xúc đó như thế nào?...)</p>
+                <p><span class="highlight1"><i>Bước 4:</i></span> Nhấn nút gửi để cảm xúc được hiển thị cho các thành viên khác trong phòng, và sẽ được lưu trữ tại phần “biểu đồ cảm xúc”.</p>
+                <hr>
+            </div>
+            <div >
+                <p>Mỗi tuần sẽ có một phần đánh giá để “Bút Chì Thấu Cảm” có thể khảo sát ý kiến người dùng về hoạt động này.</p>
+                <br>
+            
+            
+                <p><span class="highlight2"><i>Bước 1:</i></span> Đánh giá mức độ hiệu quả của hoạt động này bằng cách nhấn vào con số từ 0-10 dưới thân bút chì.</p>
+                <p><span class="highlight2"><i>Bước 2:</i></span> Chia sẻ thêm suy nghĩ/trải nghiệm thông qua phần câu hỏi trên giấy ghi chú bên dưới.</p>
+                <p><span class="highlight2"><i>Bước 3:</i></span> Nhấn nút gửi để hoàn thành.</p>
+            </div>
+        </div>
+            
 
+    </div>
+    <div class="right-column">
+        <img src="{{asset('client/image/trang.png')}}" alt="Illustration" style="height: 300px; weight: 300px; margin-top: 200px">
+    </div>
+</div>
+<hr>
+<div style="display:flex; flex-direction: row; width: 100%; margin-top: 10px">
+    <div class="left-column" style="display:flex; flex-direction: column; width: 80%; margin: auto">
+        <h2><i style="font-weight: bolder; color: #F39816; font-family: Dancing Script">“Màu yêu thương”</i></h2>  
+        <div style="width: 80%" class="tamtu">
+            <div>
+                <p><span class="highlight3"><i>Bước 1:</i></span> Chọn một cảm xúc chủ đạo trong ngày.</p>
+                <p><span class="highlight3"><i>Bước 2:</i></span> Đánh giá mức độ của cảm xúc đó bằng cách ấn vào thang đo bên cạnh thân bút chì.</p>
+                <p><span class="highlight3"><i>Bước 3:</i></span> Chia sẻ thêm về cảm xúc ngày hôm nay thông qua phần giấy ghi chú. (Điều gì/việc gì đã mang đến cảm xúc đó? Bạn xử lý cảm xúc đó như thế nào?...)</p>
+                <p><span class="highlight3"><i>Bước 4:</i></span> Nhấn nút gửi để cảm xúc được hiển thị cho các thành viên khác trong phòng, và sẽ được lưu trữ tại phần “biểu đồ cảm xúc”.</p>
+            </div>
+        
+        </div>
+            
+
+    </div>
+    <div class="right-column">
+        <img src="{{asset('client/image/yeuthuong.png')}}" alt="Illustration" style="height: 300px; weight: 300px">
+    </div>
+</div>
     <!-- Phần hướng dẫn sử dụng -->
-    <div class="header">
-        <h1>Hướng dẫn sử dụng</h1>
-        <h2>“Vẽ tâm tư”</h2>
-    </div>
-    <div class="q">
-        <div class="steps">
-            <p><span class="highlight">Bước 1:</span> Chọn một cảm xúc chủ đạo trong ngày.</p>
-            <p><span class="highlight">Bước 2:</span> Đánh giá mức độ của cảm xúc đó bằng cách ấn vào thang đo bên cạnh thân bút chì.</p>
-            <p><span class="highlight">Bước 3:</span> Chia sẻ thêm về cảm xúc ngày hôm nay thông qua phần giấy ghi chú. (Điều gì/việc gì đã mang đến cảm xúc đó? Bạn xử lý cảm xúc đó như thế nào?...)</p>
-            <p><span class="highlight">Bước 4:</span> Nhấn nút gửi để cảm xúc được hiển thị cho các thành viên khác trong phòng, và sẽ được lưu trữ tại phần “biểu đồ cảm xúc”.</p>
-            <p>Mỗi tuần sẽ có một phần đánh giá để “Bút Chì Thấu Cảm” có thể khảo sát ý kiến người dùng về hoạt động này.</p>
-        </div>
-        <div class="evaluation">
-            <p><span class="highlight">Bước 1:</span> Đánh giá mức độ hiệu quả của hoạt động này bằng cách nhấn vào con số từ 0-10 dưới thân bút chì.</p>
-            <p><span class="highlight">Bước 2:</span> Chia sẻ thêm suy nghĩ/trải nghiệm thông qua phần câu hỏi trên giấy ghi chú bên dưới.</p>
-            <p><span class="highlight">Bước 3:</span> Nhấn nút gửi để hoàn thành.</p>
-        </div>
-    </div>
+    
 
-    <img src="{{asset('client/image/trang.jpg')}}" alt="Illustration" class="illustration">
+    
+    
+    
+
+    
 </div>
 @endsection
