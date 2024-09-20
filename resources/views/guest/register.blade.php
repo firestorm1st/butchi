@@ -16,22 +16,6 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form">
                                         <form action="" method="POST">
-                                            @if ($errors->any())
-                                            <div class="alert alert-danger alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                            </div>
-                                            @endif
-                                            @if ($message = Session::has('success'))
-                                            <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <h5><i class="icon fas fa-check"></i> Chúc mừng!</h5>
-                                            {{Session::get('success')}}
-                                            </div>
-                                            @endif
                                             @csrf
                                             <label style="color: red">Email<span class="required">*</span></label>
                                             <input class="input" type="email" name="email" placeholder="email" value="{{old('email')}}">

@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Đăng nhập')
 @section('content')
     <div class="login-register-area section-padding-bottom">
         <div class="container">
@@ -15,29 +16,6 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form">
                                         <form action="" method="POST">
-                                            @if ($errors->any())
-                                                <div class="alert alert-danger alert-dismissible">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                        aria-hidden="true">×</button>
-                                                    <h5><i class="icon fas fa-ban"></i> Cảnh báo!</h5>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </div>
-                                                @if (session('success'))
-                                                <div class="alert alert-success">
-                                                    {{ session('success') }}
-                                                </div>
-                                                @endif
-                                            @endif
-                                            
-                                            @if ($errors->any())
-                                                <div class="alert alert-danger">
-                                                    @foreach ($errors->all() as $error)
-                                                        <p>{{ $error }}</p>
-                                                    @endforeach
-                                                </div>
-                                            @endif
                                             @csrf
                                             <label>Email<span class="required">*</span></label>
                                             <input class="input" type="email" name="email" placeholder="email" value="{{old('email')}}">

@@ -70,10 +70,11 @@ class LoginController extends Controller
         $is_offline = $request->has('is_offline') ? 1 : 2;
         $user->is_offline=$is_offline;
         $user->role=$request->role;
-        $user->save();
-
-        Auth::login($user);
-        return redirect()->route('showLogin');
+        if($user->save()){
+            Auth::login($user);
+            return redirect()->route('showLogin')->with('success','Đăng kí thành công');
+        }
+        return redirect()->back()->with('error','Có lỗi xảy ra');
     }
 
     public function showForgotPassword()

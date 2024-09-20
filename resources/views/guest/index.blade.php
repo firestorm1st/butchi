@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','trang chủ')
 @section('content')
     <main>
         <section class="content">

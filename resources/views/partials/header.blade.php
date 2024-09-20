@@ -13,36 +13,18 @@
             <li class="main-menu-item">
                 <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}" class="main-menu-link">Tài khoản</a>
                 <!-- sub menu start -->
+                @if (Auth::user()->room_id!=null)
                 <ul class="sub-menu">
-                    @if (Auth::user()->room_id!=null)
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.index',['id'=>Auth::user()->room_id])}}">Xem thành viên</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.form',['id'=>Auth::user()->room_id])}}">Chọn cảm xúc</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.full',['id'=>Auth::user()->room_id])}}">Xem cảm xúc</a></li>
-                    @endif
                 </ul>
+                @endif
                 <!-- sub menu end -->
             </li>
             @endif
             <li><a href="{{ route('guest.aboutUs') }}">Giới thiệu</a></li>
             <li><a href="{{ route('guest.contactUs') }}">Liên hệ</a></li>
-            <li>
-                <p class="p_navbar">
-                    {{-- @php
-                if(Auth::check()==true)
-                {
-                    <a href="{{ route('admin.index')}}"> echo Auth::user()->username; </a>
-                    
-                }else {
-                    echo 'Guest';
-                }
-            @endphp  --}}
-                    @if (Auth::check())
-                        <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a>
-                    @else
-                        Guest
-                    @endif
-                </p>
-            </li>
             @if (Auth::check())
                 @if (Auth::user()->role == 3)
                     <li><a href="{{ route('admin.index') }}">Admin</a></li>

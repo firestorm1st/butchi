@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Trang cá nhân')
 @section('content')
     <div class="container_account">
 

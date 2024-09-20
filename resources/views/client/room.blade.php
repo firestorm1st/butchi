@@ -1,4 +1,5 @@
 @extends('master')
+@section('title','Phòng')
 @section('content')
     <h1>CHỌN PHÒNG</h1>
     @if(Auth::User()->role==2)

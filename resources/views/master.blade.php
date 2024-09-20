@@ -6,7 +6,6 @@
 
     <!-- Required meta tags -->
     @include('partials.head')
-    <title>@yield('title')</title>
 
 </head>
 <!-- head end -->
@@ -26,6 +25,15 @@
                 text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 3000
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: '{{ session('error') }}',
             });
         </script>
     @endif

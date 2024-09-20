@@ -6,14 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 class Emotion extends Model
 {
     protected $table = 'emotions';
-    protected $fillable = ['name', 'image'];
+    protected $fillable = ['name', 'image','color'];
 
     public function user() {
         return $this->belongsTo(User::class);
-    }
-
-    public function emotion() {
-        return $this->belongsTo(Emotion::class);
     }
 
     public function level() {

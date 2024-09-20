@@ -8,7 +8,7 @@ class EmotionDaily extends Model
 {
     protected $table = 'emotion_daily';
 
-    protected $fillable = ['user_id', 'emo_id', 'level_id', 'answer'];
+    protected $fillable = ['user_id', 'emo_id', 'level_id', 'answer','date'];
 
     public function user()
     {

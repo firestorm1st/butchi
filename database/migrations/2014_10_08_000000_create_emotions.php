@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('color');
-            $table->tinyInteger('status')->default(1)->comment('1: Show - 2: Hide');
             $table->timestamps();
         });
     }

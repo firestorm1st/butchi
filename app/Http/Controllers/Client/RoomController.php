@@ -138,6 +138,7 @@ class RoomController extends Controller
             'room_id' => $room_id,
             'emo_id' => $emotion_id,
             'level_id' => $level_id,
+            'date'=>now(),
             'answer' => $answer
         ])) {
             return redirect()->back()->with('success', 'Cảm xúc của bạn đã được lưu!');
