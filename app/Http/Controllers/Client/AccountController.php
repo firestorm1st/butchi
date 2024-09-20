@@ -25,7 +25,8 @@ class AccountController extends Controller
 
         $data = EmotionDaily::where('user_id', $id)->where('date', '>=', Carbon::now()->subDays(7)->format('Y-m-d'))
             ->orderBy('date')
-            ->get(['date', 'emo_id']); // Thay đổi theo cấu trúc bảng của bạn
+            ->join('levels', 'emotion_daily.level_id', '=', 'levels.id')
+            ->get(['date', 'emo_id','levels.name as level_name']); // Thay đổi theo cấu trúc bảng của bạn
 
         return view('client.accountPage', [
             'user' => $user,

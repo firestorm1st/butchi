@@ -16,10 +16,9 @@ class CheckRoomPassword
         // Kiểm tra user có quyền truy cập phòng này không
         if (auth()->check() && auth()->user()->room_id == $room->id) {
             return $next($request);
+        }else{
+            return redirect()->route('client.rooms.show')
+        ->with(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
         }
-
-        // Nếu user chưa thuộc phòng, quay lại trang nhập mật khẩu
-        return redirect()->route('client.rooms.enter', ['id' => $room->id])
-        ->withErrors(['room' => 'Bạn chưa nhập mật khẩu phòng này']);
     }
 }

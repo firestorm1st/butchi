@@ -30,9 +30,9 @@
                     <li><a href="{{ route('admin.index') }}">Admin</a></li>
                 @endif
                 {{-- <li><a href="{{route('client.account',['id'=>Auth::user()->id])}}">My account</a></li> --}}
-                <li><a href="{{ route('logout') }}">Log out</a></li>
+                <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
             @else
-                <li><a href="{{ route('showLogin') }}">Login</a></li>
+                <li><a href="{{ route('showLogin') }}">Đăng nhập</a></li>
                 <li><a href="{{ route('showRegister') }}">Đăng ký</a></li>
             @endif
         </ul>

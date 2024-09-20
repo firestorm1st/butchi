@@ -3,7 +3,7 @@
 @section('content')
     <div class="container_account">
 
-        <div class="left-column">
+        <div class="left-column" style="background-color: #FFF2D0">
             <div class="center">
                 <h2 style="font-family:'Dancing Script'; font-size: 36px;">{{ $user->username }}</h2>
                 @if ($user->avatar)
@@ -63,104 +63,116 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var dataFromLaravel = @json($data);
+    var dataFromLaravel = @json($data); // Dữ liệu cảm xúc được truyền từ PHP
 
-            // Tạo mảng label từ các giá trị ngày
-            const labels = dataFromLaravel.map(item => {
-                const date = new Date(item.date);
-                return `${date.getDate()}/${date.getMonth() + 1}`; // Định dạng ngày thành dd/mm
-            });
+    // Tạo mảng label từ các giá trị ngày
+    const labels = dataFromLaravel.map(item => {
+        const date = new Date(item.date);
+        return `${date.getDate()}/${date.getMonth() + 1}`; // Định dạng ngày thành dd/mm
+    });
 
-            // Tạo mảng data từ các giá trị emo_id (hoặc giá trị khác bạn muốn hiển thị)
-            const emoData = dataFromLaravel.map(item => item.emo_id);
+    // Tạo mảng data từ các giá trị emo_id
+    const emoData = dataFromLaravel.map(item => item.emo_id);
 
+    // Khởi tạo biểu đồ
+    var ctx = document.getElementById('myLineChart').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels, // Gán các nhãn ngày
+            datasets: [{
+                label: 'Cảm xúc 7 ngày',
+                data: emoData, // Các giá trị (1 đến 8) cho trục Y
+                backgroundColor: [
+                    'rgba(105, 0, 132, .2)',
+                ],
+                fill: true,
+                borderColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                ],
+                borderWidth: 2,
 
-
-            // Khởi tạo biểu đồ
-            var ctx = document.getElementById('myLineChart').getContext('2d');
-            var myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels, // Gán các nhãn ngày
-                    datasets: [{
-                        label: 'Cảm xúc 7 ngày',
-                        data: emoData, // Các giá trị (1 đến 8) cho trục Y
-                        backgroundColor: [
-                            'rgba(105, 0, 132, .2)',
-                        ],
-                        fill: true,
-                        borderColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                        ],
-                        borderWidth: 2,
-
-                        pointBackgroundColor: 'rgba(255, 99, 132, 0.8)', // Màu nền của các điểm
-                        pointBorderColor: '#fff', // Màu viền của các điểm
-                        pointRadius: 5, // Kích thước của các điểm
-                        pointHoverRadius: 7, // Kích thước của các điểm khi hover
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            min: 1, // Giá trị tối thiểu trên trục Y
-                            max: 8, // Giá trị tối đa trên trục Y
-                            ticks: {
-                                stepSize: 1, // Các giá trị cách nhau 1 đơn vị
-                                callback: function(value) {
-                                    return ""; // Hiển thị số trên trục Y
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    // Tùy chỉnh văn bản trong tooltip dựa trên giá trị
-                                    let text;
-                                    switch (context.raw) {
-                                        case 1:
-                                            text = "Bất ngờ";
-                                            break;
-                                        case 2:
-                                            text = "Buồn bã";
-                                            break;
-                                        case 3:
-                                            text = "Giận dữ";
-                                            break;
-                                        case 4:
-                                            text = "Mong đợi";
-                                            break;
-                                        case 5:
-                                            text = "Sợ hãi";
-                                            break;
-                                        case 6:
-                                            text = "Tin tưởng";
-                                            break;
-                                        case 7:
-                                            text = "Vui vẻ";
-                                            break;
-                                        case 8:
-                                            text = "Chán ghét";
-                                            break;
-                                        default:
-                                            text = "Không xác định";
-                                    }
-                                    return 'Cảm xúc: ' + text;
-                                }
-                            }
-                        },
-                        legend: {
-                            display: true
+                pointBackgroundColor: 'rgba(255, 99, 132, 0.8)', // Màu nền của các điểm
+                pointBorderColor: '#fff', // Màu viền của các điểm
+                pointRadius: 5, // Kích thước của các điểm
+                pointHoverRadius: 7, // Kích thước của các điểm khi hover
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 1, // Giá trị tối thiểu trên trục Y
+                    max: 8, // Giá trị tối đa trên trục Y
+                    ticks: {
+                        stepSize: 1, // Các giá trị cách nhau 1 đơn vị
+                        callback: function(value) {
+                            return ""; // Ẩn số trên trục Y
                         }
                     }
                 }
-            });
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            // Lấy giá trị emo_id hiện tại
+                            let emoId = context.raw;
+                            let dateIndex = context.dataIndex; // Index của ngày
 
+                            // Lấy ngày tương ứng với dữ liệu
+                            let date = labels[dateIndex];
+                            let levelName = "Không xác định"; // Giá trị mặc định
 
-        });
+                            // Lấy level từ dữ liệu Laravel (dataFromLaravel)
+                            let emotionInfo = dataFromLaravel[dateIndex];
+
+                            if (emotionInfo && emotionInfo.level_name) {
+                                levelName = emotionInfo.level_name; // Tên mức độ cảm xúc trong ngày
+                            }
+
+                            // Tùy chỉnh văn bản cảm xúc
+                            let text;
+                            switch (emoId) {
+                                case 1:
+                                    text = "Bất ngờ";
+                                    break;
+                                case 2:
+                                    text = "Buồn bã";
+                                    break;
+                                case 3:
+                                    text = "Giận dữ";
+                                    break;
+                                case 4:
+                                    text = "Mong đợi";
+                                    break;
+                                case 5:
+                                    text = "Sợ hãi";
+                                    break;
+                                case 6:
+                                    text = "Tin tưởng";
+                                    break;
+                                case 7:
+                                    text = "Vui vẻ";
+                                    break;
+                                case 8:
+                                    text = "Chán ghét";
+                                    break;
+                                default:
+                                    text = "Không xác định";
+                            }
+
+                            return `Cảm xúc: ${text} (Mức độ: ${levelName})`;
+                        }
+                    }
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+});
     </script>
     <style>
         body {
