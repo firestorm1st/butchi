@@ -8,7 +8,7 @@
             @foreach($emotions as $emotion)
                 <div class="icon" data-emotion="{{ $emotion->id }}" style="pointer-events: none;">
                     <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
-                    <div class="label" style="color: {{ $emotion->color }}">{{ $emotion->name }}</div>
+                    <div class="label" style="color: {{$emotion->color}}">{{ $emotion->name }}</div>
                 </div>
             @endforeach
         </div>
@@ -55,7 +55,7 @@
                 @foreach($emotions as $emotion)
                     <div class="icon" data-emotion="{{ $emotion->id }}">
                         <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
-                        <div class="label">{{ $emotion->name }}</div>
+                        <div class="label"style="color: {{$emotion->color}},font-family: 'true typewriter';">{{ $emotion->name }}</div>
                     </div>
                 @endforeach
             </div>
@@ -153,7 +153,6 @@
     .label {
         margin-top: 0px;
         font-size: 16px;
-        color: #F1C40F;
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
     }
@@ -448,9 +447,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 levels.forEach(lvl => lvl.classList.remove("selected"));
                 level.classList.add("selected");
-
-                const starPosition = 50 + (20 * (levelId - 1));
-                star.style.top = starPosition + "px";
             });
         });
     });
