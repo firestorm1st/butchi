@@ -8,7 +8,7 @@
             @foreach($emotions as $emotion)
                 <div class="icon" data-emotion="{{ $emotion->id }}" style="pointer-events: none;">
                     <img src="{{ asset('client/image/' . $emotion->image) }}" alt="{{ $emotion->name }}">
-                    <div class="label">{{ $emotion->name }}</div>
+                    <div class="label" style="color: {{ $emotion->color }}">{{ $emotion->name }}</div>
                 </div>
             @endforeach
         </div>

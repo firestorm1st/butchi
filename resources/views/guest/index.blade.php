@@ -21,7 +21,7 @@
                 <a style="color: black" class="link" href="{{ route('guest.aboutUs') }}">Hướng dẫn</a>
             </div>
             <div class="welcome-image">
-                <img src="{{ asset('client/image/trang.jpg') }}" alt="Bút Chì Thấu Cảm Image">
+                <img src="{{ asset('client/image/trang.png') }}" alt="Bút Chì Thấu Cảm Image">
             </div>
         </section>
     </main>
@@ -67,7 +67,7 @@
         }
 
         .content {
-            margin: 30px auto;
+            margin: 100px auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
