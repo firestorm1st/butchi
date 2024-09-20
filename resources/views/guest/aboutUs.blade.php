@@ -8,6 +8,9 @@
         background-color: #fffaed;; /* Màu nền giống trong hình */
         color: #333;
     }
+    p{
+        font-family: 'true typewriter';
+    }
 
     .container {
         width: 80%;
@@ -134,7 +137,6 @@
         font-size: 18px;
         align-content: justify;
         margin-bottom: 0;
-        font-family: true typewriter;
     }
     
     hr{
@@ -167,14 +169,14 @@
         <h2>Thông điệp</h2>
         <div class="message-content">
             <div class="column">
-                <p>
+                <p style="font-size: 18px;">
                     “Bút chì” - cây bút đầu tiên bắt đầu cho mọi nét chữ của con. Và gia đình luôn là nơi quan trọng, nền tảng cho sự trưởng thành.
                     Trong hành trình lớn khôn ấy, “Bút chì con cái” luôn phải tự gọt giữa mình để thoát khỏi thân phận đứa trẻ nhưng vẫn cân bằng mối quan hệ với cha mẹ.
                     Nhiều nghiên cứu cho thấy vị thành niên chưa phát triển hoàn thiện các chức năng điều hành (theo E.Jensen và Nutt) nên rất cần sự dẫn dắt, hỗ trợ và chấp nhận từ phía “Bút chì cha mẹ”.
                 </p>
             </div>
             <div class="column">
-                <p>
+                <p style="font-size: 18px;">
                     “Bút Chì Thấu Cảm” mong muốn hướng tới việc xây dựng cầu nối đúng đắn, khoa học giữa cha mẹ và con cái - nơi tình yêu thương và sự thấu cảm có thể giúp cha mẹ trở thành người bạn đồng hành,
                     dẫn dắt con em mình trong giai đoạn chuyển tiếp đầy thách thức của lứa tuổi vị thành niên.
                 </p>
