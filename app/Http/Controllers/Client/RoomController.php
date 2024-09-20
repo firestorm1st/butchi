@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EmotionDaily;
 use App\Models\Emotion;
 use App\Models\Level;
-use App\Models\User;
-use Carbon\Carbon;
 
 class RoomController extends Controller
 {

@@ -17,7 +17,7 @@
                 <img src="{{ asset('client/image/jar.jpg') }}" alt="Emotion Jar">
                 <div class="icon-in-jar">
                     <img src="{{ asset('client/image/'.$emotionToday->emotion->image) }}" alt="{{ $emotionToday->emotion->name }}" class="icon-in-jar-style">
-                    <div class="label">{{ $emotionToday->emotion->name }}</div>
+                <div class="label">{{ $emotionToday->emotion->name }}</div>
                 </div>
             </div>
     
