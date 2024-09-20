@@ -51,7 +51,7 @@ class RoomController extends Controller
 
         // Validate the input
         $request->validate([
-            'name' => 'required|string|max:10',
+            'name' => 'required|string|max:8',
             'password' => 'required|string|confirmed', // Confirm password validation
         ]);
 
@@ -71,7 +71,7 @@ class RoomController extends Controller
         }
 
         // Redirect to the client index page with an error message if saving fails
-        return redirect()->back()->with('error', 'Có lỗi xảy ra');
+        return redirect()->back()->with('error', 'Tên phòng dưới 8 chữ hoặc phải nhập mật khẩu');
     }
 
 
@@ -93,7 +93,7 @@ class RoomController extends Controller
             $user->save();
 
             // Chuyển hướng đến trang client/index/{id}
-            return redirect()->route('client.index', ['id' => $room->id]);
+            return redirect()->route('client.index', ['id' => $room->id])->with('success','Chào mừng bạn vào phòng');
         }
 
         // Nếu mật khẩu sai, quay lại modal với thông báo lỗi

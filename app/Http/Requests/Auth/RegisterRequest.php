@@ -31,12 +31,12 @@ class registerRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'please enter email',
-            'email.unique'=>'email already esixts',
-            'email.email'=>'email must have @gmail.com',
-            'password.required'=>'please enter password',
-            'password.confirmed' => 'Re-entered password does not match',
-            'username.required'=>'please enter username'
+            'email.required' => 'xin nhập mail',
+            'email.unique'=>'email đã có sẵn',
+            'email.email'=>'email phải có @gmail.com',
+            'password.required'=>'Xin hãy nhập mật khẩu',
+            'password.confirmed' => 'mật khẩu xác nhận không chính xác',
+            'username.required'=>'xin hãy nhập tên người dùng'
         ];
     }
 }

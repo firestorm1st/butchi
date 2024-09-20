@@ -30,9 +30,9 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'please enter email',
-            'email.email'=>'email must have @gmail.com',
-            'password.required'=>'please enter password'
+            'email.required' => 'xin hãy nhập email',
+            'email.email'=>'email phải có @gmail.com',
+            'password.required'=>'xin hãy nhập password'
         ];
     }
 }

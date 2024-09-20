@@ -96,16 +96,17 @@
         }
 
         .room img {
-            width: 150px;
+            width: 200px;
+            height: 200px;
             height: auto;
         }
 
         .room-info {
             position: absolute;
-            top: 37%;
+            top: 60%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             padding: 5px 10px;
             border-radius: 5px;

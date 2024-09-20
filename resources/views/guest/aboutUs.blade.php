@@ -1,145 +1,162 @@
 @extends('master')
 @section('content')
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fdf7e2; /* Màu nền giống trong hình */
+        color: #333;
+    }
 
-        body {
-            background-color: #fffaed;
-        }
+    .container {
+        width: 80%;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px; /* Bo góc cho container */
+        position: relative;
+    }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-        }
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .image-section img {
-            width: 350px;
-            height: auto;
-            border-radius: 15px;
-        }
+    .header h1 {
+        color: #333;
+        font-size: 32px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
 
-        .text-section {
-            max-width: 500px;
-        }
+    .header p {
+        color: #8e44ad; /* Màu tím cho tiêu đề phụ */
+        font-size: 20px;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
 
-        .text-section h1 {
-            font-family: 'Dancing Script';
-            font-size: 36px;
-            font-weight: bold;
-        }
+    hr {
+        border: 0;
+        height: 1px;
+        background: #ccc; /* Màu của thẻ hr */
+        margin: 40px 0; /* Khoảng cách của dòng kẻ */
+    }
 
-        .text-section p {
-            font-family: 'true typewriter';
-            margin-top: 20px;
-            font-size: 18px;
-            color: gray;
-        }
+    /* Styling cho phần thông điệp */
+    .message {
+        margin-top: 30px;
+    }
 
-        /* Bottom Section */
-        .quote-section {
-            background-color: #f1f1f1;
-            padding: 30px;
-            text-align: center;
-            margin: 50px 0;
-            border-radius: 10px;
-        }
+    .message h2 {
+        color: #f39c12;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-        .quote-section blockquote {
-            font-size: 24px;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
+    .message-content {
+        display: flex;
+        gap: 20px; /* Khoảng cách giữa các cột */
+        margin-bottom: 30px;
+    }
+    .q{
+        float: left; /* Căn trái */
+    width: 50%; /* Chiếm 50% chiều rộng */
+    }
 
-        .quote-section .source {
-            font-size: 16px;
-            color: gray;
-        }
+    .column {
+        flex: 1; /* Mỗi cột chiếm không gian đều nhau */
+    }
 
-        .message-section {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+    .message p {
+        text-align: justify;
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
 
-        .message-section h2 {
-            font-size: 36px;
-        }
+    /* Styling cho phần hướng dẫn */
+    .steps, .evaluation {
+        margin-bottom: 20px;
+        float: left; /* Căn trái */
+    width: 50%; /* Chiếm 50% chiều rộng */
+    }
 
-        .columns {
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-        }
+    .steps p, .evaluation p {
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 10px 0;
+        
+    }
 
-        .column {
-            flex-basis: 30%;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .highlight {
+        color: #e74c3c; /* Màu đỏ để làm nổi bật các bước */
+        font-weight: bold;
+    }
 
-        .column h3 {
-            font-family: 'Dancing Script';
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-
-        .custom-text {
-            font-family: 'true typewriter';
-            font-size: 16px;
-            font-style: italic;
-            margin-top: 10px;
-            color: gray;
-        }
-    </style>
-    <!-- Top Section -->
-    <div class="container">
-        <!-- Left Section: Image -->
-        <div class="image-section">
-            <img src="{{ asset('client/image/yeuthuong.png') }}" alt="Bút Chì Thấu Cảm Image" style="width: 300px;height:auto">
-        </div>
-
-        <!-- Right Section: Text and Button -->
-        <div class="text-section">
-            <h1>Giới thiệu về<br> “Bút Chì Thấu Cảm”</h1>
-            <p>Chì vẽ hạnh phúc - Dẫn lối yêu thương</p>
+    .illustration {
+        display: block;
+        margin: 0 auto; /* Canh giữa hình minh họa */
+        width: 300px; /* Kích thước hình ảnh */
+        height: auto;
+        margin-top: 30px;
+    }
+</style>
+<div class="container">
+    <!-- Phần đầu -->
+    <div class="header">
+        <h1>Bút Chì Thấu Cảm</h1>
+        <p>Bút Chì Thấu Cảm - cầu nối để giúp các gia đình <br> 
+        diễn đạt tình yêu thương theo một cách rất riêng <br> 
+        - tôn trọng, tin tưởng, hạnh phúc.</p>
+    </div>
+    
+    <!-- Phần thông điệp -->
+    <div class="message">
+        <h2>Thông điệp</h2>
+        <div class="message-content">
+            <div class="column">
+                <p>
+                    “Bút chì” - cây bút đầu tiên bắt đầu cho mọi nét chữ của con. Và gia đình luôn là nơi quan trọng, nền tảng cho sự trưởng thành.
+                    Trong hành trình lớn khôn ấy, “Bút chì con cái” luôn phải tự gọt giữa mình để thoát khỏi thân phận đứa trẻ nhưng vẫn cân bằng mối quan hệ với cha mẹ.
+                    Nhiều nghiên cứu cho thấy vị thành niên chưa phát triển hoàn thiện các chức năng điều hành (theo E.Jensen và Nutt) nên rất cần sự dẫn dắt, hỗ trợ và chấp nhận từ phía “Bút chì cha mẹ”.
+                </p>
+            </div>
+            <div class="column">
+                <p>
+                    “Bút Chì Thấu Cảm” mong muốn hướng tới việc xây dựng cầu nối đúng đắn, khoa học giữa cha mẹ và con cái - nơi tình yêu thương và sự thấu cảm có thể giúp cha mẹ trở thành người bạn đồng hành,
+                    dẫn dắt con em mình trong giai đoạn chuyển tiếp đầy thách thức của lứa tuổi vị thành niên.
+                </p>
+            </div>
         </div>
     </div>
-
-    <!-- Separator -->
+    
+    <!-- Dòng kẻ ngang phân cách -->
     <hr>
 
-    <!-- Bottom Section -->
-    <div class="quote-section">
-        <blockquote>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, vero nobis?"</blockquote>
-        <p class="source">Nguồn gốc: “Bút Chì Thấu Cảm”</p>
+    <!-- Phần hướng dẫn sử dụng -->
+    <div class="header">
+        <h1>Hướng dẫn sử dụng</h1>
+        <h2>“Vẽ tâm tư”</h2>
+    </div>
+    <div class="q">
+        <div class="steps">
+            <p><span class="highlight">Bước 1:</span> Chọn một cảm xúc chủ đạo trong ngày.</p>
+            <p><span class="highlight">Bước 2:</span> Đánh giá mức độ của cảm xúc đó bằng cách ấn vào thang đo bên cạnh thân bút chì.</p>
+            <p><span class="highlight">Bước 3:</span> Chia sẻ thêm về cảm xúc ngày hôm nay thông qua phần giấy ghi chú. (Điều gì/việc gì đã mang đến cảm xúc đó? Bạn xử lý cảm xúc đó như thế nào?...)</p>
+            <p><span class="highlight">Bước 4:</span> Nhấn nút gửi để cảm xúc được hiển thị cho các thành viên khác trong phòng, và sẽ được lưu trữ tại phần “biểu đồ cảm xúc”.</p>
+            <p>Mỗi tuần sẽ có một phần đánh giá để “Bút Chì Thấu Cảm” có thể khảo sát ý kiến người dùng về hoạt động này.</p>
+        </div>
+        <div class="evaluation">
+            <p><span class="highlight">Bước 1:</span> Đánh giá mức độ hiệu quả của hoạt động này bằng cách nhấn vào con số từ 0-10 dưới thân bút chì.</p>
+            <p><span class="highlight">Bước 2:</span> Chia sẻ thêm suy nghĩ/trải nghiệm thông qua phần câu hỏi trên giấy ghi chú bên dưới.</p>
+            <p><span class="highlight">Bước 3:</span> Nhấn nút gửi để hoàn thành.</p>
+        </div>
     </div>
 
-    <!-- Columns Section -->
-    <div class="columns">
-        <!-- Column 1 -->
-        <div class="column">
-            <h3>Why?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem tempore odio!</p>
-        </div>
-
-        <!-- Column 2 -->
-        <div class="column">
-            <h3>How?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem tempore odio!</p>
-        </div>
-
-        <!-- Column 3 -->
-        <div class="column">
-            <h3>What?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem tempore odio!</p>
-        </div>
-    </div>
+    <img src="{{asset('client/image/trang.jpg')}}" alt="Illustration" class="illustration">
+</div>
 @endsection
