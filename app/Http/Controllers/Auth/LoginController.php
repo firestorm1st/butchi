@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\registerRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 // use Auth;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +61,7 @@ class LoginController extends Controller
         return view('guest.register');
     }
 
-    public function register(registerRequest $request)
+    public function register(RegisterRequest $request)
     {
         $user = new User();
         $user->username = $request->username;

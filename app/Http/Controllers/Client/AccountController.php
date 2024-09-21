@@ -43,10 +43,10 @@ class AccountController extends Controller
 
         $request->validate([
             'image' => 'mimes:jpg,png,bmp,jpeg',
-            'username'=>'max:21'
+            'username'=>'max:15'
         ],[
             'image.mimes' => 'Chỉ chấp nhận các định dạng hình ảnh: jpg, png, bmp, jpeg.',
-            'username.max' => 'Tên người dùng không được vượt quá 21 ký tự.',
+            'username.max' => 'Tên người dùng không được vượt quá 15 ký tự.',
         ]);
 
         $avatar = $request->avatar;
@@ -71,7 +71,7 @@ class AccountController extends Controller
         }
         // dd($user);
 
-        return redirect()->back()->with('error', 'tên người dùng không được quá 21 kí tự');
+        return redirect()->back()->with('error', 'Có lỗi phát sinh');
     }
 
     public function changeAccount(string $id)

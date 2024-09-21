@@ -37,7 +37,7 @@
                         <input type="file" class="custom-file-input custom-input" id="customImage"
                             value="{{ old('avatar') }}" name="avatar" accept="image/jpg,image/png,image/bmp,image/jpeg" />
                         @if ($user->avatar)
-                            <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện người dùng" width='100px'
+                            <img src="{{ asset('uploads/' . $user->avatar) }}" alt="Hình đại diện" width='100px'
                                 height='100px'>
                         @else
                             <img src="{{ asset('client/image/avatar.png') }}" alt="Avatar" width='100px' height='100px'>
