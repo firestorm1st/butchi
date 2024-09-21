@@ -16,17 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
-
-    public function showPencil()
-    {
-        //return view('client.modules.pencil');
-    }
-
-    public function pencil(Request $request)
-    {
-        // return view('client.modules.pencil');
-    }
-
     public function showCheckin()
     {
         //return view('client.modules.checkin');

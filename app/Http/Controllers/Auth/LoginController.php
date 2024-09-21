@@ -111,6 +111,9 @@ class LoginController extends Controller
         $request->validate([
             "password" => "required|string|confirmed",
             "password_confirmation" => "required"
+        ],[
+            'password.required:Bạn phải nhập mật khẩu',
+            'password_confirmation.required:Bạn phải nhập mật khẩu xác nhận'
         ]);
         $updatePass = User::where("remember_token", $request->token)->get();
         if (!$updatePass) {

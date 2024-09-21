@@ -53,6 +53,11 @@ class RoomController extends Controller
         $request->validate([
             'name' => 'required|string|max:8',
             'password' => 'required|string|confirmed', // Confirm password validation
+        ],[
+            'name.requied:Tên phòng cần được điền',
+            'name.max:Tên phòng không được quá 8 kí tự',
+            'password.required:Phải điền mật khẩu',
+            'password.confirmed:bạn phải nhập mật khẩu xác nhận'
         ]);
 
         // Create a new room

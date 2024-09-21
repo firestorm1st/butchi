@@ -43,6 +43,10 @@ class AccountController extends Controller
 
         $request->validate([
             'image' => 'mimes:jpg,png,bmp,jpeg',
+            'username'=>'max:21'
+        ],[
+            'image.mimes' => 'Chỉ chấp nhận các định dạng hình ảnh: jpg, png, bmp, jpeg.',
+            'username.max' => 'Tên người dùng không được vượt quá 21 ký tự.',
         ]);
 
         $avatar = $request->avatar;
@@ -62,10 +66,12 @@ class AccountController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
 
-        $user->update();
+        if($user->update()){
+            return redirect()->route('client.showAccount', ['user' => $user, 'id' => $id])->with('success', 'Cập nhật thông tin người dùng thành công.');
+        }
         // dd($user);
 
-        return redirect()->route('client.showAccount', ['user' => $user, 'id' => $id])->with('success', 'Cập nhật thông tin người dùng thành công.');
+        return redirect()->back()->with('error', 'tên người dùng không được quá 21 kí tự');
     }
 
     public function changeAccount(string $id)
