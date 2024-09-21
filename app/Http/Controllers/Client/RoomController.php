@@ -47,36 +47,36 @@ class RoomController extends Controller
 
         if ($roomExists) {
             return redirect()->back()->with('error', 'Bạn đã tạo phòng, xin vui lòng đăng nhập vào phòng của mình');
+        }else{
+            $request->validate([
+                'name' => 'required|string|max:8',
+                'password' => 'required|string|confirmed', // Confirm password validation
+            ],[
+                'name.requied:Tên phòng cần được điền',
+                'name.max:Tên phòng không được quá 8 kí tự',
+                'password.required:Phải điền mật khẩu',
+                'password.confirmed:bạn phải nhập mật khẩu xác nhận'
+            ]);
+    
+            // Create a new room
+            
+            $room = new Room();
+            $room->user_id = $user->id;
+            $room->name = $request->name;
+            $room->password = bcrypt($request->password);
+    
+            if ($room->save()) {
+                // Associate the room with the user
+                $user->room_id = $room->id;
+                $user->save();
+    
+                return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Phòng đã được tạo thành công');
+            }
+    
+            // Redirect to the client index page with an error message if saving fails
+            return redirect()->back()->with('error', 'Tên phòng dưới 8 chữ hoặc phải nhập mật khẩu');
         }
 
-        // Validate the input
-        $request->validate([
-            'name' => 'required|string|max:8',
-            'password' => 'required|string|confirmed', // Confirm password validation
-        ],[
-            'name.requied:Tên phòng cần được điền',
-            'name.max:Tên phòng không được quá 8 kí tự',
-            'password.required:Phải điền mật khẩu',
-            'password.confirmed:bạn phải nhập mật khẩu xác nhận'
-        ]);
-
-        // Create a new room
-        
-        $room = new Room();
-        $room->user_id = $user->id;
-        $room->name = $request->name;
-        $room->password = bcrypt($request->password);
-
-        if ($room->save()) {
-            // Associate the room with the user
-            $user->room_id = $room->id;
-            $user->save();
-
-            return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Phòng đã được tạo thành công');
-        }
-
-        // Redirect to the client index page with an error message if saving fails
-        return redirect()->back()->with('error', 'Tên phòng dưới 8 chữ hoặc phải nhập mật khẩu');
     }
 
 

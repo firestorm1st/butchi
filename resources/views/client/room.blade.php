@@ -28,7 +28,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Nhập mật khẩu</h2>
-            <form action="{{ route('client.rooms.enter', ['id' => 0]) }}" method="POST" id="enterRoomForm">
+            <form action="{{ route('client.rooms.enter', ['id' => $room->id]) }}" method="POST" id="enterRoomForm">
                 @csrf
                 <input type="hidden" id="roomId" name="room_id">
                 <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
@@ -44,7 +44,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModalcreate()">&times;</span>
             <h2>Nhập tên phòng</h2>
-            <form id="createRoomForm" action="{{ route('client.rooms.store') }}" method="POST">
+            <form action="{{ route('client.rooms.store') }}" method="POST" id="createRoomForm">
                 @csrf
                 <input type="text" id="roomName" name="name" placeholder="Nhập tên phòng..." required>
                 <h2>Nhập mật khẩu</h2>
@@ -54,6 +54,7 @@
                     <button type="submit" class="submit-btn">Xác nhận</button>
                 </div>
             </form>
+            <div id="createRoomError" style="color: red; display: none;"></div>
         </div>
     </div>
 
@@ -205,11 +206,6 @@
 
     <script>
         function openModal(roomId) {
-            // Đặt room_id vào trường ẩn
-            document.getElementById('roomId').value = roomId;
-            // Cập nhật action của form để gửi đến route chính xác
-            document.getElementById('enterRoomForm').action = `/client/rooms/enter/${roomId}`;
-            // Hiển thị modal
             document.getElementById('passwordModal').style.display = 'flex';
         }
 
