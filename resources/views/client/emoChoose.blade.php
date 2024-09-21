@@ -81,7 +81,7 @@
                         <h3>Mình dành vài phút để kể <br> về cảm xúc hôm nay nhé.</h3>
                         <textarea name="answer" class="text-content" placeholder="Viết vào đây..."></textarea>
                         <div class="button-container">
-                            <button type="submit" class="custom-button">Gửi ></button>
+                            <button type="submit" class="btn btn-primary" style="margin-left: 100px;">Gửi ></button>
                         </div>
                     </div>
                 </div>
@@ -278,16 +278,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .custom-button {
-        padding: 10px 20px;
-        background-color: #2ecc71;
-        border: none;
-        border-radius: 5px;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
     }
 
     /* Modal CSS */

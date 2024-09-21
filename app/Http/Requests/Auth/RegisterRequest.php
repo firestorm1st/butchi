@@ -24,7 +24,8 @@ class RegisterRequest extends FormRequest
         return [
             'email' => 'required|email|unique:users,email',
             'password'=>'required|confirmed',
-            'username'=>'required|max:21'
+            'username'=>'required|max:21',
+            'role'=>'required'
         ];
     }
 
@@ -37,7 +38,8 @@ class RegisterRequest extends FormRequest
             'password.required'=>'Xin hãy nhập mật khẩu',
             'password.confirmed' => 'mật khẩu xác nhận không chính xác',
             'username.required'=>'xin hãy nhập tên người dùng',
-            'username.max'=>'Tên người dùng tối đa 21 kí tự'
+            'username.max'=>'Tên người dùng tối đa 21 kí tự',
+            'role.required'=>'Bạn nên chọn role'
         ];
     }
 }

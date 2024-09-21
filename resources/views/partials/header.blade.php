@@ -11,7 +11,7 @@
         <ul class="navbar">
             @if (Auth::check())
             <li class="main-menu-item">
-                <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}" class="main-menu-link">Tài khoản</a>
+                <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}" class="main-menu-link">{{Auth::User()->username}}</a>
                 <!-- sub menu start -->
                 @if (Auth::user()->room_id!=null)
                 <ul class="sub-menu">

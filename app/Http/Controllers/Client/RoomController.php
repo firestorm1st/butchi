@@ -137,6 +137,15 @@ class RoomController extends Controller
 
     public function saveEmotionDaily(Request $request, $room_id)
     {
+        $request->validate([
+            'emotion_id' => 'required',
+            'level_id' => 'required',
+            'answer'=>'required'
+        ],[
+            'emotion_id.required' => 'Bạn nên chọn cảm xúc hôm nay.',
+            'level_id.required' => 'Bạn nên chọn mức độ hôm nay.',
+            'answer.required' => 'Lý do bạn chọn cảm xúc là gì?',
+        ]);
         // Lấy thông tin từ form gửi lên
         $emotion_id = $request->input('emotion_id');
         $level_id = $request->input('level_id');
