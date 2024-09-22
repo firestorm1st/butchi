@@ -5,7 +5,7 @@
         <section class="content">
             <div class="welcome-text">
                 <h2>Chào mừng bạn đến với<br> "Bút Chì Thấu Cảm"</h2>
-                <p>Chỉ vẽ hạnh phúc - Dẫn lối yêu thương</p>
+                <p>Chì vẽ hạnh phúc - Dẫn lối yêu thương</p>
                 @auth
                     @if(Auth::user()->room_id == null)
                         <!-- Điều hướng đến danh sách phòng để chọn -->

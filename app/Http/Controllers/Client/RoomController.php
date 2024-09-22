@@ -86,15 +86,18 @@ class RoomController extends Controller
         return view('client.room', compact('rooms'));
     }
 
-    public function enterRoom(Request $request, $id)
+    public function enterRoom(Request $request, string $id)
     {
+        
         $room = Room::find($id);  // Tìm thông tin phòng theo ID
+        
         $password = $request->input('password');
 
         if ($room && Hash::check($password, $room->password)) {
             // Gán room_id cho user hiện tại
             $user = auth()->user();
             $user->room_id = $room->id;
+            
             $user->save();
 
             // Chuyển hướng đến trang client/index/{id}
@@ -171,4 +174,10 @@ class RoomController extends Controller
         // Chuyển hướng về trang cũ hoặc bất kỳ trang nào khác
         return redirect()->back()->with('error', 'Có lỗi xảy ra');
     }
+
+    public function showCheckin()
+    {
+        return view('client.checkinPage');
+    }
+
 }
