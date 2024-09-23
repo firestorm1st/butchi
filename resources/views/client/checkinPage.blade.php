@@ -129,8 +129,18 @@
 
         <div class="task">
             <p>Cốc cốc! Mở cửa trái tim</p>
-            <p>Hôm nay, bạn hãy nói “Con yêu cha/mẹ” trước khi đi ngủ</p>
-            <button id="complete-btn">Hoàn thành</button>
+            @if ($existingMission)
+                <p>{{ $mission->name }}</p>
+                <button id="complete-btn" disabled>Đã hoàn thành</button>
+            @elseif($mission)
+                <form action="{{ route('client.checkin', ['id' => $mission->id]) }}" method="post">
+                    @csrf
+                    <p>{{ $mission->name }}</p>
+                    <button id="complete-btn">Hoàn thành</button>
+                </form>
+            @else
+                <p>Hôm nay không có hoạt động màu yêu thương rồi, ngày mai bạn quay lại nhé!</p>
+            @endif
         </div>
     </div>
 
@@ -156,7 +166,7 @@
         const startDay = (startDate.getDay() + 6) % 7; // Adjust so Monday is 0
 
         const calendarContainer = document.querySelector('.calendar');
-
+        const checkinDates = @json($checkin);
         // Fill in the empty days before the 1st of the month
         for (let i = 0; i < startDay; i++) {
             const emptyDiv = document.createElement('div');
@@ -164,7 +174,7 @@
             calendarContainer.appendChild(emptyDiv);
         }
 
-        // Function to handle check-in
+        // Function to handle checking in and adding class
         function handleCheckIn(dayElement) {
             dayElement.classList.add('checked-in');
         }
@@ -174,31 +184,43 @@
             const dayDiv = document.createElement('div');
             dayDiv.classList.add('calendar-day');
             dayDiv.innerHTML = `
-                <span >${day}</span>
-                <span class="checkmark">&#10003</span>
-                <input type="checkbox" class="check-in-btn" disable id="day-${day}"></input>
-                
-            `;
+        <span>${day}</span>
+        <span class="checkmark">&#10003;</span>
+        <input type="checkbox" class="check-in-btn" disabled id="day-${day}">
+    `;
 
+            const date = new Date();
+            date.setDate(day);
+            const formattedDate = date.toISOString().split('T')[0]; // Format as 'YYYY-MM-DD'
+
+            // Check if this day is in the checkinDates array
+            if (checkinDates.includes(formattedDate)) {
+                // If yes, mark the day as checked in
+                dayDiv.classList.add('checked-in');
+                const checkInButton = dayDiv.querySelector('.check-in-btn');
+                checkInButton.checked = true; // Mark checkbox as checked
+            }
+
+            // Optionally add an event listener to handle user checking in manually
             const checkInButton = dayDiv.querySelector('.check-in-btn');
             checkInButton.addEventListener('click', () => handleCheckIn(dayDiv));
 
             calendarContainer.appendChild(dayDiv);
         }
 
+        // Handle check-in completion for today's date
         document.getElementById("complete-btn").addEventListener("click", function() {
-            // Get today's date
             const day = today.getDate();
-
-            // Find the checkbox corresponding to today's date
             const checkbox = document.getElementById(`day-${day}`);
 
             if (checkbox) {
-                // Check the checkbox if it exists
                 checkbox.checked = true;
+                handleCheckIn(checkbox.parentElement); // Add checked-in class to the day div
             } else {
                 alert("Không có checkbox cho ngày hôm nay.");
             }
+
+
         });
     </script>
 
@@ -274,7 +296,7 @@
         .checkmark {
             display: none;
             color: #3D30A2;
-            font-size: 40px;
+            font-size: 20px;
         }
 
 
