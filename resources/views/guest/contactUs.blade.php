@@ -4,7 +4,7 @@
         <div class="content-wrapper">
             <div class="contact-info">
                 <h2>Bức thư trao đi</h2>
-                <p>&nbsp;&nbsp;&nbsp;Nếu có bất kỳ thắc mắc hay nguyện vọng nào, bạn có thể gửi đến “Bút Chì Thầu Cảm” ngay
+                <p>&nbsp;&nbsp;&nbsp;Nếu có bất kỳ thắc mắc hay nguyện vọng nào, bạn có thể gửi đến “Bút Chì Thấu Cảm” ngay
                     tại đây.</br>&nbsp;&nbsp;&nbsp;Chúng mình vô cùng cảm kích và biết ơn với sự đóng góp của bạn.</p>
             </div>
             <form action="{{ route('guest.contactUs')}}" method="POST" class="contact-form">
