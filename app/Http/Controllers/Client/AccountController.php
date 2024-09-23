@@ -59,7 +59,7 @@ class AccountController extends Controller
             }
 
             $avatarName = time() . '-' . $avatar->getClientOriginalName();
-            $avatar->move(public_path('uploads/'), $avatarName);
+            $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
             $user->avatar = $avatarName;
         }
 
