@@ -86,14 +86,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('index', [AdminController::class, 'index'])->name('index');
     Route::prefix('contact')->name('contact.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'index')->name('index');
+    });
 
-        Route::get('create', 'create')->name('create');
-        Route::post('store', 'store')->name('store');
-
-        Route::get('edit/{id}', 'edit')->name('edit');
-        Route::post('update/{id}', 'update')->name('update');
-
-        Route::get('destroy/{id}', 'destroy')->name('destroy');
+    Route::prefix('room')->name('room.')->controller(ContactController::class)->group(function () {
+        Route::get('index', 'indexRoom')->name('index');
     });
 
     Route::prefix('mission')->name('mission.')->controller(MissionController::class)->group(function () {
