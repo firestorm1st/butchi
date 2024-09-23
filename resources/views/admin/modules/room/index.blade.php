@@ -61,6 +61,7 @@
                         <th>Tên phòng</th>
                         <th>Thành viên tạo</th>
                         <th>Thời gian tạo</th>
+                        <th>Chỉnh sửa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +74,8 @@
                             @endphp
                             <td>{{ $user->email }}</td>
                             <td>{{ $room->created_at }}</td>
+                            <td><a href="{{ route('admin.room.edit', ['id' => $room->id]) }}">Chỉnh sửa</a></td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
@@ -82,6 +85,7 @@
                         <th>Tên phòng</th>
                         <th>Thành viên tạo</th>
                         <th>Thời gian tạo</th>
+                        <th>Chỉnh sửa</th>
                     </tr>
                 </tfoot>
             </table>

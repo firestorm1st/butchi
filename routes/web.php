@@ -90,6 +90,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('room')->name('room.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'indexRoom')->name('index');
+
+        Route::get('edit/{id}', 'editRoom')->name('edit');
+        Route::post('update/{id}', 'updateRoom')->name('update');
     });
 
     Route::prefix('mission')->name('mission.')->controller(MissionController::class)->group(function () {
