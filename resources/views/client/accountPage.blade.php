@@ -139,28 +139,28 @@
                                     let text;
                                     switch (emoId) {
                                         case 1:
-                                            text = "Giận dữ";
+                                            text = "Chán ghét";
                                             break;
                                         case 2:
-                                            text = "Mong đợi";
+                                            text = "Buồn bã";
                                             break;
                                         case 3:
-                                            text = "Vui vẻ";
+                                            text = "Bất ngờ";
                                             break;
                                         case 4:
-                                            text = "Tin tưởng";
+                                            text = "Sợ hãi";
                                             break;
                                         case 5:
-                                            text = "Sợ hãi";
+                                            text = "Tin tưởng";
                                             break;
                                         case 6:
                                             text = "Bất Ngờ";
                                             break;
                                         case 7:
-                                            text = "Buồn bã";
+                                            text = "Mong đợi";
                                             break;
                                         case 8:
-                                            text = "Chán ghét";
+                                            text = "Tức giận";
                                             break;
                                         default:
                                             text = "Không xác định";
