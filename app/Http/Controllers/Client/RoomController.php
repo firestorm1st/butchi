@@ -10,19 +10,25 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EmotionDaily;
 use App\Models\Emotion;
 use App\Models\Level;
+use App\Models\Mission;
+use App\Models\User;
+use App\Models\MissionDaily;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
-    public function showFullEmo($roomId) {
-        $room = Room::findOrFail($roomId); 
+    public function showFullEmo($roomId)
+    {
+        $room = Room::findOrFail($roomId);
         // Lấy danh sách cảm xúc hàng ngày từ bảng EmotionDaily theo room_id
         $emotions = EmotionDaily::with(['user', 'emotion', 'level'])
-                    ->whereHas('user', function ($query) use ($roomId) {
-                        $query->where('room_id', $roomId);
-                    })
-                    ->get();
-    
-        return view('client.emoIndex', ['rooms'=>$room,'emotions' => $emotions]);
+            ->whereHas('user', function ($query) use ($roomId) {
+                $query->where('room_id', $roomId);
+            })
+            ->get();
+
+        return view('client.emoIndex', ['rooms' => $room, 'emotions' => $emotions]);
     }
 
     public function index(string $id)
@@ -47,36 +53,35 @@ class RoomController extends Controller
 
         if ($roomExists) {
             return redirect()->back()->with('error', 'Bạn đã tạo phòng, xin vui lòng đăng nhập vào phòng của mình');
-        }else{
+        } else {
             $request->validate([
                 'name' => 'required|string|max:8',
                 'password' => 'required|string|confirmed', // Confirm password validation
-            ],[
+            ], [
                 'name.requied:Tên phòng cần được điền',
                 'name.max:Tên phòng không được quá 8 kí tự',
                 'password.required:Phải điền mật khẩu',
                 'password.confirmed:bạn phải nhập mật khẩu xác nhận'
             ]);
-    
+
             // Create a new room
-            
+
             $room = new Room();
             $room->user_id = $user->id;
             $room->name = $request->name;
             $room->password = bcrypt($request->password);
-    
+
             if ($room->save()) {
                 // Associate the room with the user
                 $user->room_id = $room->id;
                 $user->save();
-    
+
                 return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Phòng đã được tạo thành công');
             }
-    
+
             // Redirect to the client index page with an error message if saving fails
             return redirect()->back()->with('error', 'Tên phòng dưới 8 chữ hoặc phải nhập mật khẩu');
         }
-
     }
 
 
@@ -88,20 +93,20 @@ class RoomController extends Controller
 
     public function enterRoom(Request $request, string $id)
     {
-        
+
         $room = Room::find($id);  // Tìm thông tin phòng theo ID
-        
+
         $password = $request->input('password');
 
         if ($room && Hash::check($password, $room->password)) {
             // Gán room_id cho user hiện tại
             $user = auth()->user();
             $user->room_id = $room->id;
-            
+
             $user->save();
 
             // Chuyển hướng đến trang client/index/{id}
-            return redirect()->route('client.index', ['id' => $room->id])->with('success','Chào mừng bạn vào phòng');
+            return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Chào mừng bạn vào phòng');
         }
 
         // Nếu mật khẩu sai, quay lại modal với thông báo lỗi
@@ -143,8 +148,8 @@ class RoomController extends Controller
         $request->validate([
             'emotion_id' => 'required',
             'level_id' => 'required',
-            'answer'=>'required'
-        ],[
+            'answer' => 'required'
+        ], [
             'emotion_id.required' => 'Bạn nên chọn cảm xúc hôm nay.',
             'level_id.required' => 'Bạn nên chọn mức độ hôm nay.',
             'answer.required' => 'Lý do bạn chọn cảm xúc là gì?',
@@ -165,7 +170,7 @@ class RoomController extends Controller
             'room_id' => $room_id,
             'emo_id' => $emotion_id,
             'level_id' => $level_id,
-            'date'=>now(),
+            'date' => now(),
             'answer' => $answer
         ])) {
             return redirect()->back()->with('success', 'Cảm xúc của bạn đã được lưu!');
@@ -175,9 +180,54 @@ class RoomController extends Controller
         return redirect()->back()->with('error', 'Có lỗi xảy ra');
     }
 
-    public function showCheckin()
+    public function showCheckin(string $id)
     {
-        return view('client.checkinPage');
+        $currentMonth = Carbon::now()->format('Y-m');
+
+        // Get the check-in dates for the current month
+        $checkin = MissionDaily::where('user_id', $id)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->pluck('created_at')
+            ->map(function ($date) {
+                return Carbon::parse($date)->format('Y-m-d');
+            });
+
+        // Debugging output to check what checkin contains
+        // dd($checkin);
+
+        // Check if the user has already checked in today
+        $existingMission = MissionDaily::where('user_id', $id)
+            ->whereDate('created_at', Carbon::now()->format('Y-m-d'))
+            ->first();
+
+        if ($existingMission) {
+            $mission = Mission::where('id', $existingMission->mission_id)->first();
+            // Pass the check-in dates to the view as 'checkin'
+            return view('client.checkinPage', compact('existingMission', 'mission', 'checkin'))
+                ->with('error', 'Bạn đã hoàn thành màu yêu thương hôm nay rồi.');
+        } else {
+            $user = User::find($id);
+            $offline = $user->is_offline;
+
+            $mission = DB::table('missions')
+                ->where('day', '=', Carbon::now()->format('Y-m-d'))
+                ->where('is_offline', $offline)
+                ->first();
+
+            // Pass the check-in dates to the view as 'checkin'
+            return view('client.checkinPage', compact('existingMission', 'mission', 'checkin'));
+        }
     }
 
+    public function checkin(Request $request, string $id)
+    {
+        $mission_daily = new MissionDaily();
+        $mission_daily->user_id = Auth::user()->id;
+        $mission_daily->mission_id = $id;
+        $mission_daily->save();
+
+
+        return redirect()->back()->with('success', 'Bạn đã hoàn thành màu yêu thương hôm nay.');
+    }
 }
