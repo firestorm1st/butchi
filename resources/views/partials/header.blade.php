@@ -11,14 +11,14 @@
         <ul class="navbar">
             @if (Auth::check())
             <li class="main-menu-item">
-                <a href="{{route('client.showAccount',['id'=>Auth::user()->id])}}" class="main-menu-link">{{Auth::User()->username}}</a>
+                <a class="main-menu-link">{{Auth::User()->username}}</a>
                 <!-- sub menu start -->
                 @if (Auth::user()->room_id!=null)
                 <ul class="sub-menu">
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.showAccount',['id'=>Auth::user()->id])}}">Xem tài khoản</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.index',['id'=>Auth::user()->room_id])}}">Xem thành viên</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.form',['id'=>Auth::user()->room_id])}}">'Vẽ' tâm tư</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.full',['id'=>Auth::user()->room_id])}}">Xem tâm tư</a></li>
-                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.showCheckin',['id'=>Auth::user()->id])}}">Màu yêu thương</a></li>
                 </ul>
                 @endif
                 <!-- sub menu end -->
