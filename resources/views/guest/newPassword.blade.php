@@ -17,12 +17,13 @@
                                     <div class="login-register-form">
                                         <form action="{{ route('reset.password.post') }}" method="POST">
                                             @csrf
-                                            <input type="text" hidden value="{{ $token }}" name="token">
+                                            <input type="hidden" value="{{ $token }}" name="token">
                                             <input type="text" disabled value="{{ $email }}" name="email">
+                                            </br>
                                             <label>Mật khẩu mới<span class="required">*</span></label>
-                                            <input type="password" name="password" placeholder="Enter New Password">
+                                            <input class="input" type="password" name="password" placeholder="Enter New Password">
                                             <label>Xác nhận<span class="required">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Confirm New password"
+                                            <input class="input" type="password" class="form-control" placeholder="Confirm New password"
                                                 name="password_confirmation">
                                             <div class="button-box">
                                                 <button type="submit" class="btn btn-dark">
