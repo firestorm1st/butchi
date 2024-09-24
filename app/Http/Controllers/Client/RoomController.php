@@ -112,7 +112,7 @@ class RoomController extends Controller
     }
 
     // Nếu mật khẩu sai hoặc phòng không tồn tại, quay lại với thông báo lỗi
-    return redirect()->back()->with(['error' => 'Mật khẩu không chính xác hoặc phòng không tồn tại']);
+    return redirect()->back()->with(['error' => 'Mật khẩu không chính xác']);
 }
     public function logoutRoom()
     {
