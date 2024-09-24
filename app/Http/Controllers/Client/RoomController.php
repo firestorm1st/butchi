@@ -37,7 +37,7 @@ class RoomController extends Controller
 
         // Kiểm tra xem user có thuộc phòng này không
         if (auth()->user()->room_id !== $room->id) {
-            return redirect()->route('client.rooms.enter', ['id' => $room->id])->withErrors(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
+            return redirect()->route('client.rooms.enter', ['id' => $room->id])->with(['error' => 'Bạn chưa nhập mật khẩu phòng này']);
         }
 
         // Truyền dữ liệu phòng vào view
