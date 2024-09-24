@@ -60,7 +60,7 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
 
     Route::get('room', [RoomController::class, 'showRooms'])->name('rooms.show');
     Route::post('/rooms/create', [RoomController::class, 'storeRoom'])->name('rooms.store');
-    Route::post('client/rooms/enter/{id}', [RoomController::class, 'enterRoom'])
+    Route::post('client/rooms/enter', [RoomController::class, 'enterRoom'])
     ->name('rooms.enter');
     Route::post('/logout-room', [RoomController::class, 'logoutRoom'])->name('logoutRoom');
 

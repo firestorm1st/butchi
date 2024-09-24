@@ -91,28 +91,29 @@ class RoomController extends Controller
         return view('client.room', compact('rooms'));
     }
 
-    public function enterRoom(Request $request, string $id)
-    {
+    public function enterRoom(Request $request)
+{
+    // Lấy room_id và password từ request
+    $roomId = $request->input('room_id');
+    $password = $request->input('password');
 
-        $room = Room::find($id);  // Tìm thông tin phòng theo ID
+    // Tìm phòng theo room_id
+    $room = Room::find($roomId);
 
-        $password = $request->input('password');
+    if ($room && Hash::check($password, $room->password)) {
+        // Gán room_id cho user hiện tại
+        $user = auth()->user();
+        $user->room_id = $room->id;
 
-        if ($room && Hash::check($password, $room->password)) {
-            // Gán room_id cho user hiện tại
-            $user = auth()->user();
-            $user->room_id = $room->id;
+        $user->save();
 
-            $user->save();
-
-            // Chuyển hướng đến trang client/index/{id}
-            return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Chào mừng bạn vào phòng');
-        }
-
-        // Nếu mật khẩu sai, quay lại modal với thông báo lỗi
-        return redirect()->back()->withErrors(['error' => 'Mật khẩu không chính xác']);
+        // Chuyển hướng đến trang client/index/{id}
+        return redirect()->route('client.index', ['id' => $room->id])->with('success', 'Chào mừng bạn vào phòng');
     }
 
+    // Nếu mật khẩu sai hoặc phòng không tồn tại, quay lại với thông báo lỗi
+    return redirect()->back()->with(['error' => 'Mật khẩu không chính xác hoặc phòng không tồn tại']);
+}
     public function logoutRoom()
     {
         $user = Auth::user();

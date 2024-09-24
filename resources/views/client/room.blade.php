@@ -28,7 +28,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Nhập mật khẩu</h2>
-            <form action="{{ route('client.rooms.enter', ['id' => $room->id]) }}" method="POST" id="enterRoomForm">
+            <form action="{{ route('client.rooms.enter') }}" method="POST" id="enterRoomForm">
                 @csrf
                 <input type="hidden" id="roomId" name="room_id">
                 <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
@@ -207,6 +207,9 @@
     <script>
         function openModal(roomId) {
             document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('roomId').value = roomId;
+            console.log(roomId);
+            
         }
 
         function closeModal() {
