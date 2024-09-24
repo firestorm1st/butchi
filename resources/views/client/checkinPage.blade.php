@@ -1,112 +1,3 @@
-{{-- @extends('master')
-@section('content') --}}
-{{-- <div class="container">
-        <div class="calendar">
-            <div class="week">
-                <!-- Display weekdays -->
-                <div class="day">Thứ 2</div>
-                <div class="day">Thứ 3</div>
-                <div class="day">Thứ 4</div>
-                <div class="day">Thứ 5</div>
-                <div class="day">Thứ 6</div>
-                <div class="day">Thứ 7</div>
-                <div class="day">Chủ Nhật</div>
-            </div>
-            <div class="dates">
-                <!-- Create a checkbox for each date -->
-                <div><input type="checkbox" id="day-16"><label for="day-16">16</label></div>
-                <div><input type="checkbox" id="day-17"><label for="day-17">17</label></div>
-                <div><input type="checkbox" id="day-18"><label for="day-18">18</label></div>
-                <div><input type="checkbox" id="day-19"><label for="day-19">19</label></div>
-                <div><input type="checkbox" id="day-20"><label for="day-20">20</label></div>
-                <div><input type="checkbox" id="day-21"><label for="day-21">21</label></div>
-                <div><input type="checkbox" id="day-22"><label for="day-22">22</label></div>
-            </div>
-        </div>
-
-        <div class="task">
-            <p>Cốc cốc! Mở cửa trái tim</p>
-            <p>Hôm nay, bạn hãy nói “Con yêu cha/mẹ” trước khi đi ngủ</p>
-            <button id="complete-btn">Hoàn thành</button>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById("complete-btn").addEventListener("click", function() {
-            // Get today's date
-            const today = new Date();
-            const day = today.getDate();
-
-            // Find the checkbox corresponding to today's date
-            const checkbox = document.getElementById(`day-${day}`);
-
-            if (checkbox) {
-                // Check the checkbox if it exists
-                checkbox.checked = true;
-            } else {
-                alert("Không có checkbox cho ngày hôm nay.");
-            }
-        });
-    </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            display: flex;
-            align-items: flex-start;
-            /* Align items at the top */
-            gap: 20px;
-            /* Space between the calendar and task */
-        }
-
-        .calendar {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .week {
-            display: flex;
-        }
-
-        .day {
-            flex: 1;
-            text-align: center;
-            background-color: #563D7C;
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-        }
-
-        .dates {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 10px;
-        }
-
-        .dates div {
-            width: 14%;
-            text-align: center;
-        }
-
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            pointer-events: none;
-            /* Disable manual checking */
-        }
-
-        
-        }
-    </style> --}}
-{{-- @endsection --}}
-
 @extends('master')
 @section('content')
     <div class="container">
@@ -231,119 +122,124 @@
         }
 
         .container {
-            display: flex;
-            align-items: flex-start;
-            /* Align items at the top */
-            gap: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 90%; /* Giữ nguyên chiều rộng container */
+    max-width: 1400px; /* Tăng chiều rộng tối đa */
+    
+}
 
-            /* Space between the calendar and task */
-        }
+h1 {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
 
-        h1 {
-            width: 70%;
-            margin: 30px auto;
-        }
+.task-calendar, .task {
+    width: 70%; /* Mỗi phần chiếm 50% màn hình */
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+}
 
-        .task-calendar {
-            width: 60%;
-        }
+.task-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .calendar {
-            display: grid;
-            /* grid-template-columns: repeat(7, 1fr); */
-            gap: 10px;
-            max-width: 600px;
-            margin: 50px auto;
-            text-align: center;
-            font-size: 15px;
-            grid-template-columns: 70px 70px 70px 70px 70px 70px 70px;
+.calendar {
+    display: grid;
+    gap: 10px;
+    max-width: 400px; /* Giới hạn chiều rộng lịch */
+    height: 150px;
+    text-align: center;
+    font-size: 14px;
+    grid-template-columns: repeat(7, 1fr); /* Đặt mỗi ô chiếm 1 phần lưới */
+    justify-items: center;
+}
 
+.calendar-header {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #3D30A2;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%; /* Đảm bảo ô tiêu đề vừa với ô lịch */
+    height: 65px; /* Độ cao của tiêu đề */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        }
+.calendar-day {
+    width: 50px;
+    height: 65px;
+    background-color: #F7F7F7;
+    border: 1px solid rgb(92, 88, 88);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px; /* Tăng kích thước chữ */
+    position: relative;
+}
 
-        .calendar-header {
-            font-size: 15px;
-            font-weight: bold;
-            background-color: #3D30A2;
-            /* width: 50px; */
-            /* margin: 15px auto; */
-            padding: 20px 0;
-            height: 100px;
-            border: 1px solid;
-            color: white;
-            border-radius: 10px;
-            text-align: center;
-        }
+.calendar-day.empty {
+    background-color: transparent;
+    border: none;
+}
 
-        .calendar-day {
-            position: relative;
-            padding: 20px;
-            background-color: #F7F7F7;
-            border: 1px solid rgb(92, 88, 88);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 17px;
-        }
+.checkmark {
+    display: none;
+    color: #3D30A2;
+    font-size: 20px;
+}
 
-        .calendar-day.empty {
-            background-color: transparent;
-            border: none;
-        }
+.checked-in .checkmark {
+    display: inline;
+}
 
-        .checkmark {
-            display: none;
-            color: #3D30A2;
-            font-size: 20px;
-        }
+.check-in-btn {
+    margin-top: 10px;
+    transform: scale(1.2); /* Tăng kích thước checkbox */
+    pointer-events: none;
+}
 
+.checked-in .check-in-btn {
+    display: none;
+}
 
-        .checked-in .checkmark {
-            display: inline;
-        }
+/* Phần CSS cho task */
+.task {
+    font-size: 30px;
+    font-family: 'true typewriter';
+    padding: 20px;
+    background: url('{{ asset('client/image/note.png') }}') no-repeat center center;
+    background-size: cover;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 550px; /* Chiều cao tối thiểu để hiển thị tốt */
+    box-sizing: border-box;
+}
 
-        .check-in-btn {
-            margin-top: 10px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-            transition: background-color 0.3s ease;
-        }
+#complete-btn {
+    margin-top: 10px;
+    background-color: #563D7C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
-        .check-in-btn:hover {
-            background-color: #d0d0d0;
-        }
-
-        .checked-in .check-in-btn {
-            display: none;
-        }
-
-        .task {
-            padding: 20px;
-            background-color: #FCE9E6;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-        }
-
-        #complete-btn {
-            margin-top: 10px;
-            background-color: #563D7C;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            pointer-events: none;
-            /* Disable manual checking */
-        }
+input[type="checkbox"] {
+    pointer-events: none;
+}
     </style>
 @endsection
