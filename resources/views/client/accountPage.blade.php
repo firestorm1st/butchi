@@ -154,7 +154,7 @@
                                             text = "Tin tưởng";
                                             break;
                                         case 6:
-                                            text = "Bất Ngờ";
+                                            text = "Vui vẻ";
                                             break;
                                         case 7:
                                             text = "Mong đợi";
