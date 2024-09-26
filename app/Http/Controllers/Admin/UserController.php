@@ -43,7 +43,7 @@ class UserController extends Controller
 
         $avatar = $request->avatar;
         $avatarName = time() . '-' . $avatar->getClientOriginalName();
-        $avatar->move(public_path('uploads/'), $avatarName);
+        $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
         $user->avatar = $avatarName;
 
 
@@ -97,14 +97,14 @@ class UserController extends Controller
         $avatar = $request->avatar;
         if (!empty($avatar)) {
             if ($user->avatar) {
-                $old_image_path = public_path('uploads/' . $user->avatar);
+                $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
                 if (file_exists($old_image_path)) {
                     unlink($old_image_path);
                 }
             }
 
             $avatarName = time() . '-' . $avatar->getClientOriginalName();
-            $avatar->move(public_path('uploads/'), $avatarName);
+            $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
             $user->avatar = $avatarName;
         }
 
@@ -129,7 +129,7 @@ class UserController extends Controller
             abort(404);
         }
 
-        $old_image_path = public_path('uploads/' . $user->avatar);
+        $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
         if (file_exists($old_image_path)) {
             unlink($old_image_path);
         }
