@@ -95,16 +95,16 @@ class UserController extends Controller
         }
 
         $avatar = $request->avatar;
-        if (!empty($avatar)) {
-            if ($user->avatar) {
-                $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
-                if (file_exists($old_image_path)) {
-                    unlink($old_image_path);
-                }
-            }
+        // if (!empty($avatar)) {
+        //     if ($user->avatar) {
+        //         $old_image_path = public_path('uploads/' . $user->avatar);
+        //         if (file_exists($old_image_path)) {
+        //             unlink($old_image_path);
+        //         }
+        //     }
 
             $avatarName = time() . '-' . $avatar->getClientOriginalName();
-            $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
+            $avatar->move(public_path('uploads/'), $avatarName);
             $user->avatar = $avatarName;
         }
 
@@ -113,7 +113,6 @@ class UserController extends Controller
 
         $user->is_offline = $request->is_offline;
         $user->role = $request->role;
-        // dd($user);
         $user->update();
 
         return redirect()->route('admin.user.index')->with('success', 'Cập nhật thông tin người dùng thành công.');
@@ -129,10 +128,10 @@ class UserController extends Controller
             abort(404);
         }
 
-        $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
-        if (file_exists($old_image_path)) {
-            unlink($old_image_path);
-        }
+        // $old_image_path = public_path('uploads/' . $user->avatar);
+        // if (file_exists($old_image_path)) {
+        //     unlink($old_image_path);
+        // }
 
         $user->delete();
 
