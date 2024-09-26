@@ -13,6 +13,7 @@ use App\Models\Level;
 use App\Models\Mission;
 use App\Models\User;
 use App\Models\MissionDaily;
+use App\Models\RatingDaily;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -230,5 +231,21 @@ class RoomController extends Controller
 
 
         return redirect()->back()->with('success', 'Bạn đã hoàn thành màu yêu thương hôm nay.');
+    }
+
+    public function submitFeedback(Request $request) {
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:0|max:10',
+            'answer' => 'required|string'
+        ]);
+        $userId = Auth::id();
+        // Lưu vào bảng feedback
+        RatingDaily::create([
+            'user_id' => $userId,
+            'rating' => $validated['rating'],
+            'answer' => $validated['answer']
+        ]);
+    
+        return redirect()->back()->with('success', 'Bạn đã điểm danh thành công');
     }
 }
