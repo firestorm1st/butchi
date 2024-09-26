@@ -97,7 +97,7 @@ class UserController extends Controller
         $avatar = $request->avatar;
         if (!empty($avatar)) {
             if ($user->avatar) {
-                $old_image_path = public_path('uploads/' . $user->avatar);
+                $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
                 if (file_exists($old_image_path)) {
                     unlink($old_image_path);
                 }
