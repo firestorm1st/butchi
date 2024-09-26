@@ -35,7 +35,13 @@
                             <input type="date" class="form-control" placeholder="Nhập ngày áp dụng" name="day"
                                 value="{{ old('day', $mission->day) }}">
                         </div>
-
+                        <div class="form-group">
+                            <label>Nhiệm vụ: </label>
+                            <select class="form-control" name="is_offline">
+                                <option value="1" {{ old('is_offline', $mission->is_offline) == 1 ? 'selected' : '' }}>Trực tiếp</option>
+                                <option value="2" {{ old('is_offline', $mission->is_offline) == 2 ? 'selected' : '' }}>Trực tuyến</option>
+                            </select>
+                        </div>
 
                     </div>
 

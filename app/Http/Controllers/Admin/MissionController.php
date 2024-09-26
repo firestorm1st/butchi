@@ -35,16 +35,23 @@ class MissionController extends Controller
         $ngayNhapVao = Carbon::parse($request->day);
         $ngayHienTai = Carbon::now();
 
-        if ($ngayNhapVao->gt($ngayHienTai)) {
+        if(Mission::where('day', $ngayNhapVao)->where('is_offline', $request->is_offline)->first())
+        {
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng đã có loại nhiệm vụ này, vui lòng chọn ngày/ loại nhiệm vụ khác']);
+        }
+
+        if (!$ngayNhapVao->gt($ngayHienTai)) 
+        {
+           
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
+        }
             $mission = new Mission();
             $mission->name = $request->name;
             $mission->day = $request->day;
+            $mission->is_offline = $request->is_offline;
             $mission->save();
 
             return redirect()->route('admin.mission.index')->with('success', 'Tạo mới nhiệm vụ thành công.');
-        } else {
-            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
-        }
     }
 
     /**
@@ -80,15 +87,25 @@ class MissionController extends Controller
         $ngayNhapVao = Carbon::parse($request->day);
         $ngayHienTai = Carbon::now();
 
-        if ($ngayNhapVao->gt($ngayHienTai)) {
+        if(Mission::where('day', $ngayNhapVao)->where('is_offline', $request->is_offline)->first())
+        {
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng đã có loại nhiệm vụ này, vui lòng chọn ngày/ loại nhiệm vụ khác']);
+        }
+
+        if (!$ngayNhapVao->gt($ngayHienTai)) 
+        {
+           
+            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
+        }
+
+        
             $mission->name = $request->name;
             $mission->day = $request->day;
+            $mission->is_offline = $request->is_offline;
             $mission->save();
 
             return redirect()->route('admin.mission.index')->with('success', 'Cập nhật nhiệm vụ thành công.');
-        } else {
-            return redirect()->route('admin.mission.index')->with(['error' => 'Ngày áp dụng phải lớn hơn ngày hiện tại']);
-        }
+        
     }
 
 
