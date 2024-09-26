@@ -133,10 +133,11 @@
         }
 
         .create-room-btn {
+            float: right;
+            margin-right: 30px;
             background-color: #000;
             color: white;
             padding: 10px 20px;
-            margin-left: 1300px;
             border: none;
             border-radius: 10px;
             font-size: 1rem;

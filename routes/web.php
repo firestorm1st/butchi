@@ -76,6 +76,7 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
 
     Route::get('/checkin/{id}', [RoomController::class, 'showCheckin'])->name('showCheckin');
     Route::post('/checkin/{id}', [RoomController::class, 'checkin'])->name('checkin');
+    Route::post('/submit-feedback', [ClientController::class, 'submitFeedback'])->name('submitFeedback')->middleware([CheckRoomPassword::class]);
 
     
     

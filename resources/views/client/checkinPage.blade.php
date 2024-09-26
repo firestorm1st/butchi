@@ -35,6 +35,23 @@
         </div>
     </div>
 
+    {{-- <div id="rating-popup" class="popup-overlay">
+        <div class="popup-content">
+            <h3>Bạn đánh giá mức độ hiệu quả của hoạt động này như thế nào?</h3>
+            <div class="pencil-container">
+                <img src="{{ asset('client/image/caybutngang.png') }}" alt="Pencil" class="pencil-background">
+                <div class="star"></div>
+            </div>
+            <div class="levels">
+                @for ($level = 0; $level <= 10; $level++)
+                    <div class="level" data-level="{{ $level }}">{{ $level }}</div>
+                @endfor
+            </div>
+            <textarea id="user-feedback" placeholder="Chia sẻ với tụi mình suy nghĩ/cảm nhận của bạn về trải nghiệm trên nha!"></textarea>
+            <button id="submit-feedback">Gửi</button>
+        </div>
+    </div> --}}
+
     <script>
         // Get the current date
         const today = new Date();
@@ -112,6 +129,34 @@
             }
 
 
+        });
+        //JS cho popup
+        document.getElementById('submit-feedback').addEventListener('click', function() {
+            const rating = document.getElementById('rating-range').value;
+            const feedback = document.getElementById('user-feedback').value;
+
+            // Lấy user_id của user đang đăng nhập
+            const userId = '{{ Auth::id() }}';
+
+            // Gửi dữ liệu qua AJAX
+            fetch('{{ route('client.submitFeedback') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    rating: rating,
+                    answer: feedback
+                })
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cảm ơn bạn đã đánh giá!');
+                    location.reload(); // Reload trang sau khi gửi thành công
+                }
+            });
         });
     </script>
 
@@ -241,5 +286,93 @@ h1 {
 input[type="checkbox"] {
     pointer-events: none;
 }
-    </style>
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Mặc định ẩn */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    width: 500px;
+}
+
+.pencil-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Giới hạn chiều rộng của bút */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pencil-background {
+    width: 100%;
+    height: auto;
+}
+
+.star {
+    position: absolute;
+    top: -30px; /* Điều chỉnh để sao nằm trên bút */
+    width: 50px;
+    height: 50px;
+    background: url('{{ asset('client/image/ngoisao.png') }}') no-repeat center;
+    background-size: contain;
+    transition: left 0.3s ease; /* Hiệu ứng mượt khi di chuyển ngôi sao */
+}
+
+.levels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Chiều rộng của thanh điểm */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.level {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.level.selected {
+    background-color: #3D30A2;
+    color: white;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#submit-feedback {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3D30A2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+</style>
 @endsection
