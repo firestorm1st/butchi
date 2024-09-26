@@ -65,6 +65,7 @@
                         <th>Tên nhiệm vụ</th>
                         <th>Ngày áp dụng</th>
                         <th>Ngày tạo</th>
+                        <th>Loại nhiệm vụ</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>
                     </tr>
@@ -76,6 +77,12 @@
                             <td>{{ $mission->name }}</td>
                             <td>{{ $mission->day }}</td>
                             <td>{{ $mission->created_at }}</td>
+                            <td>
+                                <span
+                                    class="right badge badge-{{ $mission->is_offline == 1 ? 'info' : 'primary' }}">
+                                    {{ $mission->is_offline == 1 ? 'Trực tiếp' : 'Trực tuyến'}}
+                                </span>
+                            </td>
                             <td><a href="{{ route('admin.mission.edit', ['id' => $mission->id]) }}">Chỉnh sửa</a></td>
                             <td><a onclick="return confirmDelete ()"
                                     href="{{ route('admin.mission.destroy', ['id' => $mission->id]) }}">Xóa</a></td>
@@ -88,6 +95,7 @@
                         <th>Tên nhiệm vụ</th>
                         <th>Ngày áp dụng</th>
                         <th>Ngày tạo</th>
+                        <th>Loại nhiệm vụ</th>
                         <th>Chỉnh sửa</th>
                         <th>Xóa</th>
                     </tr>
