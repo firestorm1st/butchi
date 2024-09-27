@@ -228,24 +228,34 @@ class RoomController extends Controller
         $mission_daily->user_id = Auth::user()->id;
         $mission_daily->mission_id = $id;
         $mission_daily->save();
-
-
-        return redirect()->back()->with('success', 'Bạn đã hoàn thành màu yêu thương hôm nay.');
+        return redirect()->route('client.showCheckin')->with('success', 'Check-in thành công!');
     }
 
-    public function submitFeedback(Request $request) {
-        $validated = $request->validate([
+    public function submitFeedback(Request $request) 
+    {
+        // Xác thực dữ liệu đầu vào
+        $request->validate([
+            'mission_id' => 'required',
             'rating' => 'required|integer|min:0|max:10',
-            'answer' => 'required|string'
+            'answer' => 'required|string',
         ]);
-        $userId = Auth::id();
-        // Lưu vào bảng feedback
+
+        // Lưu feedback
         RatingDaily::create([
-            'user_id' => $userId,
-            'rating' => $validated['rating'],
-            'answer' => $validated['answer']
+            'user_id' => auth()->id(),
+            'mission_id' => $request->input('mission_id'),
+            'rating' => $request->input('rating'),
+            'answer' => $request->input('answer'),
         ]);
-    
-        return redirect()->back()->with('success', 'Bạn đã điểm danh thành công');
+
+        // Lưu mission_daily
+        $missionId = $request->input('mission_id'); // Lấy mission_id từ request
+        $mission_daily = new MissionDaily();
+        $mission_daily->user_id = Auth::user()->id;
+        $mission_daily->mission_id = $missionId; // Sử dụng missionId vừa lấy
+        $mission_daily->save();
+
+        // Trả về phản hồi JSON
+        return redirect()->back()->with('success','Bạn đã điểm danh thành công');
     }
 }
