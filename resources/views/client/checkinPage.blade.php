@@ -1,43 +1,50 @@
 @extends('master')
 @section('content')
-    <div class="container">
-        <div class="task-calendar">
-            <h1 style="text-align: center;" id="calendar-title"></h1>
-            <div class="calendar">
-                <!-- Calendar Header -->
-                <div class="calendar-header">THỨ <br> 2</div>
-                <div class="calendar-header">THỨ <br> 3</div>
-                <div class="calendar-header">THỨ <br> 4</div>
-                <div class="calendar-header">THỨ <br> 5</div>
-                <div class="calendar-header">THỨ <br> 6</div>
-                <div class="calendar-header">THỨ <br> 7</div>
-                <div class="calendar-header">CHỦ <br> NHẬT</div>
+<div class="container">
+    <div class="task-calendar">
+        <h1 style="text-align: center;" id="calendar-title"></h1>
+        <div class="calendar">
+            <!-- Calendar Header -->
+            <div class="calendar-header">THỨ <br> 2</div>
+            <div class="calendar-header">THỨ <br> 3</div>
+            <div class="calendar-header">THỨ <br> 4</div>
+            <div class="calendar-header">THỨ <br> 5</div>
+            <div class="calendar-header">THỨ <br> 6</div>
+            <div class="calendar-header">THỨ <br> 7</div>
+            <div class="calendar-header">CHỦ <br> NHẬT</div>
 
-                <!-- Calendar Days will be generated here -->
-            </div>
-        </div>
-
-
-        <div class="task">
-            <p>Cốc cốc! Mở cửa trái tim</p>
-            @if ($existingMission)
-                <p>{{ $mission->name }}</p>
-                <button id="complete-btn" disabled>Đã hoàn thành</button>
-            @elseif($mission)
-                <form action="{{ route('client.checkin', ['id' => $mission->id]) }}" method="post">
-                    @csrf
-                    <p>{{ $mission->name }}</p>
-                    <button id="complete-btn">Hoàn thành</button>
-                </form>
-            @else
-                <p>Hôm nay không có hoạt động màu yêu thương rồi, ngày mai bạn quay lại nhé!</p>
-            @endif
+            <!-- Calendar Days will be generated here -->
         </div>
     </div>
 
-    {{-- <div id="rating-popup" class="popup-overlay">
-        <div class="popup-content">
-            <h3>Bạn đánh giá mức độ hiệu quả của hoạt động này như thế nào?</h3>
+    <div class="task">
+        <p>Cốc cốc! Mở cửa trái tim</p>
+        @if ($existingMission)
+            <p>{{ $mission->name }}</p>
+            <button id="complete-btn" disabled>Đã hoàn thành</button>
+        @elseif($mission)
+            <form action="{{ route('client.submitFeedback') }}" method="post" id="feedback-form">
+                @csrf
+                <input type="hidden" name="mission_id" value="{{ $mission->id }}">
+                <input type="hidden" name="completed" id="completed" value="true">
+                
+                <p>{{ $mission->name }}</p>
+                <button type="button" id="complete-btn">Hoàn thành</button> <!-- Đổi type thành button để không submit form -->
+            </form>
+        @else
+            <p>Hôm nay không có hoạt động màu yêu thương rồi, ngày mai bạn quay lại nhé!</p>
+        @endif
+    </div>
+</div>
+
+<div id="rating-popup" class="popup-overlay">
+    <div class="popup-content">
+        <h3>Bạn đánh giá mức độ hiệu quả của hoạt động này như thế nào?</h3>
+        <form action="{{ route('client.submitFeedback') }}" method="POST" id="feedback-form">
+            @csrf
+            <input type="hidden" name="mission_id" value="{{ $mission->id }}">
+            <input type="hidden" name="completed" id="completed" value="false">
+        
             <div class="pencil-container">
                 <img src="{{ asset('client/image/caybutngang.png') }}" alt="Pencil" class="pencil-background">
                 <div class="star"></div>
@@ -47,10 +54,16 @@
                     <div class="level" data-level="{{ $level }}">{{ $level }}</div>
                 @endfor
             </div>
-            <textarea id="user-feedback" placeholder="Chia sẻ với tụi mình suy nghĩ/cảm nhận của bạn về trải nghiệm trên nha!"></textarea>
-            <button id="submit-feedback">Gửi</button>
-        </div>
-    </div> --}}
+        
+            <textarea name="answer" id="user-feedback" placeholder="Chia sẻ với tụi mình suy nghĩ/cảm nhận của bạn về trải nghiệm trên nha!"></textarea>
+            
+            <input type="hidden" name="rating" id="rating-input" value="0">
+            
+            <button type="submit" id="submit-feedback">Gửi</button>
+        </form>
+    </div>
+</div>
+
 
     <script>
         // Get the current date
@@ -131,33 +144,93 @@
 
         });
         //JS cho popup
-        document.getElementById('submit-feedback').addEventListener('click', function() {
-            const rating = document.getElementById('rating-range').value;
-            const feedback = document.getElementById('user-feedback').value;
+    document.addEventListener('DOMContentLoaded', function() {
+        const completeBtn = document.getElementById('complete-btn');
+        const popup = document.getElementById('rating-popup');
+        const levels = document.querySelectorAll('.level');
+        const star = document.querySelector('.star');
+        const ratingInput = document.getElementById('rating-input');
+        const feedbackForm = document.getElementById('feedback-form');
+        let selectedLevel = null;
 
-            // Lấy user_id của user đang đăng nhập
-            const userId = '{{ Auth::id() }}';
+        const levelPositions = {
+            0: 0,
+            1: 40,
+            2: 80,
+            3: 120,
+            4: 160,
+            5: 200,
+            6: 240,
+            7: 280,
+            8: 320,
+            9: 360,
+            10: 400
+        };
 
-            // Gửi dữ liệu qua AJAX
-            fetch('{{ route('client.submitFeedback') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    rating: rating,
-                    answer: feedback
-                })
-            }).then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Cảm ơn bạn đã đánh giá!');
-                    location.reload(); // Reload trang sau khi gửi thành công
-                }
-            });
+    // Hiện popup khi nhấn nút "Hoàn thành"
+    completeBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn form checkin submit ngay lập tức
+        popup.style.display = 'flex';
+    });
+
+    // Xử lý sự kiện click trên các level
+    levels.forEach((level) => {
+        level.addEventListener('click', function() {
+            if (selectedLevel) {
+                selectedLevel.classList.remove('selected');
+            }
+
+            selectedLevel = level;
+            level.classList.add('selected');
+
+            const levelValue = level.getAttribute('data-level');
+            const newPosition = levelPositions[levelValue];
+
+            // Di chuyển ngôi sao theo level
+            star.style.left = `${newPosition}px`; // Chỉ thay đổi left
+
+            // Gán giá trị level vào input hidden
+            ratingInput.value = levelValue;
         });
+    });
+
+    // Khi form đánh giá được submit
+    feedbackForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Ngăn form feedback gửi ngay
+        
+        const formData = new FormData(feedbackForm);
+
+        // Gửi form feedback bằng AJAX
+        fetch(feedbackForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())  // Giả sử server trả JSON
+        .then(data => {
+            if (data.success) {
+                // Sau khi feedback thành công, submit form checkin
+                const checkinForm = document.querySelector('form[action*="checkin"]');
+                
+                if (checkinForm) {
+                    checkinForm.submit(); // Tự động submit form checkin sau khi feedback thành công
+                }
+                
+                // Đóng popup sau khi hoàn thành
+                popup.style.display = 'none';
+            } else {
+                // Hiển thị lỗi nếu có
+                alert('Gửi đánh giá thất bại, vui lòng thử lại.');
+            }
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra:', error);
+        });
+    });
+});
     </script>
 
     <style>
@@ -174,7 +247,10 @@
     max-width: 1400px; /* Tăng chiều rộng tối đa */
     
 }
-
+.level.selected {
+        color: blue;
+        font-weight: bold;
+    }
 h1 {
     width: 100%;
     text-align: center;
@@ -274,6 +350,7 @@ h1 {
 }
 
 #complete-btn {
+    float: bottom;
     margin-top: 10px;
     background-color: #563D7C;
     color: white;
@@ -287,92 +364,81 @@ input[type="checkbox"] {
     pointer-events: none;
 }
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none; /* Mặc định ẩn */
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none; /* Mặc định ẩn */
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
 
-.popup-content {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    width: 500px;
-}
+    .popup-content {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        position: relative;
+        width: 500px;
+    }
 
-.pencil-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px; /* Giới hạn chiều rộng của bút */
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
+    .levels {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
 
-.pencil-background {
-    width: 100%;
-    height: auto;
-}
+    .level {
+        cursor: pointer;
+    }
 
-.star {
-    position: absolute;
-    top: -30px; /* Điều chỉnh để sao nằm trên bút */
-    width: 50px;
-    height: 50px;
-    background: url('{{ asset('client/image/ngoisao.png') }}') no-repeat center;
-    background-size: contain;
-    transition: left 0.3s ease; /* Hiệu ứng mượt khi di chuyển ngôi sao */
-}
+    .pencil-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
 
-.levels {
-    display: flex;
-    justify-content: space-between;
-    width: 100%; /* Chiều rộng của thanh điểm */
-    margin-bottom: 20px;
-    text-align: center;
-}
+    .pencil-background {
+        width: 100%;
+        height: 50px;
+    }
 
-.level {
-    cursor: pointer;
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+    .star {
+        margin-top: 15px;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: url('{{ asset('client/image/ngoisao.png') }}') no-repeat center;
+        background-size: contain;
+        left: 0;
+        top: -10px;
+        transition: left 0.3s ease, top 0.3s ease; /* Thêm transition cho left và top */
+    }
 
-.level.selected {
-    background-color: #3D30A2;
-    color: white;
-}
+    textarea {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        height: 100px;
+        resize: none;
+    }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#submit-feedback {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #3D30A2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+    #submit-feedback {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #3D30A2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right;
+    }
 </style>
 @endsection
