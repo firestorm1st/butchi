@@ -95,18 +95,12 @@ class UserController extends Controller
         }
 
         $avatar = $request->avatar;
-        if (!empty($avatar)) {
-            if ($user->avatar) {
-                $old_image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user->avatar;
-                if (file_exists($old_image_path)) {
-                    unlink($old_image_path);
-                }
-            }
 
-            $avatarName = time() . '-' . $avatar->getClientOriginalName();
-            $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
-            $user->avatar = $avatarName;
-        }
+
+        $avatarName = time() . '-' . $avatar->getClientOriginalName();
+        $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
+        $user->avatar = $avatarName;
+
 
         $user->username = $request->username;
         $user->password = bcrypt($request->password);

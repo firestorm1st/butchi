@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -15,51 +16,17 @@ class AdminController extends Controller
         return view('admin.modules.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     return view('admin.modules.contact.create');
-    // }
+    public function vetamtu()
+    {
+        $feedbacks = DB::table('emotion_rating')->orderBy('created_at', 'DESC')-> get();
+        return view('admin.modules.feedback.indexVeTamTu', ['feedbacks' => $feedbacks]);
+      
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(StoreRequest $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Display the specified resource.
-     */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(string $id)
-    // {
-    //     return view('admin.modules.contact.edit');
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    // public function update(UpdateRequest $request, string $id)
-    // {
-    //     //
-    // }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(string $id)
-    // {
-    //     //
-    // }
+    public function mauyeuthuong()
+    {
+        $feedbacks = DB::table('rating_daily_attendance')->orderBy('created_at', 'DESC')-> get();
+        return view('admin.modules.feedback.indexMauYeuThuong', ['feedbacks' => $feedbacks]);
+      
+    }
 }
