@@ -74,6 +74,9 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
     Route::get('/emotion/{id}/tracker', [RoomController::class, 'showEmotionForm'])->name('emotion.form')->middleware([CheckRoomPassword::class]);
     Route::post('/emotion/{id}/store', [RoomController::class, 'saveEmotionDaily'])->name('emotion.store')->middleware([CheckRoomPassword::class]);
 
+    Route::get('/feedback', [RoomController::class, 'showFeedbackForm'])->name('showFeedback')->middleware('checkFeedback');
+    Route::post('/feedback', [RoomController::class, 'saveFeedback'])->name('Feedback');
+
     Route::get('/checkin/{id}', [RoomController::class, 'showCheckin'])->name('showCheckin');
     Route::post('/submit-feedback', [RoomController::class, 'submitFeedback'])->name('submitFeedback');
 });

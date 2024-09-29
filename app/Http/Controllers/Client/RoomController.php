@@ -14,6 +14,7 @@ use App\Models\Mission;
 use App\Models\User;
 use App\Models\MissionDaily;
 use App\Models\RatingDaily;
+use App\Models\EmotionRating;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -156,6 +157,10 @@ class RoomController extends Controller
             'level_id.required' => 'Bạn nên chọn mức độ hôm nay.',
             'answer.required' => 'Lý do bạn chọn cảm xúc là gì?',
         ]);
+        $user_id=Auth::User()->id;
+        $recentFeedback = EmotionRating::where('user_id', $user_id)
+            ->where('created_at', '>=', now()->subDays(7))
+            ->first();
         // Lấy thông tin từ form gửi lên
         $emotion_id = $request->input('emotion_id');
         $level_id = $request->input('level_id');
@@ -174,12 +179,55 @@ class RoomController extends Controller
             'level_id' => $level_id,
             'date' => now(),
             'answer' => $answer
-        ])) {
-            return redirect()->back()->with('success', 'Cảm xúc của bạn đã được lưu!');
+        ])) 
+        {
+            if($recentFeedback){
+                return redirect()->back()->with('success','Bạn đã "Vẽ" tâm tư thành công');
+            }else{
+                return redirect(route('client.Feedback'));
+            }
+        }
+    }
+
+    public function showFeedbackForm(Request $request)
+    {
+        return view('client.feedback');
+    }
+
+    public function saveFeedback(Request $request)
+    {
+        // Xác thực dữ liệu từ form
+        $request->validate([
+            'rating' => 'required',
+            'answer1' => 'required|string|max:255',
+            'answer2' => 'required|string|max:255',
+        ], [
+            'rating.required' => 'Bạn cần chọn mức đánh giá.',
+            'answer1.required' => 'Bạn cần chia sẻ cảm nhận.',
+            'answer2.required' => 'Bạn cần chia sẻ về sự thay đổi.',
+        ]);
+
+        // Lấy dữ liệu từ form
+        $user_id = auth()->id();
+        $rating = $request->input('rating');
+        $answer1 = $request->input('answer1');
+        $answer2 = $request->input('answer2');
+
+        // Lưu feedback
+        $feedback = EmotionRating::create([
+            'user_id' => $user_id,
+            'rating' => $rating,
+            'answer1' => $answer1,
+            'answer2' => $answer2,
+            'created_at' => now(),
+        ]);
+
+        // Trả về phản hồi
+        if ($feedback) {
+            return redirect()->route('client.index',['id' => Auth::User()->room_id])->with('success','Cảm ơn bạn đã đánh giá!');
         }
 
-        // Chuyển hướng về trang cũ hoặc bất kỳ trang nào khác
-        return redirect()->back()->with('error', 'Có lỗi xảy ra');
+        return redirect()->back()->with('error','Có lỗi xảy ra');
     }
 
     public function showCheckin(string $id)

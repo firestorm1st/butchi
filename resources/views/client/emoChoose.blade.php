@@ -90,24 +90,6 @@
     @endif
 </div>
 
-<!-- Modal hiển thị sau khi gửi cảm xúc -->
-<div id="ModalRating" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModalcreate()">&times;</span>
-        <h2>Bạn đánh giá mức độ hiệu quả của hoạt động này như thế nào</h2>
-        <form id="createRoomForm" action="{{ route('client.rooms.store') }}" method="POST">
-            @csrf
-            <input type="text" id="roomName" name="name" placeholder="Nhập tên phòng..." required>
-            <h2>Nhập mật khẩu</h2>
-            <input type="password" id="roomPassword" name="password" placeholder="Nhập mật khẩu..." required>
-            <input type="password" id="roomPasswordConfirm" name="password_confirmation" placeholder="Xác nhận mật khẩu..." required>
-            <div>
-                <button type="submit" class="submit-btn">Xác nhận</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 <!-- CSS -->
 <style>
     /* Các thiết lập cho giao diện chính */
@@ -279,43 +261,6 @@
         justify-content: center;
         align-items: center;
     }
-
-    /* Modal CSS */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        padding-top: 100px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
 </style>
 
 <!-- JavaScript -->
@@ -446,9 +391,5 @@ document.addEventListener("DOMContentLoaded", function() {
         alert('Vui lòng chọn cảm xúc và mức độ trước khi gửi.');
     }
 });
-    // Modal logic
-    function closeModalcreate() {
-        document.getElementById('ModalRating').style.display = 'none';
-    }
 </script>
 @endsection
