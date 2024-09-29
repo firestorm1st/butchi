@@ -132,6 +132,31 @@
                     </ul>
                 </li>
 
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-sitemap"></i>
+                        <p>
+                            Feedback
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.vetamtu') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vẽ Tâm Tư</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.mauyeuthuong') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Màu yêu thương</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

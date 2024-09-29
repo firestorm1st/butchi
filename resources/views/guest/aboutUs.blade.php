@@ -246,14 +246,10 @@
                 <h2><i style="font-weight: bolder; color: #F39816; font-family: Dancing Script">“Màu yêu thương”</i></h2>
                 <div style="width: 80%" class="tamtu">
                     <div>
-                        <p><span class="highlight3"><i>Bước 1:</i></span> Chọn một cảm xúc chủ đạo trong ngày.</p>
-                        <p><span class="highlight3"><i>Bước 2:</i></span> Đánh giá mức độ của cảm xúc đó bằng cách ấn vào
-                            thang đo bên cạnh thân bút chì.</p>
-                        <p><span class="highlight3"><i>Bước 3:</i></span> Chia sẻ thêm về cảm xúc ngày hôm nay thông qua
-                            phần giấy ghi chú. (Điều gì/việc gì đã mang đến cảm xúc đó? Bạn xử lý cảm xúc đó như thế
-                            nào?...)</p>
-                        <p><span class="highlight3"><i>Bước 4:</i></span> Nhấn nút gửi để cảm xúc được hiển thị cho các
-                            thành viên khác trong phòng, và sẽ được lưu trữ tại phần “biểu đồ cảm xúc”.</p>
+                        <p><span class="highlight3"><i>Bước 1:</i></span> Một nhiệm vụ nho nhỏ mỗi ngày sẽ được gửi đến, hãy hoàn thành nhiệm vụ đó nhé!</p>
+                        <p><span class="highlight3"><i>Bước 2:</i></span> Sau khi đã thực hiện xong nhiệm vụ, sẽ có phần đánh giá sẽ được hiển thị. Hãy đánh giá mức độ hiệu quả của hoạt động này bằng cách ấn vào con số từ 0-10 dưới thân bút chì.</p>
+                        <p><span class="highlight3"><i>Bước 3:</i></span> Chia sẻ thêm suy nghĩ/ trải nghiệm thông qua phần câu hỏi trên giấy ghi chú bên dưới.</p>
+                        <p><span class="highlight3"><i>Bước 4:</i></span> Nhấn nút “gửi” để hoàn thành.</p>
                     </div>
 
                 </div>

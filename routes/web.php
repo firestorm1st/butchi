@@ -80,6 +80,9 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('index', [AdminController::class, 'index'])->name('index');
+    Route::get('feedback-ve-tam-tu', [AdminController::class, 'vetamtu'])->name('vetamtu');
+    Route::get('feedback-mau-yeu-thuong', [AdminController::class, 'mauyeuthuong'])->name('mauyeuthuong');
+
     Route::prefix('contact')->name('contact.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'index')->name('index');
     });
