@@ -95,12 +95,12 @@ class UserController extends Controller
         }
 
         $avatar = $request->avatar;
+       
 
-
-        $avatarName = time() . '-' . $avatar->getClientOriginalName();
-        $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
-        $user->avatar = $avatarName;
-
+            $avatarName = time() . '-' . $avatar->getClientOriginalName();
+            $avatar->move($_SERVER['DOCUMENT_ROOT'] . '/uploads/', $avatarName);
+            $user->avatar = $avatarName;
+        
 
         $user->username = $request->username;
         $user->password = bcrypt($request->password);

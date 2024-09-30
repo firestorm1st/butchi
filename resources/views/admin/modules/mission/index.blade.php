@@ -67,7 +67,7 @@
                         <th>Ngày tạo</th>
                         <th>Loại nhiệm vụ</th>
                         <th>Chỉnh sửa</th>
-                        {{-- <th>Xóa</th> --}}
+                        <!--<th>Xóa</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -84,8 +84,8 @@
                                 </span>
                             </td>
                             <td><a href="{{ route('admin.mission.edit', ['id' => $mission->id]) }}">Chỉnh sửa</a></td>
-                            {{-- <td><a onclick="return confirmDelete ()"
-                                    href="{{ route('admin.mission.destroy', ['id' => $mission->id]) }}">Xóa</a></td> --}}
+                            <!--<td><a onclick="return confirmDelete ()"-->
+                            <!--        href="{{ route('admin.mission.destroy', ['id' => $mission->id]) }}">Xóa</a></td>-->
                         </tr>
                     @endforeach
                 </tbody>
@@ -97,7 +97,7 @@
                         <th>Ngày tạo</th>
                         <th>Loại nhiệm vụ</th>
                         <th>Chỉnh sửa</th>
-                        {{-- <th>Xóa</th> --}}
+                        <!--<th>Xóa</th>-->
                     </tr>
                 </tfoot>
             </table>

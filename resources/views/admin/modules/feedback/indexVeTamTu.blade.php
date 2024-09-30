@@ -75,7 +75,7 @@
                                 @php
                                     $user = App\Models\User::where('id', $f->user_id)->first();
                                 @endphp
-                                {{ $user->name }}
+                                {{ $user->username }}
                             </td>
                             <td>{{ $f->rating }}</td>
                             <td>{{ $f->answer1 }}</td>

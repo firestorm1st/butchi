@@ -98,21 +98,22 @@
                             </td>
 
                             <td>
-                                <span class="right badge badge-{{ $user->is_offline == 1 ? 'success' : 'info' }}">
-                                    {{ $user->is_offline == 1 ? 'Trực tiếp' : 'Trực tuyến' }}
+                                <span
+                                    class="right badge badge-{{ $user->is_offline == 1 ? 'success' : 'info'}}">
+                                    {{ $user->is_offline == 1 ? 'Trực tiếp' : 'Trực tuyến'}}
                                 </span>
                             </td>
 
                             <td>{{ $user->created_at }}</td>
                             <td><a href="{{ route('client.showAccount', ['id' => $user->id]) }}">Xem</a></td>
                             <td>
-                                @php
-                                    $room = App\Models\Room::where('id', $user->room_id)->first();
-                                @endphp
-                                {{ $room ? $room->name : 'Chưa có phòng' }}
-                            </td>
+    @php
+        $room = App\Models\Room::where('id', $user->room_id)->first();
+    @endphp
+    {{ $room ? $room->name : 'Chưa có phòng' }}
+</td>
 
-
+                            
                             <td><a href="{{ route('admin.user.edit', ['id' => $user->id]) }}">Chỉnh sửa</a></td>
                             <!--<td><a onclick="return confirmDelete ()"-->
                             <!--        href="{{ route('admin.user.destroy', ['id' => $user->id]) }}">Xóa</a></td>-->

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\RatingDaily;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -25,7 +27,7 @@ class AdminController extends Controller
 
     public function mauyeuthuong()
     {
-        $feedbacks = DB::table('rating_daily_attendance')->orderBy('created_at', 'DESC')-> get();
+        $feedbacks = RatingDaily::with('user')->orderBy('created_at', 'DESC')-> get();
         return view('admin.modules.feedback.indexMauYeuThuong', ['feedbacks' => $feedbacks]);
       
     }

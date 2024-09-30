@@ -71,10 +71,7 @@
                     <td>{{ $f->created_at }}</td>
 
                     <td>
-                        @php
-                        $user = App\Models\User::where('id', $f->user_id)->first();
-                        @endphp
-                        {{ $user->name }}
+                        {{ $f->user->username }}
                     </td>
                     <td>{{ $f->rating }}</td>
                     <td>{{ $f->answer }}</td>
