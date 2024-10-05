@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Contact\StoreRequest;
 use App\Http\Requests\Admin\Contact\UpdateRequest;
 use App\Models\Contact;
 use App\Models\Room;
+use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\EmotionDaily;
 
 class ContactController extends Controller
 {
@@ -52,7 +53,18 @@ class ContactController extends Controller
             $room->password = bcrypt($request->password);
             $room->save();
 
-            return redirect()->route('admin.room.index')->with('success', 'Cập nhật thông tin phòng thành công.');
-       
+            return redirect()->route('admin.room.index')->with('success', 'Cập nhật thông tin phòng thành công.');  
+    }
+    
+    public function filterByUserAdmin(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        // Lấy tất cả người dùng trong phòng
+        $users = User::all(); // Hoặc giới hạn theo phòng nếu cần
+        
+        $emotions = EmotionDaily::when($user_id, function($query) use ($user_id) {
+            return $query->where('user_id', $user_id);
+        })->get();
+        return view('admin.modules.room.emoIndex', compact('emotions', 'users'));
     }
 }

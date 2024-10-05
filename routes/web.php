@@ -62,6 +62,7 @@ Route::name('client.')->middleware([checkLogin::class])->group(function(){
     Route::post('/rooms/create', [RoomController::class, 'storeRoom'])->name('rooms.store');
     Route::post('client/rooms/enter', [RoomController::class, 'enterRoom'])
     ->name('rooms.enter');
+    Route::get('/filter-by-user/{id}', [RoomController::class, 'filterByUser'])->name('filterByUser')->middleware([CheckRoomPassword::class]);
     Route::post('/logout-room', [RoomController::class, 'logoutRoom'])->name('logoutRoom');
 
     Route::get('account/{id}', [AccountController::class, 'showAccount'])->name('showAccount');
@@ -92,7 +93,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('room')->name('room.')->controller(ContactController::class)->group(function () {
         Route::get('index', 'indexRoom')->name('index');
-
+        Route::get('/filter-by-user','filterByUserAdmin')->name('filterByUserAdmin');
         Route::get('edit/{id}', 'editRoom')->name('edit');
         Route::post('update/{id}', 'updateRoom')->name('update');
     });

@@ -21,6 +21,7 @@
                     @if (Auth::user()->role == 1)
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.showCheckin',['id'=>Auth::user()->id])}}">"Màu" yêu thương</a></li>
                     @endif
+                    <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.filterByUser',['id'=>Auth::user()->room_id])}}">Danh Sách tâm tư</a></li>
                     <li class="sub-menu-item"><a class="sub-menu-link" href="{{route('client.emotion.full',['id'=>Auth::user()->room_id])}}">Xem tâm tư</a></li>
                 </ul>
                 @endif

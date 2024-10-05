@@ -306,4 +306,21 @@ class RoomController extends Controller
         // Trả về phản hồi JSON
         return redirect()->back()->with('success','Bạn đã điểm danh thành công');
     }
+
+    public function filterByUser(Request $request,$room_id)
+    {
+        $user_id = $request->input('user_id');
+        $roomid=$room_id;
+        // Lấy tất cả người dùng trong phòng
+        $users = User::where('room_id',$roomid)->get(); // Hoặc giới hạn theo phòng nếu cần
+        
+        $emotions = EmotionDaily::whereHas('user', function($query) use ($room_id) {
+            $query->where('room_id', $room_id);
+        })
+        ->when($user_id, function($query) use ($user_id) {
+            return $query->where('user_id', $user_id);
+        })
+        ->get();
+        return view('client.emoView', compact('emotions', 'users','roomid'));
+    }
 }

@@ -81,6 +81,12 @@
                                 <p>Danh sách</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.room.filterByUserAdmin') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách 'Vẽ' tâm tư</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
